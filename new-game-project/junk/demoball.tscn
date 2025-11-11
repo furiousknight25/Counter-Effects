@@ -1,0 +1,67 @@
+[gd_scene load_steps=7 format=3 uid="uid://j7oysou2qkbd"]
+
+[ext_resource type="Script" uid="uid://l06xxu7g3o71" path="res://junk/balltet.gd" id="1_sd4iu"]
+[ext_resource type="Script" uid="uid://wytq8piaqmrc" path="res://scripts/SpringPhysics.gd" id="2_ogs3h"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ogs3h"]
+size = Vector2(1167, 31)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hu645"]
+
+[sub_resource type="Curve" id="Curve_ogs3h"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_ogs3h"]
+offsets = PackedFloat32Array(0.7328767, 1)
+colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 1)
+
+[node name="Node2D" type="Node2D"]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(573.5, 5.5)
+shape = SubResource("RectangleShape2D_ogs3h")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(578, 653)
+shape = SubResource("RectangleShape2D_ogs3h")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(16, 458)
+rotation = -1.5707964
+shape = SubResource("RectangleShape2D_ogs3h")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(1154, 331)
+rotation = -1.5707964
+shape = SubResource("RectangleShape2D_ogs3h")
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+position = Vector2(595, 327)
+motion_mode = 1
+slide_on_ceiling = false
+wall_min_slide_angle = 0.0
+script = ExtResource("1_sd4iu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+shape = SubResource("CircleShape2D_hu645")
+
+[node name="SpringX" type="Node" parent="CharacterBody2D"]
+script = ExtResource("2_ogs3h")
+goal = 595
+tension = 1.0
+damping = 0.0
+
+[node name="SpringY" type="Node" parent="CharacterBody2D"]
+script = ExtResource("2_ogs3h")
+goal = 327
+tension = 1.0
+damping = 0.0
+
+[node name="Line2D" type="Line2D" parent="CharacterBody2D"]
+top_level = true
+width = 5.0
+width_curve = SubResource("Curve_ogs3h")
+gradient = SubResource("Gradient_ogs3h")
