@@ -16,6 +16,8 @@ func _ready() -> void:
 	spring_y.goal = global_position.y
 
 func _process(delta: float) -> void:
+	spring_x.goal = get_global_mouse_position().x
+	spring_y.goal = get_global_mouse_position().y
 	match cur_state:
 		STATES.FREEZE: #when the ball gets hit, might activate this state. FREEZE frame logic, also prevents player from getting hit
 			freeze_process(delta)
@@ -37,18 +39,20 @@ func moving_process(delta):
 	velocity.x += spring_x.interpolate_spring(position.x, delta) * delta#bungie cord
 	velocity.y += spring_y.interpolate_spring(position.y, delta) * delta
 	
-	if is_on_wall(): #bouncing off wall
-		var wall_noraml = get_wall_normal()
-		if wall_noraml != null: 
-			velocity = velocity.bounce(wall_noraml)
+	var motion = velocity * delta
+	var collision = move_and_collide(motion)
+	if collision: #bouncing off wall
+		var wall = collision.get_collider()
+		if wall != null: 
+			var normal = collision.get_normal()
+			velocity = velocity.bounce(normal)
 			#Vector2(randf_range(-.1,.1), randf_range(-.1,.1)) we can use equation to modify and add random
-	
-	move_and_slide()
+		
+		
 	visual_follow_line.spawn_line(global_position)
 	
-	var last_hit = get_last_slide_collision()
-	if last_hit != null:
-		hit_object(last_hit.get_collider())
+	if collision != null:
+		hit_object(collision.get_collider())
 
 
 func hit_ball(direction : Vector2, strength : float, freeze_length : float = 0): #direction is your target position, it WILL be normalized and you get a lashing if you dont like it

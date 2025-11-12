@@ -1,10 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://dfhfol7byum77"]
+[gd_scene load_steps=5 format=3 uid="uid://dfhfol7byum77"]
 
 [ext_resource type="PackedScene" uid="uid://c7a6cijicq3rd" path="res://scenes/Ball.tscn" id="1_cyp6q"]
 [ext_resource type="PackedScene" uid="uid://bo5kfu2xrt7og" path="res://scenes/Target.tscn" id="2_32jcc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ib06g"]
 size = Vector2(275, 16)
+
+[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_cyp6q"]
+points = PackedVector2Array(-33, 57, -55, -18, 18, -14, -29, -1)
 
 [node name="Root" type="Node2D"]
 
@@ -13,6 +16,10 @@ size = Vector2(275, 16)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Border"]
 position = Vector2(127.5, -2)
 shape = SubResource("RectangleShape2D_ib06g")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="Border"]
+position = Vector2(137, 88)
+shape = SubResource("ConvexPolygonShape2D_cyp6q")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Border"]
 position = Vector2(124, 195)
