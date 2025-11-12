@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://dj3hcfpjf08dc"]
+
+[ext_resource type="Script" uid="uid://bhs7necjv2276" path="res://scripts/visual_follow_line.gd" id="1_lirng"]
+
+[sub_resource type="Curve" id="Curve_mcdg6"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_lirng"]
+offsets = PackedFloat32Array(0.7328767, 1)
+colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 1)
+
+[node name="VisualFollowLine" type="Line2D"]
+top_level = true
+width = 5.0
+width_curve = SubResource("Curve_mcdg6")
+gradient = SubResource("Gradient_lirng")
+script = ExtResource("1_lirng")

@@ -5,7 +5,7 @@ class_name Spring
 
 @export var value : float = 0.0 
 var vel := .01
-@export var goal := 0
+@export var goal : float = 0.0
 @export var tension := 300.0 #strength of spring
 @export var damping := 20.0 #how fast the spring slows down
 

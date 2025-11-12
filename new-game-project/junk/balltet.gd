@@ -15,7 +15,6 @@ func _physics_process(delta: float) -> void:
 		velocity = dir * speed
 		speed += 500
 	
-	print(speed)
 		
 	if is_on_wall():
 		var wall_noraml = get_wall_normal()

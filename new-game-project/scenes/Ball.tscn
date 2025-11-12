@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://c7a6cijicq3rd"]
+
+[ext_resource type="Script" uid="uid://btxblnn0xcf64" path="res://scripts/ball.gd" id="1_d73vv"]
+[ext_resource type="Script" uid="uid://wytq8piaqmrc" path="res://scripts/SpringPhysics.gd" id="2_ul5l2"]
+[ext_resource type="PackedScene" uid="uid://dj3hcfpjf08dc" path="res://scenes/visual_follow_line.tscn" id="3_dqebh"]
+[ext_resource type="Script" uid="uid://dvloyvpvwr5sd" path="res://scripts/debug_mode.gd" id="4_dqebh"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ig1eg"]
+radius = 5.0
+
+[node name="Ball" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 7
+motion_mode = 1
+wall_min_slide_angle = 0.0
+platform_on_leave = 2
+script = ExtResource("1_d73vv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ig1eg")
+
+[node name="SpringX" type="Node" parent="."]
+script = ExtResource("2_ul5l2")
+tension = 50.0
+damping = 0.0
+
+[node name="SpringY" type="Node" parent="."]
+script = ExtResource("2_ul5l2")
+tension = 50.0
+damping = 0.0
+
+[node name="VisualFollowLine" parent="." instance=ExtResource("3_dqebh")]
+
+[node name="DebugMode" type="Node" parent="."]
+script = ExtResource("4_dqebh")
