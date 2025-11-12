@@ -16,8 +16,6 @@ func _ready() -> void:
 	spring_y.goal = global_position.y
 
 func _process(delta: float) -> void:
-	spring_x.goal = get_global_mouse_position().x
-	spring_y.goal = get_global_mouse_position().y
 	match cur_state:
 		STATES.FREEZE: #when the ball gets hit, might activate this state. FREEZE frame logic, also prevents player from getting hit
 			freeze_process(delta)
@@ -54,7 +52,6 @@ func moving_process(delta):
 	if collision != null:
 		hit_object(collision.get_collider())
 
-
 func hit_ball(direction : Vector2, strength : float, freeze_length : float = 0): #direction is your target position, it WILL be normalized and you get a lashing if you dont like it
 	if freeze_length > 0.0:
 		set_state_freezing(freeze_length)
@@ -65,4 +62,3 @@ func hit_ball(direction : Vector2, strength : float, freeze_length : float = 0):
 func hit_object(object):
 	if object.is_in_group("Hitable"):
 		object.hit(velocity)
-	
