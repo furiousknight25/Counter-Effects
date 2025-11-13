@@ -5,7 +5,7 @@ class_name Ball
 @onready var spring_x: Spring = $SpringX
 @onready var spring_y: Spring = $SpringY
 @onready var visual_follow_line: VisualFollowLine = $VisualFollowLine
-
+@export var spring_enabled = false
 var speed : float = 1.0
 
 enum STATES {FREEZE, MOVING}
@@ -34,8 +34,9 @@ func freeze_process(delta):
 	pass #use this for visual logic
 
 func moving_process(delta):
-	velocity.x += spring_x.interpolate_spring(position.x, delta) * delta#bungie cord
-	velocity.y += spring_y.interpolate_spring(position.y, delta) * delta
+	if spring_enabled:
+		velocity.x += spring_x.interpolate_spring(position.x, delta) * delta#bungie cord
+		velocity.y += spring_y.interpolate_spring(position.y, delta) * delta
 	
 	var motion = velocity * delta
 	var collision = move_and_collide(motion)
@@ -55,7 +56,8 @@ func moving_process(delta):
 func hit_ball(direction : Vector2, strength : float, freeze_length : float = 0): #direction is your target position, it WILL be normalized and you get a lashing if you dont like it
 	if freeze_length > 0.0:
 		set_state_freezing(freeze_length)
-	
+	direction = direction.normalized()
+	Camera.add_trauma(strength * .0001, direction)
 	speed += strength
 	velocity = direction * speed
 	

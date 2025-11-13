@@ -6,7 +6,7 @@ class_name CameraShake
 var decay := .8 #How quickly shaking will stop [0,1].
 var max_offset := Vector2(480*.01,272*.01) #this reduces how much your camera can shake
 var max_roll = 0.01 #Maximum rotation in radians (use sparingly).
-@onready var noise = preload("res://2D Tools/CameraShake/cam_noise.tres") #required, you can customize this noise to change shaking properties
+@onready var noise = preload("res://scenes/cam_noise.tres") #required, you can customize this noise to change shaking properties
 
 var noise_y = 0 #Value used to move through the noise
 var trauma := 0.0 #Current shake strength
