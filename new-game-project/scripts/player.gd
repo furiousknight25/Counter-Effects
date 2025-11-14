@@ -1,4 +1,4 @@
-extends CharacterBody2D
+class_name Player extends CharacterBody2D
 
 @export_group("possible variables that could be affected by 'effects'")
 @export var jump_strength : int
@@ -24,6 +24,10 @@ var sin : float = 0.0
 var falling_stretch = 1.0
 var squishable = false
 const BASESCALE = 0.29
+
+var health : int = 5
+
+
 func _process(delta):
 	weapon_c(delta)
 	
@@ -143,6 +147,8 @@ func visuals(delta):
 
 
 func hit(direction):
+	set_health(get_health() - 1)
+	
 	modulate = Color("ff0000")
 	var tween = get_tree().create_tween()
 	tween.tween_property(self, "modulate", Color.WHITE, .5)
@@ -156,3 +162,18 @@ func hit(direction):
 		push_direction = -1
 	else:
 		push_direction = -1
+
+
+func die():
+	queue_free()
+
+
+func get_health() -> int:
+	return health
+
+
+func set_health(amount : int) -> void:
+	health = amount
+	
+	if health <= 0:
+		die()
