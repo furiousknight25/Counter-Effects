@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://dgtf87kkmhwq0"]
+
+[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_qxqx8"]
+points = PackedVector2Array(5, 0, 1, 4, 0, 0, 2, -5)
+
+[node name="corner" type="CollisionShape2D"]
+position = Vector2(-7.9999995, 0)
+scale = Vector2(4, 4)
+shape = SubResource("ConvexPolygonShape2D_qxqx8")
+debug_color = Color(0.9584257, 3.080368e-06, 0.5298511, 0.41960785)

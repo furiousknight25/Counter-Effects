@@ -3,14 +3,14 @@ class_name CameraShake
 #keep in mind they are TWO camera shake systems being used here
 ##often I like to make the camera global and then acess this via code, but for this example the camera will be instantiated here
 
-var decay := .8 #How quickly shaking will stop [0,1].
+@export var decay := .8 #How quickly shaking will stop [0,1].
 var max_offset := Vector2(480*.01,272*.01) #this reduces how much your camera can shake
 var max_roll = 0.01 #Maximum rotation in radians (use sparingly).
-@onready var noise = preload("res://2D Tools/CameraShake/cam_noise.tres") #required, you can customize this noise to change shaking properties
+@onready var noise = preload("res://scenes/cam_noise.tres") #required, you can customize this noise to change shaking properties
 
 var noise_y = 0 #Value used to move through the noise
 var trauma := 0.0 #Current shake strength
-var trauma_pwr := 2 #Trauma exponent. Use [2,3]
+@export var trauma_pwr := 2 #Trauma exponent. Use [2,3]
 var jitter = Vector2.ZERO
 
 var tension = 2 #this simulates the camera going back to its orignal position like an elastic spring
