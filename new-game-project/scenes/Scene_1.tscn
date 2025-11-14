@@ -21,12 +21,12 @@ shape = SubResource("RectangleShape2D_ib06g")
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="Border"]
 position = Vector2(0, 83)
-rotation = -1.5707964
+rotation = -1.5708
 shape = SubResource("RectangleShape2D_ib06g")
 
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="Border"]
 position = Vector2(263, 86)
-rotation = -1.5707964
+rotation = -1.5708
 shape = SubResource("RectangleShape2D_ib06g")
 
 [node name="Ball" parent="." instance=ExtResource("1_cyp6q")]
