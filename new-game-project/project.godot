@@ -29,6 +29,7 @@ window/stretch/mode="viewport"
 [file_customization]
 
 folder_colors={
+"res://MoneyComponent/": "green",
 "res://assets/": "red",
 "res://junk/": "gray",
 "res://scripts/": "purple"

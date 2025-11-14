@@ -8,6 +8,7 @@ class_name Ball
 @export var spring_enabled = false
 var speed : float = 1.0
 
+
 enum STATES {FREEZE, MOVING}
 var cur_state = STATES.MOVING
 
