@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://dfhfol7byum77"]
+[gd_scene load_steps=5 format=3 uid="uid://dfhfol7byum77"]
 
 [ext_resource type="PackedScene" uid="uid://c7a6cijicq3rd" path="res://scenes/Ball.tscn" id="1_cyp6q"]
 [ext_resource type="PackedScene" uid="uid://bo5kfu2xrt7og" path="res://scenes/Target.tscn" id="2_32jcc"]
+[ext_resource type="PackedScene" uid="uid://fyyoe5vf3xm1" path="res://scenes/character_body_2d.tscn" id="3_32jcc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ib06g"]
 size = Vector2(275, 16)
@@ -29,10 +30,13 @@ rotation = -1.5707964
 shape = SubResource("RectangleShape2D_ib06g")
 
 [node name="Ball" parent="." instance=ExtResource("1_cyp6q")]
-position = Vector2(134, 88)
+position = Vector2(155, 88)
 
 [node name="Target" parent="." instance=ExtResource("2_32jcc")]
-position = Vector2(211, 85)
+position = Vector2(232, 85)
 
 [node name="Target2" parent="." instance=ExtResource("2_32jcc")]
-position = Vector2(36, 83)
+position = Vector2(57, 83)
+
+[node name="Player" parent="." instance=ExtResource("3_32jcc")]
+position = Vector2(114, 106)
