@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://dbxdqkjweu23s"]
+
+[ext_resource type="Script" uid="uid://vbs3knw764m5" path="res://Upgrades/Scripts/upgrade_item.gd" id="1_t41gj"]
+[ext_resource type="Texture2D" uid="uid://4q335xxs2p" path="res://icon.svg" id="2_vsroj"]
+
+[node name="UpgradeItem" type="Node2D"]
+script = ExtResource("1_t41gj")
+texture = ExtResource("2_vsroj")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.09375, 0.09375)
+texture = ExtResource("2_vsroj")
+
+[node name="Label" type="Label" parent="."]
+texture_filter = 1
+offset_left = -2.9999995
+offset_top = -14.0
+offset_right = 24.0
+offset_bottom = 20.0
+scale = Vector2(0.235, 0.235)
+theme_override_font_sizes/font_size = 24
+text = "13"

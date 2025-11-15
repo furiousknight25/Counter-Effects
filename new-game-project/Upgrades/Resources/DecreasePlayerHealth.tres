@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="PlayerHealthUpgrade" load_steps=2 format=3 uid="uid://438ogms0gf5a"]
+
+[ext_resource type="Script" uid="uid://bhnswgng8jlke" path="res://Upgrades/Scripts/PlayerHealthUpgrade.gd" id="1_mn00f"]
+
+[resource]
+script = ExtResource("1_mn00f")
+health_modifier = -2
+metadata/_custom_type_script = "uid://bhnswgng8jlke"

@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 Director="*res://scripts/director.gd"
 Camera="*res://scenes/Camera.tscn"
+SignalBus="*res://SignalBus/SignalBus.gd"
 
 [display]
 
@@ -41,6 +42,7 @@ folder_colors={
 
 Hitable=""
 Player="Just the player"
+Ball=""
 
 [input]
 

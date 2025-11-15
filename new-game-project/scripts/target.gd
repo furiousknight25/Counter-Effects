@@ -1,4 +1,4 @@
-extends StaticBody2D
+class_name Target extends StaticBody2D
 
 ## Ideally, the game increments a living_targets variable by 1 each time this signal is emitted.
 signal targetSpawned

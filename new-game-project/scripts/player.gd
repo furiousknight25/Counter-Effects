@@ -28,6 +28,10 @@ const BASESCALE = 0.29
 var health : int = 5
 
 
+func _ready() -> void:
+	SignalBus.connect("upgrade_player", upgrade_player)
+
+
 func _process(delta):
 	weapon_c(delta)
 	
@@ -177,3 +181,7 @@ func set_health(amount : int) -> void:
 	
 	if health <= 0:
 		die()
+
+
+func upgrade_player(upgrade : PlayerUpgrade):
+	upgrade.upgrade_player(self)

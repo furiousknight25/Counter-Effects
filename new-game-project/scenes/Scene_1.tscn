@@ -8,7 +8,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ib06g"]
 size = Vector2(275, 16)
 
-[node name="Root" type="Node2D"]
+[node name="Scene1" type="Node2D"]
 
 [node name="Node2D" parent="." instance=ExtResource("1_32jcc")]
 position = Vector2(36, 11)
@@ -36,13 +36,15 @@ shape = SubResource("RectangleShape2D_ib06g")
 [node name="Ball" parent="." instance=ExtResource("1_cyp6q")]
 position = Vector2(155, 88)
 
-[node name="Target" parent="." instance=ExtResource("2_32jcc")]
-position = Vector2(232, 85)
-
-[node name="Target2" parent="." instance=ExtResource("2_32jcc")]
-position = Vector2(57, 83)
-shape = 1
-
 [node name="Player" parent="." instance=ExtResource("3_32jcc")]
 unique_name_in_owner = true
 position = Vector2(114, 106)
+
+[node name="TargetHolder" type="Node" parent="."]
+
+[node name="Target" parent="TargetHolder" instance=ExtResource("2_32jcc")]
+position = Vector2(232, 85)
+
+[node name="Target2" parent="TargetHolder" instance=ExtResource("2_32jcc")]
+position = Vector2(57, 83)
+shape = 1
