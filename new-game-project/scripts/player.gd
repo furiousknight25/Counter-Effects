@@ -1,5 +1,5 @@
 extends CharacterBody2D
-
+class_name Player
 @export_group("possible variables that could be affected by 'effects'")
 @export var jump_strength : int
 @export var speed : int
@@ -12,7 +12,7 @@ var can_hit : bool = false
 
 @onready var sprite = $Sprite2D
 @onready var weapon: Area2D = $Weapon
-
+@onready var animation_tree: PlayerAnim = $AnimationTree
 
 var walk_animation_speed = 0
 var dash_strength = 10
@@ -23,12 +23,12 @@ var dash_timer = 0
 var sin : float = 0.0
 var falling_stretch = 1.0
 var squishable = false
-const BASESCALE = 0.29
+const BASESCALE = 1.00
 func _process(delta):
 	weapon_c(delta)
 	
 	movement(delta)
-	visuals(delta)
+	#visuals(delta)
 
 func weapon_c(delta):
 	weapon.rotation = lerp_angle(weapon.rotation,global_position.angle_to_point(get_global_mouse_position()), delta * 12)
@@ -48,6 +48,7 @@ func swing():
 	can_hit = true
 	cooldown_on = true
 	velocity += (global_position - get_global_mouse_position()).normalized() * 120
+	animation_tree.anim_hit(global_position - get_global_mouse_position())
 	await get_tree().create_timer(cooldown_time).timeout
 	cooldown_on = false
 	can_hit = false
@@ -69,6 +70,7 @@ func movement(delta):
 	if is_on_floor():
 		coyote_time = .1
 	if coyote_time > 0 and buff_jump > 0: #jump here
+		animation_tree.jump_anim()
 		jump_length = .2
 		coyote_time = 0
 		buff_jump = 0
@@ -94,10 +96,10 @@ func visuals(delta):
 			
 			walk_animation_speed += velocity.x * .0005
 			sprite.scale = sprite.scale.lerp(Vector2(1.2, .8) * BASESCALE, delta * 5)
-			sprite.position = Vector2(0,9.0) - Vector2(0, abs(sin(sin) * 5))
+			#sprite.position = Vector2(0,9.0) - Vector2(0, abs(sin(sin) * 5))
 		else:
 			sin = lerp(sin, 0.0, delta * 12.0)
-			sprite.position = Vector2(0,9.0) - Vector2(0, abs(sin(sin) * 5))
+			#sprite.position = Vector2(0,9.0) - Vector2(0, abs(sin(sin) * 5))
 #endregion
 	
 #region jumping
@@ -147,8 +149,8 @@ func hit(direction):
 	var tween = get_tree().create_tween()
 	tween.tween_property(self, "modulate", Color.WHITE, .5)
 	
-	sprite.scale.x += .2 * BASESCALE
-	sprite.scale.y -= .1 * BASESCALE
+	#sprite.scale.x += .2 * BASESCALE
+	#sprite.scale.y -= .1 * BASESCALE
 	velocity += direction
 	
 	var push_direction = -1

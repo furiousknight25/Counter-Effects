@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ddlmgftqmllf3"
-path="res://.godot/imported/icon.jpg-3b61e88287136a35309bec0495b40496.ctex"
+uid="uid://dyepr4oy4ecxf"
+path="res://.godot/imported/playa-land_moving.png-3a3f1a0f1b61378c120d71153137f230.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/icon.jpg"
-dest_files=["res://.godot/imported/icon.jpg-3b61e88287136a35309bec0495b40496.ctex"]
+source_file="res://assets/player_animations/playa-land_moving.png"
+dest_files=["res://.godot/imported/playa-land_moving.png-3a3f1a0f1b61378c120d71153137f230.ctex"]
 
 [params]
 
