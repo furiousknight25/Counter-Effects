@@ -36,6 +36,7 @@ tension = 50.0
 damping = 0.0
 
 [node name="VisualFollowLine" parent="." instance=ExtResource("3_dqebh")]
+wiggle = 0.5
 
 [node name="DebugMode" type="Node" parent="."]
 script = ExtResource("4_dqebh")

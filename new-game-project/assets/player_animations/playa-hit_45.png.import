@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ddlmgftqmllf3"
-path="res://.godot/imported/icon.jpg-3b61e88287136a35309bec0495b40496.ctex"
+uid="uid://dpxej3wa1ricj"
+path="res://.godot/imported/playa-hit_45.png-36311136054fb065d129c44b585482a5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/icon.jpg"
-dest_files=["res://.godot/imported/icon.jpg-3b61e88287136a35309bec0495b40496.ctex"]
+source_file="res://assets/player_animations/playa-hit_45.png"
+dest_files=["res://.godot/imported/playa-hit_45.png-36311136054fb065d129c44b585482a5.ctex"]
 
 [params]
 

@@ -48,3 +48,9 @@ position = Vector2(232, 85)
 [node name="Target2" parent="TargetHolder" instance=ExtResource("2_32jcc")]
 position = Vector2(57, 83)
 shape = 1
+
+[node name="Player" parent="." instance=ExtResource("3_32jcc")]
+position = Vector2(114, 106)
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(6, 3, 10, 8, 8, 189, 258, 188, 256, 8, 13, 5, 15, -11, 271, -9, 272, 204, -11, 203, -9, -14, 14, -11)
