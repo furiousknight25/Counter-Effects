@@ -1,10 +1,10 @@
 [gd_scene load_steps=3 format=3 uid="uid://8ns7uk77unk0"]
 
 [ext_resource type="Script" uid="uid://bc44oqh2kl3sh" path="res://Managers/GameStateManager.gd" id="1_pcxke"]
-[ext_resource type="PackedScene" uid="uid://dfhfol7byum77" path="res://scenes/Scene_1.tscn" id="2_bf74e"]
+[ext_resource type="PackedScene" uid="uid://dfhfol7byum77" path="res://Levels/Level Scenes/Level_1.tscn" id="2_bf74e"]
 
 [node name="GameStateManager" type="Node"]
 script = ExtResource("1_pcxke")
 metadata/_custom_type_script = "uid://bc44oqh2kl3sh"
 
-[node name="Root" parent="." instance=ExtResource("2_bf74e")]
+[node name="Level 1" parent="." instance=ExtResource("2_bf74e")]

@@ -1,14 +1,17 @@
-[gd_scene load_steps=6 format=3 uid="uid://dfhfol7byum77"]
+[gd_scene load_steps=8 format=3 uid="uid://dfhfol7byum77"]
 
+[ext_resource type="Script" uid="uid://cc4vjvv3wkwic" path="res://Levels/Level Scenes/Level1.gd" id="1_2fttq"]
 [ext_resource type="PackedScene" uid="uid://becufmw83qp8r" path="res://MoneyComponent/MoneyComponent.tscn" id="1_32jcc"]
 [ext_resource type="PackedScene" uid="uid://c7a6cijicq3rd" path="res://scenes/Ball.tscn" id="1_cyp6q"]
 [ext_resource type="PackedScene" uid="uid://bo5kfu2xrt7og" path="res://scenes/Target.tscn" id="2_32jcc"]
 [ext_resource type="PackedScene" uid="uid://fyyoe5vf3xm1" path="res://scenes/character_body_2d.tscn" id="3_32jcc"]
+[ext_resource type="PackedScene" uid="uid://ca387n6r6geyi" path="res://Levels/Door/door.tscn" id="6_wxs68"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ib06g"]
 size = Vector2(275, 16)
 
-[node name="Scene1" type="Node2D"]
+[node name="Level 1" type="Node2D"]
+script = ExtResource("1_2fttq")
 
 [node name="Node2D" parent="." instance=ExtResource("1_32jcc")]
 position = Vector2(36, 11)
@@ -39,6 +42,7 @@ position = Vector2(155, 88)
 [node name="Player" parent="." instance=ExtResource("3_32jcc")]
 unique_name_in_owner = true
 position = Vector2(114, 106)
+collision_layer = 4
 
 [node name="TargetHolder" type="Node" parent="."]
 
@@ -51,3 +55,7 @@ shape = 1
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
 polygon = PackedVector2Array(6, 3, 10, 8, 8, 189, 258, 188, 256, 8, 13, 5, 15, -11, 271, -9, 272, 204, -11, 203, -9, -14, 14, -11)
+
+[node name="Door" parent="." instance=ExtResource("6_wxs68")]
+unique_name_in_owner = true
+position = Vector2(246, 150)

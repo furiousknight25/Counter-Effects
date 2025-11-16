@@ -8,7 +8,8 @@ func _ready() -> void:
 
 func switch_scene(old_scene : Node2D, new_scene : PackedScene):
 	old_scene.queue_free()
-	add_child(new_scene.instantiate())
+	add_child.call_deferred(new_scene.instantiate())
+	
 
 
 func add_upgrade_to_array(upgrade : Upgrade):
