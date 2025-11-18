@@ -13,13 +13,14 @@ config_version=5
 config/name="New Game Project"
 run/main_scene="uid://dfhfol7byum77"
 config/features=PackedStringArray("4.5", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="uid://bg7xk4sbowye4"
 
 [autoload]
 
 Director="*res://scripts/director.gd"
 Camera="*res://scenes/Camera.tscn"
 SignalBus="*res://SignalBus/SignalBus.gd"
+Inking="*res://Inking/Inking.tscn"
 
 [display]
 
@@ -34,6 +35,7 @@ folder_colors={
 "res://MoneyComponent/": "green",
 "res://Upgrades/": "pink",
 "res://assets/": "red",
+"res://assets/sfx/": "yellow",
 "res://junk/": "gray",
 "res://scripts/": "purple"
 }

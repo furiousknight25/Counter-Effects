@@ -3,6 +3,7 @@ class_name PlayerAnim
 @onready var player: Player = $".."
 @export var base_speed_threshold := 10.0
 @onready var sprite_2d: AnimatedSprite2D = $"../Sprite2D"
+@onready var sound_controller: PlayerSoundController = $"../SoundController"
 
 # This is the "memory" we need.
 # We'll use it to detect the *exact frame* we land.
@@ -17,7 +18,6 @@ func _process(delta: float) -> void:
 		if playback.get_current_node() != "Hit":
 			sprite_2d.flip_h = !bool(clampi(sign(player.velocity.x) + 1, 0, 1))
 		#print("Current State: ", playback.get_current_node())
-	
 	
 	var is_on_floor: bool = player.is_on_floor()
 	var is_moving: bool = abs(player.velocity.x) > base_speed_threshold
@@ -37,6 +37,8 @@ func _process(delta: float) -> void:
 	set("parameters/conditions/in_air", not is_on_floor)
 	
 	# Set floor movement states
+	if is_on_floor and is_moving: sound_controller.set_walking_on()
+	else:  sound_controller.set_walking_off()
 	set("parameters/conditions/idle", is_on_floor and not is_moving)
 	set("parameters/conditions/walk", is_on_floor and is_moving)
 	
@@ -59,6 +61,7 @@ func _process(delta: float) -> void:
 func jump_anim():
 	was_on_floor = true
 	set("parameters/conditions/jump", true)
+	$"../SoundController/Jump".play()
 	
 func anim_hit(direction: Vector2):
 	sprite_2d.flip_h = bool(clampi(sign(direction.x) + 1, 0, 1))

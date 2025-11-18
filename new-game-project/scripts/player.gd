@@ -7,6 +7,7 @@ class_name Player
 @export var slowdown_speed = 12
 @export var hit_time_frame : float = .2
 @export var cooldown_time : float = .3
+@export var invince_time = .1
 var cooldown_on : bool= false
 var can_hit : bool = false
 
@@ -151,23 +152,27 @@ func visuals(delta):
 		
 		sprite.scale = sprite.scale.lerp(Vector2(1/falling_stretch, falling_stretch) * BASESCALE, delta * 5) 
 
-
+var invince = false
 func hit(direction):
-	set_health(get_health() - 1)
-	
-	modulate = Color("ff0000")
-	var tween = get_tree().create_tween()
-	tween.tween_property(self, "modulate", Color.WHITE, .5)
-	
-	#sprite.scale.x += .2 * BASESCALE
-	#sprite.scale.y -= .1 * BASESCALE
-	velocity += direction
-	
-	var push_direction = -1
-	if is_on_floor():
-		push_direction = -1
-	else:
-		push_direction = -1
+	invince = true
+	if !invince:
+		set_health(get_health() - 1)
+		
+		modulate = Color("ff0000")
+		var tween = get_tree().create_tween()
+		tween.tween_property(self, "modulate", Color.WHITE, .5)
+		
+		#sprite.scale.x += .2 * BASESCALE
+		#sprite.scale.y -= .1 * BASESCALE
+		velocity += direction
+		
+		var push_direction = -1
+		if is_on_floor():
+			push_direction = -1
+		else:
+			push_direction = -1
+		await get_tree().create_timer(invince_time).timeout
+		invince = false
 
 
 func die():

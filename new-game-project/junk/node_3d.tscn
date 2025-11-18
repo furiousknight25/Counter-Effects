@@ -1,0 +1,43 @@
+[gd_scene load_steps=5 format=3 uid="uid://ctpmtr87qp123"]
+
+[ext_resource type="Script" uid="uid://f0vrfa2ll8np" path="res://junk/character_body_3d.gd" id="1_2k7gy"]
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_52sy1"]
+vertices = PackedVector3Array(-3.9501953, 1, -6.3203735, -3.9501953, 1, 4.1796265, 4.2998047, 1, 4.1796265, 4.2998047, 1, -6.3203735)
+polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7qxpd"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_v318n"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+navigation_mesh = SubResource("NavigationMesh_52sy1")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="NavigationRegion3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.18896484, 0, -1.0562439)
+use_collision = true
+size = Vector3(9.27832, 1, 11.528259)
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.328137, 3.05703)
+script = ExtResource("1_2k7gy")
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.23513448, -0.59943366)
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="CharacterBody3D/CSGCylinder3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.30598676, -0.42836404)
+shape = SubResource("CapsuleShape3D_7qxpd")
+
+[node name="Player" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0732594, -5.8911686)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
+shape = SubResource("CylinderShape3D_v318n")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.48328245, 0, 0.8754645, 0, 1, 0, -0.8754645, 0, 0.48328245, 4.4352994, 2.4212375, 2.655614)

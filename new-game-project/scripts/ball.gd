@@ -8,7 +8,6 @@ class_name Ball
 @export var spring_enabled = false
 var speed : float = 1.0
 
-
 enum STATES {FREEZE, MOVING}
 var cur_state = STATES.MOVING
 
@@ -46,6 +45,7 @@ func moving_process(delta):
 		if wall != null: 
 			var normal = collision.get_normal()
 			velocity = velocity.bounce(normal)
+			$Sounds/BallBounce.play()
 			#Vector2(randf_range(-.1,.1), randf_range(-.1,.1)) we can use equation to modify and add random
 		
 		
@@ -61,7 +61,28 @@ func hit_ball(direction : Vector2, strength : float, freeze_length : float = 0):
 	Camera.add_trauma(strength * .0001, direction)
 	speed += strength
 	velocity = direction * speed
+	apply_slow_motion(.1, .1)
+	$Sounds/BallHit.play()
 	
 func hit_object(object):
 	if object.is_in_group("Hitable"):
 		object.hit(velocity)
+		
+
+# Call this function to trigger the slow-mo
+# Example: apply_slow_motion(0.1, 0.2)
+# This means 10% speed for 0.2 real-time seconds.
+func apply_slow_motion(slow_factor: float, duration: float):
+	# 1. Store the normal time scale so we can restore it
+	var original_time_scale = Engine.time_scale
+
+	# 2. Slow the game down
+	Engine.time_scale = slow_factor
+
+	# 3. Create a timer that ignores the time scale
+	# The arguments are: (duration, process_always, process_pause, ignore_time_scale)
+	# We set 'ignore_time_scale' to 'true'.
+	await get_tree().create_timer(duration, false, false, true).timeout
+
+	# 4. Restore the time scale
+	Engine.time_scale = original_time_scale

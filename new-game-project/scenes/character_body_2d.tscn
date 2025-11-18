@@ -1,4 +1,4 @@
-[gd_scene load_steps=66 format=3 uid="uid://fyyoe5vf3xm1"]
+[gd_scene load_steps=69 format=3 uid="uid://fyyoe5vf3xm1"]
 
 [ext_resource type="Script" uid="uid://dymxf0txidqa8" path="res://scripts/player.gd" id="1_g2brh"]
 [ext_resource type="Texture2D" uid="uid://k4mvfo5k41jp" path="res://assets/player_animations/playa-hit_0.png" id="2_8nwgm"]
@@ -11,6 +11,9 @@
 [ext_resource type="Texture2D" uid="uid://dyepr4oy4ecxf" path="res://assets/player_animations/playa-land_moving.png" id="8_wqsd8"]
 [ext_resource type="Texture2D" uid="uid://blqojo2i6a0fk" path="res://assets/player_animations/playa-top.png" id="9_ugk0l"]
 [ext_resource type="Texture2D" uid="uid://b2eywnbxt3lpc" path="res://assets/player_animations/playa-run.png" id="10_eewtm"]
+[ext_resource type="Script" uid="uid://ytgykf1yg2ik" path="res://scenes/sound_controller.gd" id="12_7pl6r"]
+[ext_resource type="AudioStream" uid="uid://duqxkj7ji5bxx" path="res://assets/sfx/footstep.mp3" id="13_x5gf8"]
+[ext_resource type="AudioStream" uid="uid://ccsyrcfloglo7" path="res://assets/sfx/jump.mp3" id="14_42hdn"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nckey"]
 radius = 9.0
@@ -615,3 +618,21 @@ parameters/conditions/top = false
 parameters/conditions/walk = false
 parameters/Hit/blend_position = -0.044843078
 script = ExtResource("3_dn4c7")
+
+[node name="SoundController" type="Node" parent="."]
+script = ExtResource("12_7pl6r")
+
+[node name="FootTimer" type="Timer" parent="SoundController"]
+wait_time = 0.2
+
+[node name="FootStep" type="AudioStreamPlayer2D" parent="SoundController/FootTimer"]
+position = Vector2(2, 23)
+stream = ExtResource("13_x5gf8")
+max_polyphony = 10
+
+[node name="Hurt" type="AudioStreamPlayer2D" parent="SoundController"]
+
+[node name="Jump" type="AudioStreamPlayer2D" parent="SoundController"]
+stream = ExtResource("14_42hdn")
+
+[connection signal="timeout" from="SoundController/FootTimer" to="SoundController/FootTimer/FootStep" method="play"]
