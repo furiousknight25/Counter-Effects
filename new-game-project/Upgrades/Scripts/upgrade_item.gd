@@ -1,6 +1,7 @@
-extends Node2D
+class_name UpgradeItem extends Node2D
 
-@export var upgrade_resource : Upgrade
+@export var upgrade_resource_1 : Upgrade
+@export var upgrade_resource_2 : Upgrade
 @export var texture : Texture2D
 @export var cost : int = 0
 
@@ -17,6 +18,6 @@ func setup():
 	label.text = str(cost)
 
 
-func _process(_delta: float) -> void:
-	if Input.is_action_just_pressed("click"):
-		upgrade_resource.do_upgrade()
+#func _process(_delta: float) -> void:
+	#if Input.is_action_just_pressed("click"):
+		#upgrade_resource_1.do_upgrade()
