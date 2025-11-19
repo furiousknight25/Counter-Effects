@@ -125,7 +125,7 @@ func iterate_pixels():
 		for x in range(final_image.get_width()):
 			
 			var color = final_image.get_pixel(x, y) # Get the color of the current pixel
-			canvas_image.set_pixel(x, y, Color.WHITE);
+			canvas_image.set_pixel(x, y, color.inverted());
 			
 			var brightness = color.v # v is the value part, which is brightness
 			

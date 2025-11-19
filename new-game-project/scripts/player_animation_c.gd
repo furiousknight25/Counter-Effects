@@ -49,6 +49,7 @@ func _process(delta: float) -> void:
 		set('parameters/conditions/top', true)
 	
 	if is_on_floor and not was_on_floor:
+		$"../SoundController/Landonground".play()
 		if is_moving:
 			set("parameters/conditions/land_moving", true)
 		else:

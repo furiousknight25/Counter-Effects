@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://dsnxe2jwpgmjg"
-path="res://.godot/imported/INurMIND.perc(1).wav-085286961249b1088099e071703b0c81.sample"
+path="res://.godot/imported/INurMIND.perc.wav-a99405192165432080498e936e4b8f6e.sample"
 
 [deps]
 
-source_file="res://assets/Music/INurMIND.perc(1).wav"
-dest_files=["res://.godot/imported/INurMIND.perc(1).wav-085286961249b1088099e071703b0c81.sample"]
+source_file="res://assets/Music/INurMIND.perc.wav"
+dest_files=["res://.godot/imported/INurMIND.perc.wav-a99405192165432080498e936e4b8f6e.sample"]
 
 [params]
 

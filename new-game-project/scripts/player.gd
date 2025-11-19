@@ -157,6 +157,7 @@ var invince = false
 func hit(direction : Vector2):
 	
 	if !invince:
+		$SoundController/Ink2.play()
 		invince = true
 		set_health(get_health() - 1)
 		inking.splat_player(position, direction.normalized())

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://c7a6cijicq3rd"]
+[gd_scene load_steps=12 format=3 uid="uid://c7a6cijicq3rd"]
 
 [ext_resource type="Script" uid="uid://btxblnn0xcf64" path="res://scripts/ball.gd" id="1_d73vv"]
 [ext_resource type="Script" uid="uid://wytq8piaqmrc" path="res://scripts/SpringPhysics.gd" id="2_ul5l2"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://dvloyvpvwr5sd" path="res://scripts/debug_mode.gd" id="4_dqebh"]
 [ext_resource type="PackedScene" uid="uid://dgm0ri1lo1qb7" path="res://scenes/physics_arrows_package.tscn" id="5_2svwt"]
 [ext_resource type="AudioStream" uid="uid://cl46ljdk2bbcf" path="res://assets/sfx/bathit.mp3" id="6_lp32b"]
+[ext_resource type="AudioStream" uid="uid://x5jmw4632a7w" path="res://assets/sfx/ink1.mp3" id="6_o1jpy"]
 [ext_resource type="AudioStream" uid="uid://hixoeupabdi2" path="res://assets/sfx/pongbounce.mp3" id="7_o1jpy"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ig1eg"]
@@ -34,6 +35,8 @@ script = ExtResource("1_d73vv")
 body_to_observe = NodePath("..")
 velocity_arrow_multiplier = 0.1
 accel_arrow_multiplier = 1
+hide_text = true
+hide_vectors = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_ig1eg")
@@ -60,6 +63,10 @@ texture_offset = Vector2(4.795, 4.585)
 polygon = PackedVector2Array(0, -5, 3, -4, 5, 0, 4, 4, 0, 5, -3, 4, -5, 0, -4, -3)
 
 [node name="Sounds" type="Node" parent="."]
+
+[node name="Ink1" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("6_o1jpy")
+max_polyphony = 10
 
 [node name="BallHit" type="AudioStreamPlayer2D" parent="Sounds"]
 stream = ExtResource("6_lp32b")
