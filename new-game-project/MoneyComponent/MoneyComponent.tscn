@@ -9,6 +9,7 @@ script = ExtResource("1_dcuh2")
 [node name="StrikeLabel" type="Label" parent="."]
 offset_right = 51.0
 offset_bottom = 34.0
+text = "test counter"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-12.999999, 11.999999)

@@ -4,15 +4,17 @@ class_name Player
 @export var jump_strength : int
 @export var speed : int
 @export var gravity = 980
-@export var slowdown_speed = 12
+@export var slowdown_speed = 12.0
 @export var hit_time_frame : float = .2
 @export var cooldown_time : float = .3
+@export var invince_time = .1
 var cooldown_on : bool= false
 var can_hit : bool = false
 
 @onready var sprite = $Sprite2D
 @onready var weapon: Area2D = $Weapon
 @onready var animation_tree: PlayerAnim = $AnimationTree
+@onready var inking : Inking = get_tree().get_nodes_in_group("Inking")[0]
 
 var walk_animation_speed = 0
 var dash_strength = 10
@@ -25,7 +27,7 @@ var falling_stretch = 1.0
 var squishable = false
 const BASESCALE = 1.00
 
-var health : int = 5
+var health : int = 500
 
 
 func _ready() -> void:
@@ -47,7 +49,7 @@ func weapon_c(delta):
 	for i in bodies:
 		if i is Ball and can_hit:
 			can_hit = false
-			i.hit_ball(get_global_mouse_position() - global_position, 50)
+			i.hit_ball(get_global_mouse_position() - global_position, 50, .1)
 	
 	if can_hit: weapon.modulate = Color.GRAY
 	else: weapon.modulate = Color.WHITE
@@ -151,26 +153,32 @@ func visuals(delta):
 		
 		sprite.scale = sprite.scale.lerp(Vector2(1/falling_stretch, falling_stretch) * BASESCALE, delta * 5) 
 
-
-func hit(direction):
-	set_health(get_health() - 1)
+var invince = false
+func hit(direction : Vector2):
 	
-	modulate = Color("ff0000")
-	var tween = get_tree().create_tween()
-	tween.tween_property(self, "modulate", Color.WHITE, .5)
-	
-	#sprite.scale.x += .2 * BASESCALE
-	#sprite.scale.y -= .1 * BASESCALE
-	velocity += direction
-	
-	var push_direction = -1
-	if is_on_floor():
-		push_direction = -1
-	else:
-		push_direction = -1
+	if !invince:
+		invince = true
+		set_health(get_health() - 1)
+		inking.splat_player(position, direction.normalized())
+		modulate = Color("ff0000")
+		var tween = get_tree().create_tween()
+		tween.tween_property(self, "modulate", Color.WHITE, .5)
+		
+		#sprite.scale.x += .2 * BASESCALE
+		#sprite.scale.y -= .1 * BASESCALE
+		velocity += direction
+		
+		var push_direction = -1
+		if is_on_floor():
+			push_direction = -1
+		else:
+			push_direction = -1
+		await get_tree().create_timer(invince_time).timeout
+		invince = false
 
 
 func die():
+	return
 	queue_free()
 
 

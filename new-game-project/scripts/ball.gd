@@ -5,9 +5,10 @@ class_name Ball
 @onready var spring_x: Spring = $SpringX
 @onready var spring_y: Spring = $SpringY
 @onready var visual_follow_line: VisualFollowLine = $VisualFollowLine
+@onready var inking : Inking = get_tree().get_nodes_in_group("Inking")[0]
+
 @export var spring_enabled = false
 var speed : float = 1.0
-
 
 enum STATES {FREEZE, MOVING}
 var cur_state = STATES.MOVING
@@ -23,10 +24,14 @@ func _process(delta: float) -> void:
 		STATES.MOVING:
 			moving_process(delta)
 
-func set_state_freezing(freeze_time):
+func set_state_freezing(freeze_time: float = 0):
 	cur_state = STATES.FREEZE
-	await get_tree().create_timer(freeze_time).timeout
-	set_state_moving()
+	if freeze_time > 0:
+		var original_time_scale = Engine.time_scale
+		Engine.time_scale = .1
+		await get_tree().create_timer(freeze_time, false, false, true).timeout
+		Engine.time_scale = original_time_scale
+		set_state_moving()
 
 func set_state_moving():
 	cur_state = STATES.MOVING
@@ -46,6 +51,7 @@ func moving_process(delta):
 		if wall != null: 
 			var normal = collision.get_normal()
 			velocity = velocity.bounce(normal)
+			$Sounds/BallBounce.play()
 			#Vector2(randf_range(-.1,.1), randf_range(-.1,.1)) we can use equation to modify and add random
 		
 		
@@ -57,11 +63,19 @@ func moving_process(delta):
 func hit_ball(direction : Vector2, strength : float, freeze_length : float = 0): #direction is your target position, it WILL be normalized and you get a lashing if you dont like it
 	if freeze_length > 0.0:
 		set_state_freezing(freeze_length)
+	inking.splat_ball(global_position, direction.normalized())
+	
 	direction = direction.normalized()
 	Camera.add_trauma(strength * .0001, direction)
 	speed += strength
 	velocity = direction * speed
 	
+	$Sounds/BallHit.play()
+	
 func hit_object(object):
 	if object.is_in_group("Hitable"):
 		object.hit(velocity)
+
+
+func _on_end_game_timer_timeout() -> void:
+	set_state_freezing()

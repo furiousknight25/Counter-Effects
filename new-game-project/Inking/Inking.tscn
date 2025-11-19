@@ -1,0 +1,54 @@
+[gd_scene load_steps=3 format=3 uid="uid://b6hvicojge7i8"]
+
+[ext_resource type="Script" uid="uid://caog3lyckx461" path="res://Inking/inking.gd" id="1_b4kwv"]
+[ext_resource type="Script" uid="uid://dl3j1iglinpnt" path="res://Inking/Tally.gd" id="2_vduku"]
+
+[node name="Inking" type="SubViewportContainer"]
+z_index = -10
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+script = ExtResource("1_b4kwv")
+spray_speed = null
+
+[node name="SubViewportInk" type="SubViewport" parent="."]
+transparent_bg = true
+handle_input_locally = false
+canvas_item_default_texture_filter = 2
+size = Vector2i(256, 192)
+render_target_clear_mode = 1
+render_target_update_mode = 4
+
+[node name="TextureRect" type="TextureRect" parent="SubViewportInk"]
+z_index = -6
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="Tally" type="Panel" parent="Node2D"]
+offset_left = 60.0
+offset_top = -31.0
+offset_right = 192.0
+offset_bottom = -8.0
+script = ExtResource("2_vduku")
+
+[node name="Black" type="Label" parent="Node2D/Tally"]
+layout_mode = 0
+offset_left = 6.0
+offset_right = 46.0
+offset_bottom = 23.0
+
+[node name="White" type="Label" parent="Node2D/Tally"]
+layout_mode = 0
+offset_left = 80.0
+offset_right = 120.0
+offset_bottom = 23.0

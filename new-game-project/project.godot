@@ -13,7 +13,7 @@ config_version=5
 config/name="New Game Project"
 run/main_scene="uid://8ns7uk77unk0"
 config/features=PackedStringArray("4.5", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="uid://bg7xk4sbowye4"
 
 [autoload]
 
@@ -30,10 +30,13 @@ window/stretch/mode="viewport"
 [file_customization]
 
 folder_colors={
+"res://Levels/": "red",
 "res://Managers/": "orange",
 "res://MoneyComponent/": "green",
 "res://Upgrades/": "pink",
 "res://assets/": "red",
+"res://assets/Music/": "yellow",
+"res://assets/sfx/": "yellow",
 "res://junk/": "gray",
 "res://scripts/": "purple"
 }
@@ -43,6 +46,7 @@ folder_colors={
 Hitable=""
 Player="Just the player"
 Ball=""
+Inking=""
 
 [input]
 

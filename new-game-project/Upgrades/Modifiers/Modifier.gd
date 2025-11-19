@@ -19,4 +19,3 @@ func divide_modifier(attribute : float, value : float) -> void:
 
 func toggle_modifier(attribute : bool, value : bool) -> void:
 	attribute = value
-	
