@@ -1,41 +1,26 @@
 extends SubViewportContainer
-
+class_name Inking
 # --- Persistent Canvas Data ---
+@onready var texture_rect: TextureRect = $SubViewportInk/TextureRect
+@onready var tally: Panel = $Node2D/Tally
+
 var sub_viewport: SubViewport
-var baked_canvas: TextureRect
 var canvas_image: Image # The one and only image object that holds all the paint data.
 var canvas_texture: ImageTexture # The texture used to display the canvas_image.
 
+@export var spray_speed = 10.0
+
+var spray_spots
+
+func _process(delta: float) -> void:
+	if Input.is_action_just_pressed("ui_accept"):
+		iterate_pixels()
 #region Setup
 func _ready():
 	# Safely access the SubViewport using get_node()
 	sub_viewport = get_node("SubViewportInk")
 	
-	if sub_viewport:
-		baked_canvas = sub_viewport.get_node("BakedCanvas")
-		
-		# NOTE: Ensure the SubViewport size is set to 256x192 in the Inspector!
-		
-		if baked_canvas:
-			initialize_canvas()
-		else:
-			push_error("Setup Error: SubViewportInk must contain a 'BakedCanvas' TextureRect child.")
-			set_process(false)
-			return
-	else:
-		push_error("Setup Error: Could not find 'SubViewportInk' child.")
-		set_process(false)
-		return
-#endregion
-
-func _process(delta: float) -> void:
-	if Input.is_action_pressed("click"):
-		for i in 10:
-			var viewport_local_pos = baked_canvas.get_local_mouse_position()
-			
-			var stamp_data: Image
-			stamp_data = create_circle_image(16 / 2) 
-			stamp_image(viewport_local_pos, Color.BLACK, stamp_data)
+	if sub_viewport:if texture_rect:initialize_canvas()
 
 # This function runs ONCE to set up the blank canvas.
 func initialize_canvas():
@@ -47,10 +32,11 @@ func initialize_canvas():
 	
 	# 2. Create the persistent ImageTexture and assign it.
 	canvas_texture = ImageTexture.create_from_image(canvas_image)
-	baked_canvas.texture = canvas_texture
+	texture_rect.texture = canvas_texture
 	
 	# Ensure the BakedCanvas fills the viewport
-	baked_canvas.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	texture_rect.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+#endregion
 
 #region --- Shape Generation Utility Functions ---
 # These functions decouple the stamping logic from the shape creation.
@@ -61,8 +47,6 @@ func create_circle_image(radius: int) -> Image:
 	var center = Vector2(radius, radius)
 	var image = Image.create(size, size, false, Image.FORMAT_RGBA8)
 	
-	# NOTE: Image.lock() is no longer required in Godot 4.5
-	
 	for y in range(size):
 		for x in range(size):
 			var dist_sq = center.distance_squared_to(Vector2(x, y))
@@ -71,16 +55,37 @@ func create_circle_image(radius: int) -> Image:
 			else:
 				image.set_pixel(x, y, Color(0, 0, 0, 0)) 
 	return image
-#endregion
+
+func spawned_spot(velocity: Vector2, position: Vector2, shape: Image, damping_speed: float, color: Color):
+	if velocity.length_squared() < 0.1: return  # Use squared for better performance, this is the base case
+	
+	position += velocity
+	velocity *= damping_speed
+	stamp_image(position, color, shape) #spawn a blob at new point
+	
+	await get_tree().process_frame #make sure its frame dependent
+	
+	spawned_spot(velocity, position, shape, damping_speed, color)
+	
+func splat_player(pos: Vector2, hit_dir: Vector2):
+	for i in 12:
+		spawned_spot(Vector2.UP.rotated(randf_range(-.5,.5)) * randf_range(1,40), pos, create_circle_image(randf_range(2,5)), .8, Color.BLACK)
+	
+	for i in 8:
+		spawned_spot(-hit_dir.rotated(randf_range(-.3,.3)) * randf_range(1,30), pos, create_circle_image(randf_range(2,4)), .3, Color.BLACK)
+
+
+func splat_ball(pos: Vector2, hit_dir: Vector2):
+	for i in 20:
+		spawned_spot(hit_dir.rotated(randf_range(-.5,.5)) * randf_range(1,35), pos, create_circle_image(randf_range(1,8)), randf_range(.2,.6), Color.WHITE)
+	#endregion
+
 
 #region --- Main Reusable Stamping Function ---
-
-
 # This high-performance function accepts any Image data for stamping.
 func stamp_image(viewport_pos: Vector2, paint_color: Color, stamp_image_data: Image):
 	if canvas_image == null:
 		return
-
 	var stamp_size = stamp_image_data.get_size()
 
 	# --- PERFORMANCE STEP 1: Tint the stamp image (Localized CPU work) ---
@@ -91,7 +96,6 @@ func stamp_image(viewport_pos: Vector2, paint_color: Color, stamp_image_data: Im
 			if pixel_color.a > 0.05: 
 				# Use the stamp's alpha but the team's RGB color
 				tinted_stamp_image.set_pixel(x, y, Color(paint_color.r, paint_color.g, paint_color.b, pixel_color.a))
-
 
 	# --- PERFORMANCE STEP 2: Blend the small image onto the master image ---
 	# This only modifies memory for the area of the stamp.
@@ -107,3 +111,27 @@ func stamp_image(viewport_pos: Vector2, paint_color: Color, stamp_image_data: Im
 	# This only uploads the changed pixels to the GPU VRAM.
 	canvas_texture.update(canvas_image)
 #endregion
+
+func iterate_pixels():
+	var final_image = canvas_image 
+	var black_pixels = 0
+	var white_pixels = 0
+	
+	# Step 2: Iterate through every pixel
+	for y in range(final_image.get_height()):
+		await get_tree().process_frame
+		for x in range(final_image.get_width()):
+			
+			var color = final_image.get_pixel(x, y) # Get the color of the current pixel
+			var black_blend = lerp(0.0, 1.0, float(x)/256)
+			canvas_image.set_pixel(x,y,Color.WHITE.blend(Color(black_blend,black_blend,black_blend)))
+			canvas_texture.update(canvas_image)
+			var brightness = color.v # v is the value part, which is brightness
+			
+			if brightness < 0.1: black_pixels += 1
+			elif brightness > 0.9: white_pixels += 1
+			tally.set_bw(black_pixels, white_pixels)
+
+
+func _on_end_game_timer_game_end() -> void:
+	iterate_pixels()
