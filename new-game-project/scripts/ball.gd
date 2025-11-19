@@ -27,7 +27,7 @@ func _process(delta: float) -> void:
 func set_state_freezing(freeze_time: float = 0):
 	cur_state = STATES.FREEZE
 	if freeze_time > 0:
-		var original_time_scale = Engine.time_scale
+		var original_time_scale = 1.0
 		Engine.time_scale = .1
 		await get_tree().create_timer(freeze_time, false, false, true).timeout
 		Engine.time_scale = original_time_scale
@@ -69,7 +69,7 @@ func hit_ball(direction : Vector2, strength : float, freeze_length : float = 0):
 	Camera.add_trauma(strength * .0001, direction)
 	speed += strength
 	velocity = direction * speed
-	
+	$Sounds/Ink1.play()
 	$Sounds/BallHit.play()
 	
 func hit_object(object):

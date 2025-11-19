@@ -1,0 +1,49 @@
+[gd_scene load_steps=7 format=3 uid="uid://dey6d573npxbl"]
+
+[ext_resource type="Script" uid="uid://b088dki1h7ogg" path="res://Music/music.gd" id="1_4uau5"]
+[ext_resource type="Script" uid="uid://b1v22bdyxocy0" path="res://Music/AdaptiveMusic.gd" id="2_ytcby"]
+[ext_resource type="AudioStream" uid="uid://bq4j0qjv7l34w" path="res://assets/Music/INurMIND.amen.wav" id="3_b75lf"]
+[ext_resource type="AudioStream" uid="uid://da00dux0vgui" path="res://assets/Music/INurMIND.chop.wav" id="4_f4ytw"]
+[ext_resource type="AudioStream" uid="uid://dsnxe2jwpgmjg" path="res://assets/Music/INurMIND.perc.wav" id="5_k5d4v"]
+[ext_resource type="AudioStream" uid="uid://h4mn5ksf8kfi" path="res://assets/Music/INurMIND.subb.wav" id="6_i3iy5"]
+
+[node name="Music" type="Node"]
+script = ExtResource("1_4uau5")
+
+[node name="OpenYourMind" type="Node" parent="." node_paths=PackedStringArray("tracks")]
+script = ExtResource("2_ytcby")
+tracks = [NodePath("chop"), NodePath("perc"), NodePath("subb"), NodePath("amen")]
+
+[node name="chop" type="AudioStreamPlayer" parent="OpenYourMind"]
+stream = ExtResource("4_f4ytw")
+volume_db = -10.0
+
+[node name="perc" type="AudioStreamPlayer" parent="OpenYourMind"]
+stream = ExtResource("5_k5d4v")
+volume_db = -80.0
+
+[node name="subb" type="AudioStreamPlayer" parent="OpenYourMind"]
+stream = ExtResource("6_i3iy5")
+volume_db = -80.0
+
+[node name="amen" type="AudioStreamPlayer" parent="OpenYourMind"]
+stream = ExtResource("3_b75lf")
+volume_db = -80.0
+
+[node name="UI" type="Control" parent="OpenYourMind"]
+z_index = 4
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ProgressBar" type="ProgressBar" parent="OpenYourMind/UI"]
+modulate = Color(0.8083216, 0, 0.3328494, 1)
+layout_mode = 0
+offset_left = 3.0000005
+offset_top = 63.000008
+offset_right = 16.223482
+offset_bottom = 191.4567
+scale = Vector2(0.52936125, 0.52936125)
+fill_mode = 2
+show_percentage = false

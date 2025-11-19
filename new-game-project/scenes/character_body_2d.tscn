@@ -1,4 +1,4 @@
-[gd_scene load_steps=69 format=3 uid="uid://fyyoe5vf3xm1"]
+[gd_scene load_steps=71 format=3 uid="uid://fyyoe5vf3xm1"]
 
 [ext_resource type="Script" uid="uid://dymxf0txidqa8" path="res://scripts/player.gd" id="1_g2brh"]
 [ext_resource type="Texture2D" uid="uid://k4mvfo5k41jp" path="res://assets/player_animations/playa-hit_0.png" id="2_8nwgm"]
@@ -14,6 +14,8 @@
 [ext_resource type="Script" uid="uid://ytgykf1yg2ik" path="res://scenes/sound_controller.gd" id="12_7pl6r"]
 [ext_resource type="AudioStream" uid="uid://duqxkj7ji5bxx" path="res://assets/sfx/footstep.mp3" id="13_x5gf8"]
 [ext_resource type="AudioStream" uid="uid://ccsyrcfloglo7" path="res://assets/sfx/jump.mp3" id="14_42hdn"]
+[ext_resource type="AudioStream" uid="uid://baon8vnnrh6g2" path="res://assets/sfx/ink2.mp3" id="14_inrnk"]
+[ext_resource type="AudioStream" uid="uid://bc32x238qoxhd" path="res://assets/sfx/landonground.mp3" id="16_wqsd8"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nckey"]
 radius = 9.0
@@ -631,9 +633,13 @@ stream = ExtResource("13_x5gf8")
 volume_db = -12.187
 max_polyphony = 10
 
-[node name="Hurt" type="AudioStreamPlayer2D" parent="SoundController"]
+[node name="Ink2" type="AudioStreamPlayer" parent="SoundController"]
+stream = ExtResource("14_inrnk")
 
 [node name="Jump" type="AudioStreamPlayer2D" parent="SoundController"]
 stream = ExtResource("14_42hdn")
+
+[node name="Landonground" type="AudioStreamPlayer" parent="SoundController"]
+stream = ExtResource("16_wqsd8")
 
 [connection signal="timeout" from="SoundController/FootTimer" to="SoundController/FootTimer/FootStep" method="play"]
