@@ -24,15 +24,14 @@ func _process(delta: float) -> void:
 		STATES.MOVING:
 			moving_process(delta)
 
-func set_state_freezing(freeze_time):
+func set_state_freezing(freeze_time: float = 0):
 	cur_state = STATES.FREEZE
-	var original_time_scale = Engine.time_scale
-	Engine.time_scale = .1
-	await get_tree().create_timer(freeze_time, false, false, true).timeout
-	print(freeze_time)
-	Engine.time_scale = original_time_scale
-	set_state_moving()
-	
+	if freeze_time > 0:
+		var original_time_scale = Engine.time_scale
+		Engine.time_scale = .1
+		await get_tree().create_timer(freeze_time, false, false, true).timeout
+		Engine.time_scale = original_time_scale
+		set_state_moving()
 
 func set_state_moving():
 	cur_state = STATES.MOVING
@@ -76,3 +75,7 @@ func hit_ball(direction : Vector2, strength : float, freeze_length : float = 0):
 func hit_object(object):
 	if object.is_in_group("Hitable"):
 		object.hit(velocity)
+
+
+func _on_end_game_timer_timeout() -> void:
+	set_state_freezing()

@@ -628,6 +628,7 @@ wait_time = 0.2
 [node name="FootStep" type="AudioStreamPlayer2D" parent="SoundController/FootTimer"]
 position = Vector2(2, 23)
 stream = ExtResource("13_x5gf8")
+volume_db = -12.187
 max_polyphony = 10
 
 [node name="Hurt" type="AudioStreamPlayer2D" parent="SoundController"]

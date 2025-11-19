@@ -15,6 +15,7 @@ var can_hit : bool = false
 @onready var weapon: Area2D = $Weapon
 @onready var animation_tree: PlayerAnim = $AnimationTree
 @onready var inking : Inking = get_tree().get_nodes_in_group("Inking")[0]
+
 var walk_animation_speed = 0
 var dash_strength = 10
 var buff_jump = 0.0
@@ -177,6 +178,7 @@ func hit(direction : Vector2):
 
 
 func die():
+	return
 	queue_free()
 
 

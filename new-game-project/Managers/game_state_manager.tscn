@@ -1,10 +1,61 @@
-[gd_scene load_steps=3 format=3 uid="uid://8ns7uk77unk0"]
+[gd_scene load_steps=8 format=3 uid="uid://8ns7uk77unk0"]
 
 [ext_resource type="Script" uid="uid://bc44oqh2kl3sh" path="res://Managers/GameStateManager.gd" id="1_pcxke"]
-[ext_resource type="PackedScene" uid="uid://dfhfol7byum77" path="res://scenes/Scene_1.tscn" id="2_bf74e"]
+[ext_resource type="PackedScene" uid="uid://dfhfol7byum77" path="res://Levels/Level_1.tscn" id="2_bf74e"]
+[ext_resource type="PackedScene" uid="uid://c7a6cijicq3rd" path="res://scenes/Ball.tscn" id="3_nyymm"]
+[ext_resource type="PackedScene" uid="uid://fyyoe5vf3xm1" path="res://scenes/character_body_2d.tscn" id="4_c64r5"]
+[ext_resource type="PackedScene" uid="uid://becufmw83qp8r" path="res://MoneyComponent/MoneyComponent.tscn" id="5_uutof"]
+[ext_resource type="PackedScene" uid="uid://b6hvicojge7i8" path="res://Inking/Inking.tscn" id="6_rupjc"]
+[ext_resource type="Script" uid="uid://8vop7w1dd83g" path="res://TillEndGameTimer/end_game_timer.gd" id="7_utl7c"]
 
 [node name="GameStateManager" type="Node"]
 script = ExtResource("1_pcxke")
 metadata/_custom_type_script = "uid://bc44oqh2kl3sh"
 
 [node name="Root" parent="." instance=ExtResource("2_bf74e")]
+
+[node name="Ball" parent="." instance=ExtResource("3_nyymm")]
+position = Vector2(203, 162)
+
+[node name="Player" parent="." instance=ExtResource("4_c64r5")]
+unique_name_in_owner = true
+position = Vector2(114, 106)
+invince_time = 0.5
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="StrikeCount" parent="UI" instance=ExtResource("5_uutof")]
+z_index = 1
+position = Vector2(30, -2)
+scale = Vector2(0.6709192, 0.6709192)
+
+[node name="Inking" parent="UI" groups=["Inking"] instance=ExtResource("6_rupjc")]
+layout_mode = 1
+spray_speed = 10.0
+metadata/_edit_lock_ = true
+
+[node name="EndGameTimer" type="Timer" parent="UI"]
+wait_time = 20.0
+one_shot = true
+autostart = true
+script = ExtResource("7_utl7c")
+
+[node name="ProgressBar" type="ProgressBar" parent="UI/EndGameTimer"]
+offset_left = 69.0
+offset_top = 181.00002
+offset_right = 494.69235
+offset_bottom = 208.00002
+scale = Vector2(0.2607517, 0.2607517)
+value = 100.0
+
+[connection signal="game_end" from="UI/EndGameTimer" to="UI/Inking" method="_on_end_game_timer_game_end"]
+[connection signal="timeout" from="UI/EndGameTimer" to="Ball" method="_on_end_game_timer_timeout"]
+[connection signal="timeout" from="UI/EndGameTimer" to="UI/EndGameTimer" method="_on_timeout"]
+
+[editable path="UI/Inking"]

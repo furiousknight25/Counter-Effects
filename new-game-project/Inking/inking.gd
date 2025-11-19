@@ -28,7 +28,7 @@ func initialize_canvas():
 	
 	# 1. Create a new Image filled with the neutral color.
 	canvas_image = Image.create(viewport_size.x, viewport_size.y, false, Image.FORMAT_RGBA8)
-	canvas_image.fill(Color.WHITE)
+	canvas_image.fill(Color.BLACK)
 	
 	# 2. Create the persistent ImageTexture and assign it.
 	canvas_texture = ImageTexture.create_from_image(canvas_image)
@@ -116,16 +116,17 @@ func iterate_pixels():
 	var final_image = canvas_image 
 	var black_pixels = 0
 	var white_pixels = 0
-	
+
 	# Step 2: Iterate through every pixel
 	for y in range(final_image.get_height()):
 		await get_tree().process_frame
+		canvas_texture.update(canvas_image)
+
 		for x in range(final_image.get_width()):
 			
 			var color = final_image.get_pixel(x, y) # Get the color of the current pixel
-			var black_blend = lerp(0.0, 1.0, float(x)/256)
-			canvas_image.set_pixel(x,y,Color.WHITE.blend(Color(black_blend,black_blend,black_blend)))
-			canvas_texture.update(canvas_image)
+			canvas_image.set_pixel(x, y, Color.WHITE);
+			
 			var brightness = color.v # v is the value part, which is brightness
 			
 			if brightness < 0.1: black_pixels += 1
@@ -134,4 +135,5 @@ func iterate_pixels():
 
 
 func _on_end_game_timer_game_end() -> void:
+	print('it')
 	iterate_pixels()

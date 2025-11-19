@@ -12,6 +12,7 @@ grow_horizontal = 2
 grow_vertical = 2
 stretch = true
 script = ExtResource("1_b4kwv")
+spray_speed = null
 
 [node name="SubViewportInk" type="SubViewport" parent="."]
 transparent_bg = true
