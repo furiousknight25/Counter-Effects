@@ -11,6 +11,7 @@ colors = PackedColorArray(0.6523882, 0.653716, 0.61781263, 1)
 gradient = SubResource("Gradient_ka50d")
 
 [node name="Level_1" type="Node2D"]
+process_mode = 3
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 

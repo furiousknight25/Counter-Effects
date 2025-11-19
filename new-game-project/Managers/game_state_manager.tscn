@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://8ns7uk77unk0"]
+[gd_scene load_steps=9 format=3 uid="uid://8ns7uk77unk0"]
 
 [ext_resource type="Script" uid="uid://bc44oqh2kl3sh" path="res://Managers/GameStateManager.gd" id="1_pcxke"]
-[ext_resource type="PackedScene" uid="uid://dfhfol7byum77" path="res://Levels/Level_1.tscn" id="2_bf74e"]
+[ext_resource type="PackedScene" uid="uid://dfhfol7byum77" path="res://Levels/Level Scenes/Level_1.tscn" id="2_bf74e"]
+[ext_resource type="Script" uid="uid://bcqdtue8f1264" path="res://Managers/transition_manager.gd" id="2_c64r5"]
 [ext_resource type="PackedScene" uid="uid://c7a6cijicq3rd" path="res://scenes/Ball.tscn" id="3_nyymm"]
 [ext_resource type="PackedScene" uid="uid://fyyoe5vf3xm1" path="res://scenes/character_body_2d.tscn" id="4_c64r5"]
 [ext_resource type="PackedScene" uid="uid://becufmw83qp8r" path="res://MoneyComponent/MoneyComponent.tscn" id="5_uutof"]
@@ -12,7 +13,12 @@
 script = ExtResource("1_pcxke")
 metadata/_custom_type_script = "uid://bc44oqh2kl3sh"
 
-[node name="Root" parent="." instance=ExtResource("2_bf74e")]
+[node name="TransitionManager" type="Node" parent="."]
+process_mode = 3
+script = ExtResource("2_c64r5")
+metadata/_custom_type_script = "uid://bcqdtue8f1264"
+
+[node name="Level_1" parent="." instance=ExtResource("2_bf74e")]
 
 [node name="Ball" parent="." instance=ExtResource("3_nyymm")]
 position = Vector2(203, 162)

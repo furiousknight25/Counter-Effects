@@ -13,8 +13,10 @@ var canvas_texture: ImageTexture # The texture used to display the canvas_image.
 var spray_spots
 
 func _process(delta: float) -> void:
-	if Input.is_action_just_pressed("ui_accept"):
-		iterate_pixels()
+	#if Input.is_action_just_pressed("ui_accept"):
+		#iterate_pixels()
+	pass
+	
 #region Setup
 func _ready():
 	# Safely access the SubViewport using get_node()
@@ -63,7 +65,7 @@ func spawned_spot(velocity: Vector2, position: Vector2, shape: Image, damping_sp
 	velocity *= damping_speed
 	stamp_image(position, color, shape) #spawn a blob at new point
 	
-	await get_tree().process_frame #make sure its frame dependent
+	await get_tree().physics_frame #make sure its frame dependent
 	
 	spawned_spot(velocity, position, shape, damping_speed, color)
 	
@@ -119,7 +121,7 @@ func iterate_pixels():
 
 	# Step 2: Iterate through every pixel
 	for y in range(final_image.get_height()):
-		await get_tree().process_frame
+		await get_tree().physics_frame
 		canvas_texture.update(canvas_image)
 
 		for x in range(final_image.get_width()):
@@ -132,6 +134,9 @@ func iterate_pixels():
 			if brightness < 0.1: black_pixels += 1
 			elif brightness > 0.9: white_pixels += 1
 			tally.set_bw(black_pixels, white_pixels)
+	
+	print("finished counting")
+	(owner as GameStateManager).call_switch_scene("Shop")
 
 
 func _on_end_game_timer_game_end() -> void:
