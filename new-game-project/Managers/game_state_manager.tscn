@@ -53,6 +53,7 @@ autostart = true
 script = ExtResource("7_utl7c")
 
 [node name="ProgressBar" type="ProgressBar" parent="UI/EndGameTimer"]
+z_index = 2
 offset_left = 69.0
 offset_top = 181.00002
 offset_right = 494.69235

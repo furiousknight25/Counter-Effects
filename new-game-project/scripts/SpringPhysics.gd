@@ -23,7 +23,7 @@ func set_value(val : float): value = val
 func get_value() -> float: return value
 #endregion
 
-func interpolate_spring(pos: float, delta) -> float: #helper function that other files can use if they want to control when its used as a modifer
+func interpolate_spring(pos: float, _delta) -> float: #helper function that other files can use if they want to control when its used as a modifer
 	var displacement = pos - goal
 	var force = -tension * displacement - damping * vel
 	

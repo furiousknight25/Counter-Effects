@@ -17,7 +17,7 @@ var old_acceleration : Vector2
 
 # ): I ussualy like acceleration to be red but raycast modulate didnt like it, the sacrafices for programming cleanliness 
 
-func _process(delta): 
+func _process(_delta): 
 #region seting accel and velocity 
 	if body_to_observe is RigidBody2D:
 		velocity = body_to_observe.linear_velocity

@@ -580,6 +580,7 @@ transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition
 graph_offset = Vector2(-14, 7.333328)
 
 [node name="Player" type="CharacterBody2D" groups=["Hitable", "Player"]]
+collision_layer = 4
 script = ExtResource("1_g2brh")
 jump_strength = 150
 speed = 150

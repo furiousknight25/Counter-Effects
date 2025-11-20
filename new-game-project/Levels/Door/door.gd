@@ -1,11 +1,20 @@
 class_name Door extends Node2D
 
-signal door_entered
-
 @onready var collision_shape_2d: CollisionShape2D = $Area2D/CollisionShape2D
+
+
+func _ready() -> void:
+	SignalBus.connect("enable_door", enable_door)
+
+
+func enable_door():
+	await get_tree().create_timer(0.1).timeout
+	collision_shape_2d.set_deferred("disabled", false)
 
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body is Player:
+		print(body.position)
+		print("gateway to my ass")
 		collision_shape_2d.set_deferred("disabled", true)
-		door_entered.emit()
+		(get_parent().get_parent() as GameStateManager).call_switch_scene("Level_1")

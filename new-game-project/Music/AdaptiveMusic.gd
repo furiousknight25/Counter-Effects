@@ -12,7 +12,7 @@ func _ready() -> void:
 	beat_duration = 60.0 /bpm
 	start()
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("1"):
 		increase_volume(0, -10.0, .01)
 	if Input.is_action_just_pressed("2"):

@@ -6,7 +6,11 @@ extends Panel
 var black := 0
 var white := 0
 
-func _process(delta: float) -> void:
+func _ready() -> void:
+	SignalBus.connect("resetInking", reset)
+
+
+func _process(_delta: float) -> void:
 	white_l.text = str(white)
 	black_l.text = str(black)
 	#position.y = lerp(position.y, -30.0, delta * 4)
@@ -16,3 +20,7 @@ func set_bw(b,w):
 	black = b
 	white = w
 	position.y = 25
+
+
+func reset():
+	position.y = -31

@@ -159,7 +159,6 @@ func hit(direction : Vector2):
 	if !invince:
 		$SoundController/Ink2.play()
 		invince = true
-		set_health(get_health() - 1)
 		inking.splat_player(position, direction.normalized())
 		modulate = Color("ff0000")
 		var tween = get_tree().create_tween()
@@ -176,22 +175,6 @@ func hit(direction : Vector2):
 			push_direction = -1
 		await get_tree().create_timer(invince_time).timeout
 		invince = false
-
-
-func die():
-	return
-	queue_free()
-
-
-func get_health() -> int:
-	return health
-
-
-func set_health(amount : int) -> void:
-	health = amount
-	
-	if health <= 0:
-		die()
 
 
 func upgrade_player(upgrade : PlayerUpgrade):

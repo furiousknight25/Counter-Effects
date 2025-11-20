@@ -8,6 +8,7 @@ class_name Ball
 @onready var inking : Inking = get_tree().get_nodes_in_group("Inking")[0]
 
 @export var spring_enabled = false
+var base_speed : float = 1.0
 var speed : float = 1.0
 
 enum STATES {FREEZE, MOVING}
@@ -16,6 +17,8 @@ var cur_state = STATES.MOVING
 func _ready() -> void:
 	spring_x.goal = global_position.x
 	spring_y.goal = global_position.y
+	
+	SignalBus.connect("resetInking", reset)
 
 func _process(delta: float) -> void:
 	match cur_state:
@@ -24,7 +27,7 @@ func _process(delta: float) -> void:
 		STATES.MOVING:
 			moving_process(delta)
 
-func set_state_freezing(freeze_time: float = 0):
+func set_state_freezing(freeze_time: float = 0) -> void:
 	cur_state = STATES.FREEZE
 	if freeze_time > 0:
 		var original_time_scale = 1.0
@@ -36,7 +39,7 @@ func set_state_freezing(freeze_time: float = 0):
 func set_state_moving():
 	cur_state = STATES.MOVING
 
-func freeze_process(delta):
+func freeze_process(_delta):
 	pass #use this for visual logic
 
 func moving_process(delta):
@@ -71,6 +74,7 @@ func hit_ball(direction : Vector2, strength : float, freeze_length : float = 0):
 	velocity = direction * speed
 	$Sounds/Ink1.play()
 	$Sounds/BallHit.play()
+	SignalBus.emit_signal("ball_hit")
 	
 func hit_object(object):
 	if object.is_in_group("Hitable"):
@@ -79,3 +83,7 @@ func hit_object(object):
 
 func _on_end_game_timer_timeout() -> void:
 	set_state_freezing()
+
+
+func reset() -> void:
+	speed = base_speed

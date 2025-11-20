@@ -10,7 +10,7 @@ class_name PlayerAnim
 var was_on_floor := true
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	#sprite_2d.play()
 	# --- 1. GET PLAYER'S CURRENT STATE ---
 	var playback = get("parameters/playback")

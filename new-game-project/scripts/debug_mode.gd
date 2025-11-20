@@ -2,7 +2,7 @@ extends Node
 @onready var ball: Ball = $".."
 @export var debug_mode = false
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if !debug_mode: return
 	
 	if Input.is_action_just_pressed("click"):

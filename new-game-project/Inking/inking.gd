@@ -12,17 +12,15 @@ var canvas_texture: ImageTexture # The texture used to display the canvas_image.
 
 var spray_spots
 
-func _process(delta: float) -> void:
-	#if Input.is_action_just_pressed("ui_accept"):
-		#iterate_pixels()
-	pass
-	
+
 #region Setup
 func _ready():
 	# Safely access the SubViewport using get_node()
 	sub_viewport = get_node("SubViewportInk")
 	
 	if sub_viewport:if texture_rect:initialize_canvas()
+	
+	SignalBus.connect("resetInking", reset)
 
 # This function runs ONCE to set up the blank canvas.
 func initialize_canvas():
@@ -135,10 +133,15 @@ func iterate_pixels():
 			elif brightness > 0.9: white_pixels += 1
 			tally.set_bw(black_pixels, white_pixels)
 	
-	print("finished counting")
+	await get_tree().create_timer(0.5).timeout
 	(owner as GameStateManager).call_switch_scene("Shop")
 
 
 func _on_end_game_timer_game_end() -> void:
-	print('it')
 	iterate_pixels()
+
+
+func reset():
+	canvas_image.fill(Color.BLACK)
+	canvas_texture = ImageTexture.create_from_image(canvas_image)
+	texture_rect.texture = canvas_texture
