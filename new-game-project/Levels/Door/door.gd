@@ -17,4 +17,4 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		print(body.position)
 		print("gateway to my ass")
 		collision_shape_2d.set_deferred("disabled", true)
-		(get_parent().get_parent() as GameStateManager).call_switch_scene("Level_1")
+		(get_parent().get_parent() as GameStateManager).call_switch_scene("next_level")

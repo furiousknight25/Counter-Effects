@@ -18,24 +18,9 @@ func _ready():
 	# Safely access the SubViewport using get_node()
 	sub_viewport = get_node("SubViewportInk")
 	
-	if sub_viewport:if texture_rect:initialize_canvas()
+	if sub_viewport:if texture_rect:reset()
 	
 	SignalBus.connect("resetInking", reset)
-
-# This function runs ONCE to set up the blank canvas.
-func initialize_canvas():
-	var viewport_size = sub_viewport.size
-	
-	# 1. Create a new Image filled with the neutral color.
-	canvas_image = Image.create(viewport_size.x, viewport_size.y, false, Image.FORMAT_RGBA8)
-	canvas_image.fill(Color.BLACK)
-	
-	# 2. Create the persistent ImageTexture and assign it.
-	canvas_texture = ImageTexture.create_from_image(canvas_image)
-	texture_rect.texture = canvas_texture
-	
-	# Ensure the BakedCanvas fills the viewport
-	texture_rect.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 #endregion
 
 #region --- Shape Generation Utility Functions ---
@@ -141,7 +126,20 @@ func _on_end_game_timer_game_end() -> void:
 	iterate_pixels()
 
 
-func reset():
-	canvas_image.fill(Color.BLACK)
-	canvas_texture = ImageTexture.create_from_image(canvas_image)
+func reset(image : Image = null):
+	var viewport_size = sub_viewport.size
+	
+	if image == null:
+		canvas_image = Image.create(viewport_size.x, viewport_size.y, false, Image.FORMAT_RGBA8)
+		canvas_image.fill(Color.BLACK)
+		
+		# 2. Create the persistent ImageTexture and assign it.
+		canvas_texture = ImageTexture.create_from_image(canvas_image)
+	else:
+		canvas_image = image
+		canvas_texture = ImageTexture.create_from_image(canvas_image)
+		
 	texture_rect.texture = canvas_texture
+	
+	# Ensure the BakedCanvas fills the viewport
+	texture_rect.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)

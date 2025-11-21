@@ -11,8 +11,12 @@
 [ext_resource type="AudioStream" uid="uid://fjci2ehdlcpn" path="res://assets/Music/glob/glob.mong.wav" id="9_vn0di"]
 [ext_resource type="AudioStream" uid="uid://bg1djeqcnse44" path="res://assets/Music/glob/glob.viol.wav" id="10_l6egb"]
 
-[node name="Music" type="Node"]
+[node name="Music" type="Node" node_paths=PackedStringArray("song_list")]
 script = ExtResource("1_4uau5")
+song_list = {
+"glob": NodePath("Glob"),
+"openyourmind": NodePath("OpenYourMind")
+}
 
 [node name="OpenYourMind" type="Node" parent="." node_paths=PackedStringArray("tracks")]
 script = ExtResource("2_ytcby")
@@ -90,5 +94,3 @@ offset_bottom = 191.4567
 scale = Vector2(0.52936125, 0.52936125)
 fill_mode = 2
 show_percentage = false
-
-[connection signal="ready" from="Glob" to="OpenYourMind" method="start"]
