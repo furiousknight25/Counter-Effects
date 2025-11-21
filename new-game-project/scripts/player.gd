@@ -27,8 +27,7 @@ var falling_stretch = 1.0
 var squishable = false
 const BASESCALE = 1.00
 
-var health : int = 500
-
+var airspeed_multiplier : float = 1.0
 
 func _ready() -> void:
 	SignalBus.connect("upgrade_player", upgrade_player)
@@ -49,7 +48,7 @@ func weapon_c(delta):
 	for i in bodies:
 		if i is Ball and can_hit:
 			can_hit = false
-			i.hit_ball(get_global_mouse_position() - global_position, 50, .1)
+			i.hit_ball(get_global_mouse_position() - global_position, .1)
 	
 	if can_hit: weapon.modulate = Color.GRAY
 	else: weapon.modulate = Color.WHITE
@@ -69,7 +68,9 @@ func swing():
 func movement(delta):
 	var direction = Input.get_axis('left', "right")
 	
-	if direction:
+	if direction and !is_on_floor():
+		velocity.x = lerp(velocity.x, speed * direction * airspeed_multiplier, 12 * delta)
+	elif direction:
 		velocity.x = lerp(velocity.x, speed * direction, 12 * delta) #add jump buffer later
 		#dash function
 	dash_timer -= delta
@@ -94,7 +95,7 @@ func movement(delta):
 		velocity.y -= 1400 * delta
 		jump_length -= delta
 	
-	velocity.y += 980 * delta
+	velocity.y += gravity * delta
 	move_and_slide()
 func visuals(delta):
 	

@@ -7,7 +7,7 @@ var node2 : Node2D
 
 
 func transition_scenes():
-	SignalBus.emit_signal("resetInking")
+	SignalBus.emit_signal("reset")
 	var transition_tween : Tween = create_tween().set_parallel(true)
 	transition_tween.tween_property(node1, "position", Vector2(-280, 0), 2.0).set_trans(Tween.TRANS_QUINT)
 	transition_tween.tween_property(node2, "position", Vector2(0, 0), 2.0).set_trans(Tween.TRANS_QUINT)

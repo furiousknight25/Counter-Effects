@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="GravityMultiplier" load_steps=2 format=3 uid="uid://dvtjceoivin62"]
+
+[ext_resource type="Script" uid="uid://c8kp2wlbmuh6k" path="res://Upgrades/Scripts/GravityMultiplierUpgrade.gd" id="1_sdgeu"]
+
+[resource]
+script = ExtResource("1_sdgeu")
+gravity_multiplier = 0.6
+metadata/_custom_type_script = "uid://c8kp2wlbmuh6k"

@@ -7,7 +7,7 @@ var black := 0
 var white := 0
 
 func _ready() -> void:
-	SignalBus.connect("resetInking", reset)
+	SignalBus.connect("reset", reset)
 
 
 func _process(_delta: float) -> void:

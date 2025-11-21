@@ -16,8 +16,7 @@ func _ready() -> void:
 func setup():
 	sprite_2d.texture = texture
 	label.text = str(cost)
-
-
-#func _process(_delta: float) -> void:
-	#if Input.is_action_just_pressed("click"):
-		#upgrade_resource_1.do_upgrade()
+	if upgrade_resource_1:
+		upgrade_resource_1.do_upgrade()
+	if upgrade_resource_2:
+		upgrade_resource_2.do_upgrade()

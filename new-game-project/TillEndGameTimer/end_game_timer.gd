@@ -11,7 +11,7 @@ func _process(_delta: float) -> void:
 		progress_bar.value = lerp(0.0,100.0, time_left/wait_time)
 
 func _ready() -> void:
-	SignalBus.connect("resetInking", reset)
+	SignalBus.connect("reset", reset)
 	SignalBus.connect("ball_hit", start_round)
 
 
