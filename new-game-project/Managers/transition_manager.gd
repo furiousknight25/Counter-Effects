@@ -5,7 +5,6 @@ signal transition_finished
 var node1 : Node2D
 var node2 : Node2D
 
-
 func transition_scenes():
 	SignalBus.emit_signal("reset")
 	var transition_tween : Tween = create_tween().set_parallel(true)

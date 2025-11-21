@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://8ns7uk77unk0"]
+[gd_scene load_steps=14 format=3 uid="uid://8ns7uk77unk0"]
 
 [ext_resource type="Script" uid="uid://bc44oqh2kl3sh" path="res://Managers/GameStateManager.gd" id="1_pcxke"]
 [ext_resource type="PackedScene" uid="uid://dfhfol7byum77" path="res://Levels/Level Scenes/Level_1.tscn" id="2_bf74e"]
@@ -69,14 +69,10 @@ offset_bottom = 208.00002
 scale = Vector2(0.2607517, 0.2607517)
 value = 100.0
 
-[node name="UpgradeItem" parent="." instance=ExtResource("9_uutof")]
-upgrade_resource_1 = ExtResource("10_rupjc")
-upgrade_resource_2 = ExtResource("11_utl7c")
 [node name="321Go" type="Control" parent="UI"]
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
-script = ExtResource("9_uutof")
 
 [node name="3" type="Label" parent="UI/321Go"]
 visible = false
@@ -122,8 +118,11 @@ text = "GO"
 polygon = PackedVector2Array(7, 17, 0, 28, 7, 40, 14, 28)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="UI/321Go"]
-stream = ExtResource("10_rupjc")
 max_polyphony = 6
+
+[node name="UpgradeItem" parent="." instance=ExtResource("9_uutof")]
+upgrade_resource_1 = ExtResource("10_rupjc")
+upgrade_resource_2 = ExtResource("11_utl7c")
 
 [connection signal="game_end" from="UI/EndGameTimer" to="UI/Inking" method="_on_end_game_timer_game_end"]
 [connection signal="timeout" from="UI/EndGameTimer" to="Ball" method="_on_end_game_timer_timeout"]

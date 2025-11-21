@@ -20,7 +20,7 @@ func _ready():
 	
 	if sub_viewport:if texture_rect:reset()
 	
-	SignalBus.connect("resetInking", reset)
+	SignalBus.connect("reset_ink", reset)
 #endregion
 
 #region --- Shape Generation Utility Functions ---

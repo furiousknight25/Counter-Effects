@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="AirSpeedMultiplier" load_steps=2 format=3 uid="uid://di5tm50ea2psa"]
 
-[ext_resource type="Script" uid="uid://d3rgqlhocrkc7" path="res://Upgrades/Scripts/AirSpeedMulitplierUpgrade.gd" id="1_y6lly"]
+[ext_resource type="Script" path="res://Upgrades/Scripts/AirSpeedMulitplierUpgrade.gd" id="1_y6lly"]
 
 [resource]
 script = ExtResource("1_y6lly")

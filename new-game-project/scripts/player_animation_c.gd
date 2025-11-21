@@ -15,8 +15,9 @@ func _process(_delta: float) -> void:
 	# --- 1. GET PLAYER'S CURRENT STATE ---
 	var playback = get("parameters/playback")
 	if playback:
-		if playback.get_current_node() != "Hit":
-			sprite_2d.flip_h = !bool(clampi(sign(player.velocity.x) + 1, 0, 1))
+		if playback.get_current_node() != "Hit" or playback.get_current_node() != "Hit_Air":
+			if abs(player.velocity.x) > 10:
+				sprite_2d.flip_h = !bool(clampi(sign(player.velocity.x) + 1, 0, 1))
 		#print("Current State: ", playback.get_current_node())
 	
 	var is_on_floor: bool = player.is_on_floor()
@@ -45,8 +46,8 @@ func _process(_delta: float) -> void:
 	# --- 4. CHECK FOR "ONE-SHOT" TRIGGERS ---
 	# CHECK FOR LANDING: Only on the *single frame* we go from
 	# "in air" (was_on_floor == false) to "on floor" (is_on_floor == true).
-	if !is_on_floor and player.velocity.y > 0:
-		set('parameters/conditions/top', true)
+	#if !is_on_floor and player.velocity.y > 0:
+		#set('parameters/conditions/top', true)
 	
 	if is_on_floor and not was_on_floor:
 		$"../SoundController/Landonground".play()
@@ -67,5 +68,9 @@ func jump_anim():
 func anim_hit(direction: Vector2):
 	sprite_2d.flip_h = bool(clampi(sign(direction.x) + 1, 0, 1))
 	var playback = get("parameters/playback")
-	playback.travel("Hit")
-	set('parameters/Hit/blend_position', -direction.normalized().y)
+	if player.is_on_floor():
+		playback.travel("Hit")
+		set('parameters/Hit/blend_position', -direction.normalized().y)
+	else:
+		playback.travel("Hit_Air")
+		set('parameters/Hit_Air/blend_position', -direction.normalized().y)

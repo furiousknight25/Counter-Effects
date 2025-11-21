@@ -7,6 +7,8 @@ signal switch_scene(old_scene : Node2D, new_scene : NodePath)
 @warning_ignore("unused_signal")
 signal reset
 
+@warning_ignore("unused_signal")
+signal reset_ink(image : Image)
 #endregion
 
 
