@@ -25,7 +25,7 @@ func _ready() -> void:
 	spring_x.goal = global_position.x
 	spring_y.goal = global_position.y
 	
-	SignalBus.connect("resetInking", reset)
+	SignalBus.connect("reset", reset)
 	SignalBus.connect("upgrade_ball", upgrade_ball)
 
 

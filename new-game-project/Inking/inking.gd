@@ -20,7 +20,7 @@ func _ready():
 	
 	if sub_viewport:if texture_rect:initialize_canvas()
 	
-	SignalBus.connect("resetInking", reset)
+	SignalBus.connect("reset", reset)
 
 # This function runs ONCE to set up the blank canvas.
 func initialize_canvas():
@@ -134,7 +134,7 @@ func iterate_pixels():
 			tally.set_bw(black_pixels, white_pixels)
 	
 	await get_tree().create_timer(0.5).timeout
-	(owner as GameStateManager).call_switch_scene("Shop")
+	SignalBus.emit_signal("switch_scene", "Shop")
 
 
 func _on_end_game_timer_game_end() -> void:
