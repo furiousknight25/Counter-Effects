@@ -15,8 +15,6 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if !master_track.playing: return
 	
-
-
 	if Input.is_action_just_pressed("1"):
 		increase_volume(0, -10.0, .01)
 	if Input.is_action_just_pressed("2"):
@@ -31,10 +29,10 @@ func _process(delta: float) -> void:
 		increase_volume(2, -80.0, .5)
 		increase_volume(3, -80.0, .5)
 
-func start():
+func start(time_to_start : float = 0.0):
 	for i in tracks:
-		i.play()
-	print(tracks)
+		i.play(time_to_start)
+	
 	master_track = tracks[0]
 	
 	await master_track.ready
@@ -47,6 +45,10 @@ func start():
 		var follower_track = tracks[i]
 		follower_track.seek(sync_time)
 
+func stop():
+	for i in tracks:
+		i.stop()
+	
 func increase_volume(idx: int, volume : float, fade_duration: float):
 	if idx >= tracks.size(): 
 		print("AINT NO DAMN TRACK EXISTS")

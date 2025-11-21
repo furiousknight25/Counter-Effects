@@ -15,8 +15,22 @@ func _ready() -> void:
 	current_song = song_list.get('openyourmind')
 	current_song.start()
 
+func switch_song(song : String):
+	await current_eight_bar
+	var time_to_start = current_song.master_track.get_playback_position()
+	current_song.stop()
+	match song:
+		"shop":
+			current_song = song_list.get('shop')
+		"glob":
+			current_song = song_list.get('glob')
+		"openyourmind":
+			current_song = song_list.get('openyourmind')
+	current_song.start(time_to_start)
+	
 
 func _process(delta: float) -> void:
+	if Input.is_action_just_pressed("ui_left"):switch_song("shop")
 	if !current_song.master_track.playing: return
 	var current_beat_index = int(current_song.master_track.get_playback_position() / current_song.beat_duration)
 	
