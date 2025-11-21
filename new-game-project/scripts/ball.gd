@@ -10,15 +10,24 @@ class_name Ball
 @export var spring_enabled = false
 var base_speed : float = 1.0
 var speed : float = 1.0
+var strength : float = 50.0
 
 enum STATES {FREEZE, MOVING}
 var cur_state = STATES.MOVING
+
+enum InkPattern {DEFAULT, LINE, CIRCLE}
+var ink_pattern = InkPattern.DEFAULT
+
+var linear_speed_increase : bool = false
+var round_has_started : bool = false
 
 func _ready() -> void:
 	spring_x.goal = global_position.x
 	spring_y.goal = global_position.y
 	
 	SignalBus.connect("resetInking", reset)
+	SignalBus.connect("upgrade_ball", upgrade_ball)
+
 
 func _process(delta: float) -> void:
 	match cur_state:
@@ -26,6 +35,9 @@ func _process(delta: float) -> void:
 			freeze_process(delta)
 		STATES.MOVING:
 			moving_process(delta)
+	
+	if linear_speed_increase == true and round_has_started == true:
+		increase_speed_over_time(delta)
 
 func set_state_freezing(freeze_time: float = 0) -> void:
 	cur_state = STATES.FREEZE
@@ -63,18 +75,23 @@ func moving_process(delta):
 	if collision != null:
 		hit_object(collision.get_collider())
 
-func hit_ball(direction : Vector2, strength : float, freeze_length : float = 0): #direction is your target position, it WILL be normalized and you get a lashing if you dont like it
+func hit_ball(direction : Vector2, freeze_length : float = 0): #direction is your target position, it WILL be normalized and you get a lashing if you dont like it
 	if freeze_length > 0.0:
 		set_state_freezing(freeze_length)
 	inking.splat_ball(global_position, direction.normalized())
 	
 	direction = direction.normalized()
 	Camera.add_trauma(strength * .0001, direction)
-	speed += strength
+	if linear_speed_increase == false:
+		speed += strength
 	velocity = direction * speed
+
 	$Sounds/Ink1.play()
 	$Sounds/BallHit.play()
 	SignalBus.emit_signal("ball_hit")
+	
+	if round_has_started == false:
+		round_has_started = true
 	
 func hit_object(object):
 	if object.is_in_group("Hitable"):
@@ -87,3 +104,13 @@ func _on_end_game_timer_timeout() -> void:
 
 func reset() -> void:
 	speed = base_speed
+
+
+func upgrade_ball(upgrade : BallUpgrade):
+	upgrade.upgrade_ball(self)
+
+
+func increase_speed_over_time(delta : float):
+	speed = speed + (delta * 48)
+	velocity = velocity.normalized() * speed
+	

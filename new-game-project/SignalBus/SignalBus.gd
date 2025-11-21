@@ -15,10 +15,8 @@ signal resetInking
 signal upgrade_player(upgrade : PlayerUpgrade)
 
 @warning_ignore("unused_signal")
-signal upgrade_ball(ball : Ball)
+signal upgrade_ball(upgrade : BallUpgrade)
 
-@warning_ignore("unused_signal")
-signal upgrade_target(target : Target)
 #endregion
 
 

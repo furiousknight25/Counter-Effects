@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://8ns7uk77unk0"]
+[gd_scene load_steps=12 format=3 uid="uid://8ns7uk77unk0"]
 
 [ext_resource type="Script" uid="uid://bc44oqh2kl3sh" path="res://Managers/GameStateManager.gd" id="1_pcxke"]
 [ext_resource type="PackedScene" uid="uid://dfhfol7byum77" path="res://Levels/Level Scenes/Level_1.tscn" id="2_bf74e"]
@@ -8,6 +8,9 @@
 [ext_resource type="PackedScene" uid="uid://becufmw83qp8r" path="res://MoneyComponent/MoneyComponent.tscn" id="5_uutof"]
 [ext_resource type="PackedScene" uid="uid://b6hvicojge7i8" path="res://Inking/Inking.tscn" id="6_rupjc"]
 [ext_resource type="Script" uid="uid://8vop7w1dd83g" path="res://TillEndGameTimer/end_game_timer.gd" id="7_utl7c"]
+[ext_resource type="PackedScene" uid="uid://dbxdqkjweu23s" path="res://Upgrades/Scenes/UpgradeItem.tscn" id="9_uutof"]
+[ext_resource type="Resource" uid="uid://dvtjceoivin62" path="res://Upgrades/Resources/IncreaseGravity.tres" id="10_rupjc"]
+[ext_resource type="Resource" uid="uid://di5tm50ea2psa" path="res://Upgrades/Resources/MoonBoots.tres" id="11_utl7c"]
 
 [node name="GameStateManager" type="Node"]
 script = ExtResource("1_pcxke")
@@ -49,7 +52,6 @@ metadata/_edit_lock_ = true
 [node name="EndGameTimer" type="Timer" parent="UI"]
 wait_time = 20.0
 one_shot = true
-autostart = true
 script = ExtResource("7_utl7c")
 
 [node name="ProgressBar" type="ProgressBar" parent="UI/EndGameTimer"]
@@ -60,6 +62,10 @@ offset_right = 494.69235
 offset_bottom = 208.00002
 scale = Vector2(0.2607517, 0.2607517)
 value = 100.0
+
+[node name="UpgradeItem" parent="." instance=ExtResource("9_uutof")]
+upgrade_resource_1 = ExtResource("10_rupjc")
+upgrade_resource_2 = ExtResource("11_utl7c")
 
 [connection signal="game_end" from="UI/EndGameTimer" to="UI/Inking" method="_on_end_game_timer_game_end"]
 [connection signal="timeout" from="UI/EndGameTimer" to="Ball" method="_on_end_game_timer_timeout"]

@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="StrengthBallUpgrade" load_steps=2 format=3 uid="uid://dnfanyy3kd43i"]
+
+[ext_resource type="Script" uid="uid://ckhu6x274nql8" path="res://Upgrades/Scripts/StrengthBallUpgrade.gd" id="1_6hrtl"]
+
+[resource]
+script = ExtResource("1_6hrtl")
+strength = 25.0
+metadata/_custom_type_script = "uid://ckhu6x274nql8"
