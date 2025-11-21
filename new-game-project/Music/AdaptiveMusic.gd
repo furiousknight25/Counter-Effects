@@ -10,9 +10,11 @@ class_name AdaptiveMusic
 var beat_duration: float # per second number
 func _ready() -> void:
 	beat_duration = 60.0 /bpm
-	start()
 
 func _process(delta: float) -> void:
+	if !master_track.playing: return
+	for i in tracks:
+		print(i.get_playback_position())
 	if Input.is_action_just_pressed("1"):
 		increase_volume(0, -10.0, .01)
 	if Input.is_action_just_pressed("2"):
@@ -30,7 +32,7 @@ func _process(delta: float) -> void:
 func start():
 	for i in tracks:
 		i.play()
-	
+	print(tracks)
 	master_track = tracks[0]
 	
 	await master_track.ready

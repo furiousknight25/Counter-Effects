@@ -1,0 +1,21 @@
+[remap]
+
+importer="aseprite_wizard.plugin.spriteframes"
+type="SpriteFrames"
+uid="uid://dkruvypm4eaf3"
+path="res://.godot/imported/swing 2.aseprite-e23e75c47ad361d3716be2a3cb639f13.res"
+
+[deps]
+
+source_file="res://assets/player_animations/swing 2.aseprite"
+dest_files=["res://.godot/imported/swing 2.aseprite-e23e75c47ad361d3716be2a3cb639f13.res"]
+
+[params]
+
+layer/exclude_layers_pattern=""
+layer/only_visible_layers=false
+sheet/sheet_type="packed"
+sheet/sheet_columns=10
+sheet/frame_padding=0
+sheet/scale=1
+animation/round_fps=true
