@@ -55,10 +55,12 @@ func weapon_c(delta):
 	else: weapon.modulate = Color.WHITE
 	
 func swing():
-	can_hit = true
+	
 	cooldown_on = true
-	velocity += (global_position - get_global_mouse_position()).normalized() * 120
 	animation_tree.anim_hit(global_position - get_global_mouse_position())
+	await get_tree().create_timer(.05).timeout
+	can_hit = true
+	velocity += (global_position - get_global_mouse_position()).normalized() * 120
 	await get_tree().create_timer(cooldown_time).timeout
 	cooldown_on = false
 	can_hit = false
