@@ -3,12 +3,11 @@
 importer="aseprite_wizard.plugin.spriteframes"
 type="SpriteFrames"
 uid="uid://cykt6n66v2m6r"
-path="res://.godot/imported/animations(1).aseprite-5a5d9e402bb66bd1e49c774a740260ff.res"
+valid=false
 
 [deps]
 
 source_file="res://assets/player_animations/animations(1).aseprite"
-dest_files=["res://.godot/imported/animations(1).aseprite-5a5d9e402bb66bd1e49c774a740260ff.res"]
 
 [params]
 

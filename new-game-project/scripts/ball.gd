@@ -16,7 +16,7 @@ enum STATES {FREEZE, MOVING}
 var cur_state = STATES.MOVING
 
 enum InkPattern {DEFAULT, LINE, CIRCLE}
-var ink_pattern = InkPattern.DEFAULT
+var ink_pattern : int = InkPattern.DEFAULT
 
 var linear_speed_increase : bool = false
 var round_has_started : bool = false

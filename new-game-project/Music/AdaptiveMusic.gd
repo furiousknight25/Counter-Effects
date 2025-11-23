@@ -12,7 +12,7 @@ var beat_duration: float # per second number
 func _ready() -> void:
 	beat_duration = 60.0 /bpm
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if !master_track.playing: return
 	
 	if Input.is_action_just_pressed("1"):

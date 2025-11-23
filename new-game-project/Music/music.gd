@@ -29,7 +29,7 @@ func switch_song(song : String):
 	current_song.start(time_to_start)
 	
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("ui_left"):switch_song("shop")
 	if !current_song.master_track.playing: return
 	var current_beat_index = int(current_song.master_track.get_playback_position() / current_song.beat_duration)

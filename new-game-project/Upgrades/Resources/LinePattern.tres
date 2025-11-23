@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="InkPatternUpgrade" load_steps=2 format=3 uid="uid://cnoobfao4q1sg"]
+
+[ext_resource type="Script" uid="uid://b8q3l1fmwtkfq" path="res://Upgrades/Scripts/InkPatternUpgrade.gd" id="1_cla8i"]
+
+[resource]
+script = ExtResource("1_cla8i")
+ink_pattern = 1
+metadata/_custom_type_script = "uid://b8q3l1fmwtkfq"
