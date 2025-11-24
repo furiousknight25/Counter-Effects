@@ -29,16 +29,19 @@ tracks = [NodePath("chop"), NodePath("perc"), NodePath("subb"), NodePath("amen")
 
 [node name="chop" type="AudioStreamPlayer" parent="OpenYourMind"]
 stream = ExtResource("4_f4ytw")
-volume_db = -10.0
+volume_db = -80.0
 
 [node name="perc" type="AudioStreamPlayer" parent="OpenYourMind"]
 stream = ExtResource("5_k5d4v")
+volume_db = -80.0
 
 [node name="subb" type="AudioStreamPlayer" parent="OpenYourMind"]
 stream = ExtResource("6_i3iy5")
+volume_db = -80.0
 
 [node name="amen" type="AudioStreamPlayer" parent="OpenYourMind"]
 stream = ExtResource("3_b75lf")
+volume_db = -80.0
 
 [node name="UI" type="Control" parent="OpenYourMind"]
 z_index = 4
@@ -104,16 +107,18 @@ bpm = 111.0
 
 [node name="bass" type="AudioStreamPlayer" parent="Shop"]
 stream = ExtResource("11_yljg6")
-volume_db = -10.0
 
 [node name="drum" type="AudioStreamPlayer" parent="Shop"]
 stream = ExtResource("12_7ar1m")
+volume_db = -80.0
 
 [node name="rhod" type="AudioStreamPlayer" parent="Shop"]
 stream = ExtResource("13_fk62i")
+volume_db = -80.0
 
 [node name="voca" type="AudioStreamPlayer" parent="Shop"]
 stream = ExtResource("14_yx4rj")
+volume_db = -80.0
 
 [node name="UI" type="Control" parent="Shop"]
 z_index = 4

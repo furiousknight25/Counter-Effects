@@ -32,7 +32,6 @@ func spin(dir, amt):
 		spin(dir, amt)
 		
 func mark(who : bool):
-	print(who)
 	if who: #yang
 		yang_part.emitting = true
 		rotation -= .001

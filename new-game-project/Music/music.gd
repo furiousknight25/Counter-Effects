@@ -10,6 +10,8 @@ var last_beat_index: int = 0
 var bar_index: int = 0
 
 var current_song : AdaptiveMusic
+var level_mind = 0
+var level_shop = 1
 
 func _ready() -> void:
 	current_song = song_list.get('openyourmind')
@@ -37,8 +39,18 @@ func transition_to_shop():
 	
 	await current_four_bar
 	switch_song('shop')
-	
 
+func move_up(place: String):
+	if place == "mind":
+		level_mind += 1
+		for i in range(level_mind):
+			song_list.get('openyourmind').increase_volume(i, 0, .1)
+	if place == "shop":
+		print('asd')
+		level_shop += 1
+		for i in range(level_shop):
+			song_list.get('shop').increase_volume(i, 0, .1)
+	
 func mute_perc_and_chop():
 	$OpenYourMind/perc.volume_db = -80
 	$OpenYourMind/chop.volume_db = -80

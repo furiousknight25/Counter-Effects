@@ -1,8 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://bo5d4v6wps84i"]
+[gd_scene load_steps=8 format=3 uid="uid://bo5d4v6wps84i"]
 
 [ext_resource type="Script" uid="uid://due6gpd7x4mba" path="res://Levels/level.gd" id="1_4q750"]
 [ext_resource type="PackedScene" uid="uid://cpmdspnjh3tt5" path="res://Levels/Level Scenes/enemy.tscn" id="2_makm5"]
-[ext_resource type="PackedScene" uid="uid://bo5kfu2xrt7og" path="res://scenes/Target.tscn" id="3_a2apq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1oova"]
 size = Vector2(14, 256)
@@ -74,14 +73,6 @@ position = Vector2(125, 52)
 
 [node name="Ball" type="Marker2D" parent="."]
 position = Vector2(128, 153)
-
-[node name="Target" parent="." instance=ExtResource("3_a2apq")]
-position = Vector2(58, 90)
-shape = 2
-
-[node name="Target3" parent="." instance=ExtResource("3_a2apq")]
-position = Vector2(184, 92)
-shape = 2
 
 [node name="Enemy" parent="." instance=ExtResource("2_makm5")]
 position = Vector2(126, 47)

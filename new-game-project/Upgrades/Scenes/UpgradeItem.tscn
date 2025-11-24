@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://dbxdqkjweu23s"]
+[gd_scene load_steps=6 format=3 uid="uid://dbxdqkjweu23s"]
 
 [ext_resource type="Script" uid="uid://vbs3knw764m5" path="res://Upgrades/Scripts/upgrade_item.gd" id="1_t41gj"]
 [ext_resource type="Texture2D" uid="uid://4q335xxs2p" path="res://icon.svg" id="2_vsroj"]
 [ext_resource type="FontFile" uid="uid://biu82p810b20s" path="res://assets/BadPixelFont2.ttf" id="3_kfx1p"]
+[ext_resource type="AudioStream" uid="uid://bo3copeqcgmi5" path="res://assets/sfx/buy.mp3" id="4_4xyua"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vsroj"]
 size = Vector2(32, 32)
@@ -42,6 +43,9 @@ text = "DECREASES GRAVITY
 INCREASES CONTROL IN AIR"
 horizontal_alignment = 1
 autowrap_mode = 2
+
+[node name="buy" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_4xyua")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

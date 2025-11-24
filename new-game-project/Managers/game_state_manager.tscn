@@ -75,6 +75,9 @@ amount = 20
 emitting = false
 amount = 20
 
+[node name="Buildup" parent="UI/Inking" index="2"]
+volume_db = 0.0
+
 [node name="EndGameTimer" type="Timer" parent="UI"]
 wait_time = 50.0
 one_shot = true

@@ -5,12 +5,15 @@ class_name Door extends Node2D
 
 
 func _ready() -> void:
-	SignalBus.connect("enable_door", enable_door)
+	#SignalBus.connect("enable_door", enable_door)
+	collision_shape_2d.set_deferred("disabled", true)
+	hide()
 	animation_player.play("Arrow_Tween")
 
 
 func enable_door():
 	await get_tree().create_timer(0.1).timeout
+	show()
 	collision_shape_2d.set_deferred("disabled", false)
 
 

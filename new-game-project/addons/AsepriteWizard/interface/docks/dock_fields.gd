@@ -67,12 +67,10 @@ func _on_anim_vis_toggled(_toggled_on: bool) -> void:
 func _on_line_edit_text_changed(_new_text: String) -> void:
 	_notify_change_with_debounce()
 
-
 func _on_debounce_timer_timeout() -> void:
 	if not $DebounceTimer.is_stopped():
 		$DebounceTimer.stop()
 	$DebounceTimer.start()
-
 
 func _notify_change_with_debounce():
 	if disable_change_notification:

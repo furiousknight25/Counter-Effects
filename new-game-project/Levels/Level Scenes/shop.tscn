@@ -1,11 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://date2vets4t5p"]
+[gd_scene load_steps=13 format=3 uid="uid://date2vets4t5p"]
 
 [ext_resource type="PackedScene" uid="uid://ca387n6r6geyi" path="res://Levels/Door/door.tscn" id="1_k1w7q"]
-[ext_resource type="Script" path="res://Levels/Shop/shop.gd" id="1_y4rsg"]
+[ext_resource type="Script" uid="uid://b1trs4lur1k7f" path="res://Levels/Shop/shop.gd" id="1_y4rsg"]
 [ext_resource type="PackedScene" uid="uid://dbxdqkjweu23s" path="res://Upgrades/Scenes/UpgradeItem.tscn" id="3_60ttm"]
 [ext_resource type="FontFile" uid="uid://biu82p810b20s" path="res://assets/BadPixelFont2.ttf" id="3_ss0x6"]
-[ext_resource type="Resource" uid="uid://dvtjceoivin62" path="res://Upgrades/Resources/IncreaseGravity.tres" id="4_y4rsg"]
 [ext_resource type="Resource" uid="uid://di5tm50ea2psa" path="res://Upgrades/Resources/AirSpeed.tres" id="5_ss0x6"]
+[ext_resource type="AudioStream" uid="uid://bo3copeqcgmi5" path="res://assets/sfx/buy.mp3" id="6_ss0x6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sddyx"]
 size = Vector2(14, 256)
@@ -16,6 +16,129 @@ colors = PackedColorArray(0.6523882, 0.653716, 0.61781263, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_60ttm"]
 gradient = SubResource("Gradient_ka50d")
+
+[sub_resource type="Animation" id="Animation_ss0x6"]
+resource_name = "thankyou"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer/Node2D/RichTextLabel:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.46666667, 0.9666667, 1.3000001),
+"transitions": PackedFloat32Array(0.24148405, 2.5992064, 0.2, 0.2),
+"update": 0,
+"values": [Vector2(73, 93), Vector2(73.99999, 86.99999), Vector2(73, 94.00001), Vector2(73, 93)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimationPlayer/Node2D/RichTextLabel:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.76666665, 0.9666667, 1.0666667, 1.2, 1.3666668, 1.4333333),
+"transitions": PackedFloat32Array(1, 0.5946036, 2.2973967, 1, 0.5547847, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.05222757, -0.099853836, -0.072060905, 0.000674624, -0.012957808, -0.020695115, -0.023790032]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimationPlayer/Node2D/RichTextLabel:text")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.96666664),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": ["Thank you!", "Go Bring Balance to the World :D"]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Door")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(3.9333334),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"enable_door"
+}]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("AnimationPlayer/Node2D/RichTextLabel:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_u6ter"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer/Node2D/RichTextLabel:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(73, 93)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimationPlayer/Node2D/RichTextLabel:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimationPlayer/Node2D/RichTextLabel:text")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["Thank you!"]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AnimationPlayer/Node2D/RichTextLabel:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6go18"]
+_data = {
+&"RESET": SubResource("Animation_u6ter"),
+&"thankyou": SubResource("Animation_ss0x6")
+}
 
 [node name="Shop" type="Node2D"]
 script = ExtResource("1_y4rsg")
@@ -93,3 +216,23 @@ upgrade_resource_2 = ExtResource("5_ss0x6")
 position = Vector2(184, 149)
 upgrade_resource_1 = ExtResource("5_ss0x6")
 upgrade_resource_2 = ExtResource("5_ss0x6")
+
+[node name="buy" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_ss0x6")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_6go18")
+}
+
+[node name="Node2D" type="Node2D" parent="AnimationPlayer"]
+position = Vector2(-1, -17)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="AnimationPlayer/Node2D"]
+visible = false
+offset_left = 73.0
+offset_top = 93.0
+offset_right = 238.40698
+offset_bottom = 143.80963
+pivot_offset = Vector2(44, 14)
+text = "Thank you!"

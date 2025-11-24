@@ -1,6 +1,7 @@
 extends Level
 
 @onready var upgrades: Node = $Upgrades
+@onready var buy: AudioStreamPlayer = $buy
 
 func _ready() -> void:
 	set_all_upgrade_items()
@@ -18,6 +19,9 @@ func set_all_upgrade_items():
 	
 
 func add_to_taken(upgrade_name : String):
+	Music.move_up('shop')
+	$AnimationPlayer.play("thankyou")
+	$buy.play()
 	(get_parent() as GameStateManager).taken_upgrades.append(upgrade_name)
 
 

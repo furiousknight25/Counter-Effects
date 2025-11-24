@@ -27,7 +27,9 @@ func reset() -> void:
 
 
 func start_round() -> void:
+	
 	if round_start == true:
 		return
+	Music.move_up('mind')
 	start()
 	round_start = true

@@ -24,9 +24,12 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	if can_obtain == true and Input.is_action_just_pressed("Interact"):
+
 		call_upgrades()
 		SignalBus.emit_signal("upgrade_taken", upgrade_name)
 		SignalBus.emit_signal("remove_upgrades")
+
+
 
 
 func setup():
@@ -61,6 +64,7 @@ func _on_area_2d_body_exited(_body: Node2D) -> void:
 
 
 func set_upgrade(key : String):
+
 	upgrade_name = key
 	upgrade_resource_1 = load(upgrades_dict[key][0])
 	if upgrades_dict[key].size() > 1:
