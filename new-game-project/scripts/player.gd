@@ -74,7 +74,8 @@ func weapon_c(delta):
 	else: weapon.modulate = Color.WHITE
 	
 func swing():
-	
+	$Weapon/CPUParticles2D.restart()
+	#$Weapon/CPUParticles2D.emitting = true
 	cooldown_on = true
 	animation_tree.anim_hit(global_position - get_global_mouse_position())
 	await get_tree().create_timer(.05).timeout

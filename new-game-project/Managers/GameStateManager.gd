@@ -1,6 +1,7 @@
 class_name GameStateManager extends Node
 
 var level_idx : int = 0
+var level_dif_time = [50,40,30,20,20]
 @export var scenes : Dictionary[String, PackedScene]
 
 @export var rouge_like_levels : Array[PackedScene]
@@ -28,9 +29,10 @@ func switch_scene(location : String):
 	match location:
 		"next_level":
 			level_idx += 1
-			if level_idx <= 3: 
+			if level_idx <= 3:
 				loaded_scene = rouge_like_levels[randi_range(0, rouge_like_levels.size() - 1)].instantiate()
 				Music.transition_to_open_your_mind()
+				$UI/EndGameTimer.wait_time = level_dif_time[level_idx]
 			else:
 				loaded_scene = scenes.get('final').instantiate()
 		"shop":
@@ -77,7 +79,6 @@ func start_scene():
 
 func add_upgrade_to_array(upgrade : Upgrade):
 	upgrade_array.append(upgrade)
-
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "close":

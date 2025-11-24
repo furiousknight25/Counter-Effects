@@ -59,11 +59,11 @@ func spawned_spot(velocity: Vector2, position: Vector2, shape: Image, damping_sp
 	spawned_spot(velocity, position, shape, damping_speed, color)
 	
 func splat_player(pos: Vector2, hit_dir: Vector2):
-	for i in 12:
+	for i in 14:
 		spawned_spot(Vector2.UP.rotated(randf_range(-.5,.5)) * randf_range(1,40), pos, create_circle_image(randf_range(2,5)), .8, Color.BLACK)
 	
-	for i in 8:
-		spawned_spot(-hit_dir.rotated(randf_range(-.3,.3)) * randf_range(1,30), pos, create_circle_image(randf_range(2,4)), .3, Color.BLACK)
+	for i in 10:
+		spawned_spot(-hit_dir.rotated(randf_range(-.3,.3)) * randf_range(1,30), pos, create_circle_image(randf_range(2,4)), .2, Color.BLACK)
 
 func splat_ball(pos: Vector2, hit_dir: Vector2):
 	for i in 20:
@@ -108,19 +108,21 @@ func stamp_image(viewport_pos: Vector2, paint_color: Color, stamp_image_data: Im
 #endregion
 
 func iterate_pixels():
+	ying_tang_tally.trans_in()
+	
 	await Music.current_bar
 	$Buildup.play()
 	var final_image = canvas_image 
 	var black_pixels = 0
 	var white_pixels = 0
-	ying_tang_tally.trans_in()
+	
 	# Step 2: Iterate through every pixel
 	for y in range(clamp(final_image.get_height(), final_image.get_height() - 180, final_image.get_height() - 13)):
 		await get_tree().physics_frame
 		canvas_texture.update(canvas_image)
-		tally.set_bw(black_pixels, white_pixels)
+		
 		for x in range(clamp(final_image.get_width(), final_image.get_width() - 245, final_image.get_width() -14 )):
-			
+			tally.set_bw(black_pixels, white_pixels)
 			var color = final_image.get_pixel(x, y) # Get the color of the current pixel
 			canvas_image.set_pixel(x, y, color.inverted());
 			
@@ -134,7 +136,6 @@ func iterate_pixels():
 	Music.mute_perc_and_chop()
 	if black_pixels > white_pixels:
 		$Fail.play()
-		ying_tang_tally
 		
 	else: 
 		$Win.play()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://dfhfol7byum77"]
+[gd_scene load_steps=7 format=3 uid="uid://dfhfol7byum77"]
 
 [ext_resource type="Script" uid="uid://due6gpd7x4mba" path="res://Levels/level.gd" id="1_c2f1v"]
 [ext_resource type="Image" uid="uid://coyj2fulx8kip" path="res://assets/tutorial_level.png" id="2_wvb8b"]
@@ -12,6 +12,9 @@ colors = PackedColorArray(0.6523882, 0.653716, 0.61781263, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_8a5oj"]
 gradient = SubResource("Gradient_ka50d")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wvb8b"]
+size = Vector2(196, 20)
 
 [node name="Level_1" type="Node2D" node_paths=PackedStringArray("player", "ball")]
 process_mode = 3
@@ -68,3 +71,19 @@ position = Vector2(46, 120)
 
 [node name="Marker2D2" type="Marker2D" parent="."]
 position = Vector2(184, 100)
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+position = Vector2(123, 110.99999)
+rotation = -1.5707964
+scale = Vector2(0.56954074, 0.56954074)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+position = Vector2(73, 0)
+shape = SubResource("RectangleShape2D_wvb8b")
+
+[node name="ColorRect" type="ColorRect" parent="StaticBody2D2"]
+offset_left = -25.0
+offset_top = -10.0
+offset_right = 171.0
+offset_bottom = 10.0
+color = Color(0.24705882, 0.23137255, 0.32941177, 1)

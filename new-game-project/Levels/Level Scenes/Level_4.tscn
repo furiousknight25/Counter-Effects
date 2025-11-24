@@ -1,28 +1,21 @@
-[gd_scene load_steps=9 format=3 uid="uid://bo5d4v6wps84i"]
+[gd_scene load_steps=7 format=3 uid="uid://dxv73swqo1g4t"]
 
-[ext_resource type="Script" uid="uid://due6gpd7x4mba" path="res://Levels/level.gd" id="1_4q750"]
-[ext_resource type="PackedScene" uid="uid://cpmdspnjh3tt5" path="res://Levels/Level Scenes/enemy.tscn" id="2_makm5"]
-[ext_resource type="PackedScene" uid="uid://bo5kfu2xrt7og" path="res://scenes/Target.tscn" id="3_a2apq"]
+[ext_resource type="Script" uid="uid://due6gpd7x4mba" path="res://Levels/level.gd" id="1_apn6x"]
+[ext_resource type="PackedScene" uid="uid://bo5kfu2xrt7og" path="res://scenes/Target.tscn" id="2_02s5k"]
+[ext_resource type="PackedScene" uid="uid://cpmdspnjh3tt5" path="res://Levels/Level Scenes/enemy.tscn" id="3_mhaok"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1oova"]
 size = Vector2(14, 256)
 
-[sub_resource type="Gradient" id="Gradient_ka50d"]
-offsets = PackedFloat32Array(0.51)
-colors = PackedColorArray(0.6523882, 0.653716, 0.61781263, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_8a5oj"]
-gradient = SubResource("Gradient_ka50d")
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a2apq"]
-size = Vector2(129, 20)
+size = Vector2(196, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1jxjw"]
 size = Vector2(129, 20)
 
-[node name="Level_3" type="Node2D" node_paths=PackedStringArray("player", "ball")]
+[node name="Level_4" type="Node2D" node_paths=PackedStringArray("player", "ball")]
 process_mode = 3
-script = ExtResource("1_4q750")
+script = ExtResource("1_apn6x")
 player = NodePath("Player")
 ball = NodePath("Ball")
 
@@ -46,62 +39,69 @@ shape = SubResource("RectangleShape2D_1oova")
 position = Vector2(249, 106)
 shape = SubResource("RectangleShape2D_1oova")
 
-[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
-position = Vector2(6.999999, 80)
-scale = Vector2(0.21875001, 3.5)
-texture = SubResource("GradientTexture2D_8a5oj")
+[node name="ColorRect" type="ColorRect" parent="StaticBody2D"]
+offset_left = -1.0
+offset_top = -2.0
+offset_right = 255.0
+offset_bottom = 14.0
+color = Color(0.24705882, 0.23137255, 0.32941177, 1)
 
-[node name="Sprite2D2" type="Sprite2D" parent="StaticBody2D"]
-position = Vector2(141.05545, 6.9999995)
+[node name="ColorRect2" type="ColorRect" parent="StaticBody2D"]
+offset_left = 14.0
+offset_top = 6.0
+offset_right = 270.0
+offset_bottom = 22.0
+rotation = 1.5707964
+color = Color(0.24705882, 0.23137255, 0.32941177, 1)
+
+[node name="ColorRect3" type="ColorRect" parent="StaticBody2D"]
+offset_left = 1.0
+offset_top = 178.0
+offset_right = 257.0
+offset_bottom = 194.0
+color = Color(0.24705882, 0.23137255, 0.32941177, 1)
+
+[node name="ColorRect4" type="ColorRect" parent="StaticBody2D"]
+offset_left = 242.0
+offset_top = 217.0
+offset_right = 498.0
+offset_bottom = 233.0
 rotation = -1.5707964
-scale = Vector2(0.21875001, 3.970483)
-texture = SubResource("GradientTexture2D_8a5oj")
-
-[node name="Sprite2D3" type="Sprite2D" parent="StaticBody2D"]
-position = Vector2(136.00002, 185.00002)
-rotation = -1.5707964
-scale = Vector2(0.21875001, 3.970483)
-texture = SubResource("GradientTexture2D_8a5oj")
-
-[node name="Sprite2D4" type="Sprite2D" parent="StaticBody2D"]
-position = Vector2(249, 102)
-rotation = -3.1415927
-scale = Vector2(0.21875001, 3.970483)
-texture = SubResource("GradientTexture2D_8a5oj")
+color = Color(0.24705882, 0.23137255, 0.32941177, 1)
 
 [node name="Player" type="Marker2D" parent="."]
-position = Vector2(125, 52)
+position = Vector2(203, 170)
 
 [node name="Ball" type="Marker2D" parent="."]
-position = Vector2(128, 153)
+position = Vector2(61, 165)
 
-[node name="Target" parent="." instance=ExtResource("3_a2apq")]
+[node name="Target" parent="." instance=ExtResource("2_02s5k")]
 position = Vector2(58, 90)
 shape = 2
 
-[node name="Target3" parent="." instance=ExtResource("3_a2apq")]
+[node name="Target3" parent="." instance=ExtResource("2_02s5k")]
 position = Vector2(184, 92)
 shape = 2
 
-[node name="Enemy" parent="." instance=ExtResource("2_makm5")]
-position = Vector2(126, 47)
+[node name="Enemy" parent="." instance=ExtResource("3_mhaok")]
+position = Vector2(51, 53)
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="."]
 position = Vector2(74, 141)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
-position = Vector2(54.5, 0)
+position = Vector2(73, 0)
 shape = SubResource("RectangleShape2D_a2apq")
 
 [node name="ColorRect" type="ColorRect" parent="StaticBody2D2"]
-offset_left = -10.0
+offset_left = -25.0
 offset_top = -10.0
-offset_right = 119.0
+offset_right = 171.0
 offset_bottom = 10.0
 color = Color(0.24705882, 0.23137255, 0.32941177, 1)
 
 [node name="StaticBody2D3" type="StaticBody2D" parent="."]
-position = Vector2(-27, 54)
+position = Vector2(135, 60)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3"]
 position = Vector2(54.5, 0)
@@ -115,7 +115,7 @@ offset_bottom = 10.0
 color = Color(0.24705882, 0.23137255, 0.32941177, 1)
 
 [node name="StaticBody2D4" type="StaticBody2D" parent="."]
-position = Vector2(165, 56)
+position = Vector2(124, 102)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D4"]
 position = Vector2(54.5, 0)

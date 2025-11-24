@@ -37,6 +37,7 @@ func _process(_delta: float) -> void:
 	if is_on_floor and not was_on_floor:
 		$"../SoundController/Landonground".play()
 		playback.start("land")
+		$"../CPUParticles2D".restart()
 		was_on_floor = is_on_floor
 		
 		return

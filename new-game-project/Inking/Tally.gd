@@ -17,9 +17,11 @@ func _process(_delta: float) -> void:
 	#TODO make observer code for the changes here :D
 
 func set_bw(b,w):
-	if b > black:
+	var db = black - b
+	var dw = white - w
+	if db > dw:
 		ying_tang_tally.mark(false)
-	elif w > white:
+	else:
 		ying_tang_tally.mark(true)
 	black = b
 	white = w

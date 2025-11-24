@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=4 uid="uid://cpmdspnjh3tt5"]
+[gd_scene load_steps=29 format=4 uid="uid://cpmdspnjh3tt5"]
 
 [ext_resource type="Script" uid="uid://dvlcxsh1hmcyu" path="res://Enemy/enemy.gd" id="1_2v3kw"]
 [ext_resource type="Texture2D" uid="uid://cihabufe20di0" path="res://assets/drone_0.png" id="3_e2146"]
@@ -240,7 +240,20 @@ streams_count = 2
 stream_0/stream = ExtResource("4_uus6j")
 stream_1/stream = ExtResource("5_muyy7")
 
-[node name="Enemy" type="CharacterBody2D"]
+[sub_resource type="Curve" id="Curve_uus6j"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0]
+point_count = 1
+
+[sub_resource type="Curve" id="Curve_muyy7"]
+_data = [Vector2(0, 0.4975062), 0.0, 0.0, 0, 0]
+point_count = 1
+
+[sub_resource type="Gradient" id="Gradient_3edli"]
+colors = PackedColorArray(0.7107545, 0.69090503, 0, 1, 1, 0.7730989, 0.6068106, 1)
+
+[node name="Enemy" type="CharacterBody2D" groups=["Hitable"]]
+collision_layer = 4
+collision_mask = 7
 script = ExtResource("1_2v3kw")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
@@ -345,5 +358,22 @@ volume_db = 5.0
 [node name="death" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_kv8px")
 volume_db = 5.0
+
+[node name="hurtpart" type="CPUParticles2D" parent="."]
+emitting = false
+one_shot = true
+explosiveness = 1.0
+emission_shape = 1
+emission_sphere_radius = 16.72
+spread = 180.0
+initial_velocity_min = 81.87
+initial_velocity_max = 157.9
+angle_min = -395.8
+angle_max = 328.4
+scale_amount_max = 2.0
+split_scale = true
+scale_curve_x = SubResource("Curve_uus6j")
+scale_curve_y = SubResource("Curve_muyy7")
+color_initial_ramp = SubResource("Gradient_3edli")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

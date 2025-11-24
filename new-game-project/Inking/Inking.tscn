@@ -181,7 +181,7 @@ texture = ExtResource("4_5x2tj")
 
 [node name="YangPart" type="CPUParticles2D" parent="Node2D/Tally/YingTangTally/Yang"]
 position = Vector2(0, -231.48796)
-amount = 1
+amount = 12
 emission_shape = 1
 emission_sphere_radius = 6.0
 direction = Vector2(0, 0)
@@ -198,7 +198,7 @@ texture = ExtResource("5_5pbac")
 
 [node name="YinPart" type="CPUParticles2D" parent="Node2D/Tally/YingTangTally/Yin"]
 position = Vector2(0, 231.48798)
-amount = 1
+amount = 12
 emission_shape = 1
 emission_sphere_radius = 6.0
 direction = Vector2(0, 0)

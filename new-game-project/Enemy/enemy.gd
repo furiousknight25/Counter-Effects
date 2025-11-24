@@ -21,9 +21,9 @@ func _process(delta: float) -> void:
 	move_and_slide()
 
 func hit(direction : Vector2):
-	
 	if !invince:
 		health -= 1
+		$hurtpart.restart()
 		if health <= 0:
 			die()
 			return
@@ -40,7 +40,7 @@ func hit(direction : Vector2):
 		modulate = Color("ff0000")
 		var tween = get_tree().create_tween()
 		tween.tween_property(self, "modulate", Color.WHITE, .5)
-	
+		
 		velocity -= direction
 		
 		await get_tree().create_timer(invince_time).timeout

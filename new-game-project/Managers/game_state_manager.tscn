@@ -76,7 +76,7 @@ emitting = false
 amount = 20
 
 [node name="EndGameTimer" type="Timer" parent="UI"]
-wait_time = 30.0
+wait_time = 50.0
 one_shot = true
 script = ExtResource("7_utl7c")
 
