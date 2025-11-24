@@ -43,7 +43,7 @@ func _process(delta: float) -> void:
 		increase_speed_over_time(delta)
 		
 	if has_trail == true and round_has_started == true:
-		inking.stamp_image(global_position, trail_color, inking.create_circle_image(randf_range(2,4)))
+		inking.stamp_image(global_position, trail_color, inking.create_circle_image(3 * scale.x))
 
 func set_state_freezing(freeze_time: float = 0) -> void:
 	cur_state = STATES.FREEZE
