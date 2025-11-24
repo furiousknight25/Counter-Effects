@@ -87,7 +87,10 @@ func moving_process(delta):
 func hit_ball(direction : Vector2, freeze_length : float = 0): #direction is your target position, it WILL be normalized and you get a lashing if you dont like it
 	if freeze_length > 0.0:
 		set_state_freezing(freeze_length)
-	inking.splat_ball(global_position, direction.normalized())
+	if ink_pattern == InkPattern.DEFAULT:
+		inking.splat_ball(global_position, direction.normalized())
+	elif ink_pattern == InkPattern.LINE:
+		inking.splat_ball_line(global_position, direction.normalized())
 	
 	direction = direction.normalized()
 	Camera.add_trauma(strength * .0001, direction)

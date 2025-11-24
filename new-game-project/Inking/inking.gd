@@ -69,6 +69,13 @@ func splat_player(pos: Vector2, hit_dir: Vector2):
 func splat_ball(pos: Vector2, hit_dir: Vector2):
 	for i in 20:
 		spawned_spot(hit_dir.rotated(randf_range(-.5,.5)) * randf_range(1,35), pos, create_circle_image(randf_range(1,8)), randf_range(.2,.6), Color.WHITE)
+
+
+func splat_ball_line(pos: Vector2, hit_dir: Vector2):
+	for i in 40:
+		stamp_image(pos + (hit_dir * i * 3), Color.WHITE, create_circle_image(randf_range(4,6)))
+
+
 	#endregion
 
 

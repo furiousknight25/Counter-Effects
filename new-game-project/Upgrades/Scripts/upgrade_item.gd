@@ -8,13 +8,22 @@ class_name UpgradeItem extends Node2D
 @onready var label: Label = $Label
 @onready var description: Label = $Description
 
+
 var upgrade_name : String
 var can_obtain : bool = false
 var upgrades_dict : Dictionary[String, Array] = {
 	"moon_boots" : ["res://Upgrades/Resources/AirSpeed.tres", "res://Upgrades/Resources/IncreaseGravity.tres"],
 	"ball_trail" : ["res://Upgrades/Resources/BallTrail.tres"],
 	"stronger_ball" : ["res://Upgrades/Resources/BiggerBall.tres" , "res://Upgrades/Resources/SlowerBall.tres"],
-	"linear_speed_up" : ["res://Upgrades/Resources/SpeedOverTime.tres"]
+	"linear_speed_up" : ["res://Upgrades/Resources/SpeedOverTime.tres"],
+	"line_pattern" : ["res://Upgrades/Resources/LinePattern.tres"]
+}
+var upgrade_dict_textures : Dictionary[String, Texture2D] = {
+	"moon_boots" : preload("res://Upgrades/Assets/pixil-frame-017.png"),
+	"ball_trail" : preload("res://Upgrades/Assets/pixil-frame-021.png"),
+	"stronger_ball" : preload("res://Upgrades/Assets/pixil-frame-023.png"),
+	"linear_speed_up" : preload("res://Upgrades/Assets/image10.png"),
+	"line_pattern" : preload("res://Upgrades/Assets/pixil-frame-026.png")
 }
 
 func _ready() -> void:
@@ -67,6 +76,8 @@ func set_upgrade(key : String):
 
 	upgrade_name = key
 	upgrade_resource_1 = load(upgrades_dict[key][0])
+	print()
+	sprite_2d.set_deferred("texture", upgrade_dict_textures[key])
 	if upgrades_dict[key].size() > 1:
 		upgrade_resource_2 = load(upgrades_dict[key][1])
 	else:
