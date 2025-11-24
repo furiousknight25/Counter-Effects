@@ -9,6 +9,8 @@ var level_idx : int = 0
 @onready var player: Player = %Player
 @onready var ui: Control = $UI
 
+var taken_upgrades : Array[String] = []
+
 func _ready() -> void:
 	SignalBus.connect("switch_scene", switch_scene)
 

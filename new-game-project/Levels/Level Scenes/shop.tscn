@@ -1,7 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://date2vets4t5p"]
+[gd_scene load_steps=9 format=3 uid="uid://date2vets4t5p"]
 
 [ext_resource type="PackedScene" uid="uid://ca387n6r6geyi" path="res://Levels/Door/door.tscn" id="1_k1w7q"]
-[ext_resource type="Script" uid="uid://due6gpd7x4mba" path="res://Levels/level.gd" id="1_sddyx"]
+[ext_resource type="Script" uid="uid://b1trs4lur1k7f" path="res://Levels/Shop/shop.gd" id="1_y4rsg"]
+[ext_resource type="PackedScene" uid="uid://dbxdqkjweu23s" path="res://Upgrades/Scenes/UpgradeItem.tscn" id="3_60ttm"]
+[ext_resource type="Resource" uid="uid://dvtjceoivin62" path="res://Upgrades/Resources/IncreaseGravity.tres" id="4_y4rsg"]
+[ext_resource type="Resource" uid="uid://di5tm50ea2psa" path="res://Upgrades/Resources/AirSpeed.tres" id="5_ss0x6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sddyx"]
 size = Vector2(14, 256)
@@ -14,7 +17,7 @@ colors = PackedColorArray(0.6523882, 0.653716, 0.61781263, 1)
 gradient = SubResource("Gradient_ka50d")
 
 [node name="Shop" type="Node2D"]
-script = ExtResource("1_sddyx")
+script = ExtResource("1_y4rsg")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
@@ -61,3 +64,29 @@ texture = SubResource("GradientTexture2D_60ttm")
 
 [node name="Door" parent="." instance=ExtResource("1_k1w7q")]
 position = Vector2(230, 140)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = 40.0
+offset_top = 24.0
+offset_right = 224.0
+offset_bottom = 48.0
+bbcode_enabled = true
+text = "[wave amp=50.0 freq=5.0 connected=1][rainbow freq=0.7 sat=1 val=0.9 speed=0.7]SELECT ONE UPGRADE[/rainbow][/wave]"
+horizontal_alignment = 1
+
+[node name="Upgrades" type="Node2D" parent="."]
+
+[node name="UpgradeItem" parent="Upgrades" instance=ExtResource("3_60ttm")]
+position = Vector2(72, 149)
+upgrade_resource_1 = ExtResource("4_y4rsg")
+upgrade_resource_2 = ExtResource("5_ss0x6")
+
+[node name="UpgradeItem2" parent="Upgrades" instance=ExtResource("3_60ttm")]
+position = Vector2(128, 149)
+upgrade_resource_1 = ExtResource("4_y4rsg")
+upgrade_resource_2 = ExtResource("5_ss0x6")
+
+[node name="UpgradeItem3" parent="Upgrades" instance=ExtResource("3_60ttm")]
+position = Vector2(184, 149)
+upgrade_resource_1 = ExtResource("4_y4rsg")
+upgrade_resource_2 = ExtResource("5_ss0x6")

@@ -1,10 +1,12 @@
 class_name Door extends Node2D
 
 @onready var collision_shape_2d: CollisionShape2D = $Area2D/CollisionShape2D
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 
 func _ready() -> void:
 	SignalBus.connect("enable_door", enable_door)
+	animation_player.play("Arrow_Tween")
 
 
 func enable_door():

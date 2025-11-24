@@ -28,3 +28,10 @@ signal ball_hit
 
 @warning_ignore("unused_signal")
 signal enable_door
+
+
+@warning_ignore("unused_signal")
+signal upgrade_taken(upgrade_name : String)
+
+@warning_ignore("unused_signal")
+signal remove_upgrades()

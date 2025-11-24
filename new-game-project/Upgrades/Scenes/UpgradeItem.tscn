@@ -1,22 +1,47 @@
-[gd_scene load_steps=3 format=3 uid="uid://dbxdqkjweu23s"]
+[gd_scene load_steps=5 format=3 uid="uid://dbxdqkjweu23s"]
 
 [ext_resource type="Script" uid="uid://vbs3knw764m5" path="res://Upgrades/Scripts/upgrade_item.gd" id="1_t41gj"]
 [ext_resource type="Texture2D" uid="uid://4q335xxs2p" path="res://icon.svg" id="2_vsroj"]
+[ext_resource type="FontFile" uid="uid://biu82p810b20s" path="res://assets/BadPixelFont2.ttf" id="3_kfx1p"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vsroj"]
+size = Vector2(32, 32)
 
 [node name="UpgradeItem" type="Node2D"]
 script = ExtResource("1_t41gj")
 texture = ExtResource("2_vsroj")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.09375, 0.09375)
+scale = Vector2(0.2, 0.2)
 texture = ExtResource("2_vsroj")
 
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_vsroj")
+
 [node name="Label" type="Label" parent="."]
-texture_filter = 1
-offset_left = -2.9999995
-offset_top = -14.0
-offset_right = 24.0
-offset_bottom = 20.0
-scale = Vector2(0.235, 0.235)
-theme_override_font_sizes/font_size = 24
-text = "13"
+offset_left = -5.0
+offset_top = -40.0
+offset_right = 5.0
+offset_bottom = -17.0
+text = "E"
+
+[node name="Description" type="Label" parent="."]
+z_index = 1
+offset_left = -47.999996
+offset_top = -96.0
+offset_right = 106.838715
+offset_bottom = 15.0
+scale = Vector2(0.62, 0.62)
+theme_override_fonts/font = ExtResource("3_kfx1p")
+text = "DECREASES GRAVITY
+
+INCREASES CONTROL IN AIR"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

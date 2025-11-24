@@ -5,4 +5,5 @@
 [resource]
 script = ExtResource("1_cla8i")
 ink_pattern = 1
+description = "CHANGE YOUR INK PATTERN TO A HORIZONTAL LINE"
 metadata/_custom_type_script = "uid://b8q3l1fmwtkfq"
