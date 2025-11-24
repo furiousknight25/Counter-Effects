@@ -6,11 +6,12 @@ class_name Ball
 @onready var spring_y: Spring = $SpringY
 @onready var visual_follow_line: VisualFollowLine = $VisualFollowLine
 @onready var inking : Inking = get_tree().get_nodes_in_group("Inking")[0]
+@onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 
 @export var spring_enabled = false
 var base_speed : float = 1.0
 var speed : float = 1.0
-var strength : float = 50.0
+var strength : float = 30.0
 
 enum STATES {FREEZE, MOVING}
 var cur_state = STATES.MOVING
@@ -47,6 +48,7 @@ func _process(delta: float) -> void:
 
 func set_state_freezing(freeze_time: float = 0) -> void:
 	cur_state = STATES.FREEZE
+	collision_shape_2d.set_deferred("disabled", true)
 	if freeze_time > 0:
 		var original_time_scale = 1.0
 		Engine.time_scale = .1
@@ -55,6 +57,7 @@ func set_state_freezing(freeze_time: float = 0) -> void:
 		set_state_moving()
 
 func set_state_moving():
+	collision_shape_2d.set_deferred("disabled", false)
 	cur_state = STATES.MOVING
 
 func freeze_process(_delta):
@@ -102,7 +105,21 @@ func hit_ball(direction : Vector2, freeze_length : float = 0): #direction is you
 func hit_object(object):
 	if object.is_in_group("Hitable"):
 		object.hit(velocity)
+		
+		self.set_collision_mask_value(4, false)
+		set_collision_layer_value(2, false)
+		await get_tree().create_timer(.2).timeout
+		self.set_collision_mask_value(4, true)
+		set_collision_layer_value(2, true)
 
+func drop_the_ball(amt, vel):
+	await get_tree().physics_frame
+	if amt < 100:
+		amt += 1
+		print(amt)
+		vel += .2
+		position.y += vel
+		drop_the_ball(amt, vel)
 
 func _on_end_game_timer_timeout() -> void:
 	set_state_freezing()

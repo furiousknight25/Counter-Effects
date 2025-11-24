@@ -1,11 +1,41 @@
-[gd_scene load_steps=2 format=3 uid="uid://cei0e6s1g8yhi"]
+[gd_scene load_steps=6 format=3 uid="uid://cei0e6s1g8yhi"]
+
+[ext_resource type="Texture2D" path="res://.godot/imported/circlebomb.ase-56130656bd306b8483bcdcd99b0e1db7.circlebomb.texture.res" id="1_cg0f7"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_sjomq"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_njulf"]
+atlas = ExtResource("1_cg0f7")
+region = Rect2(20, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_41626"]
+atlas = ExtResource("1_cg0f7")
+region = Rect2(0, 0, 20, 20)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hthn2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_njulf")
+}],
+"loop": true,
+"name": &"off",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_41626")
+}],
+"loop": true,
+"name": &"on",
+"speed": 10.0
+}]
+metadata/imported_via_aw = true
 
 [node name="circle" type="CollisionShape2D"]
 shape = SubResource("CircleShape2D_sjomq")
 debug_color = Color(0.9584257, 3.080368e-06, 0.5298511, 0.41960785)
 
-[node name="Polygon2D" type="Polygon2D" parent="."]
-color = Color(1, 0.37840074, 0.6143717, 1)
-polygon = PackedVector2Array(0, -10, 6, -8, 10, 0, 7, 7, 0, 10, -7, 7, -10, 0, -7, -7)
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_hthn2")
+animation = &"on"

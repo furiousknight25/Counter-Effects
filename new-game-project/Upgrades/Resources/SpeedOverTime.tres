@@ -1,7 +1,6 @@
-[gd_resource type="Resource" script_class="LinearSpeedBallUpgrade" load_steps=2 format=3 uid="uid://ds2caidx1klrx"]
+[gd_resource type="Resource" script_class="LinearSpeedBallUpgrade" load_steps=2 format=3 uid="uid://xjt3g47vld28"]
 
-[ext_resource type="Script" uid="uid://comm2c31ece5n" path="res://Upgrades/Scripts/LinearSpeedBallUpgrade.gd" id="1_tw1n6"]
+[ext_resource type="Script" path="res://Upgrades/Scripts/LinearSpeedBallUpgrade.gd" id="1_tw1n6"]
 
 [resource]
 script = ExtResource("1_tw1n6")
-metadata/_custom_type_script = "uid://comm2c31ece5n"

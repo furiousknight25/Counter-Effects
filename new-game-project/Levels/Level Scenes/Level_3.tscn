@@ -1,0 +1,81 @@
+[gd_scene load_steps=6 format=3 uid="uid://bo5d4v6wps84i"]
+
+[ext_resource type="Script" uid="uid://due6gpd7x4mba" path="res://Levels/level.gd" id="1_4q750"]
+[ext_resource type="PackedScene" uid="uid://bo5kfu2xrt7og" path="res://scenes/Target.tscn" id="3_a2apq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1oova"]
+size = Vector2(14, 256)
+
+[sub_resource type="Gradient" id="Gradient_ka50d"]
+offsets = PackedFloat32Array(0.51)
+colors = PackedColorArray(0.6523882, 0.653716, 0.61781263, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_8a5oj"]
+gradient = SubResource("Gradient_ka50d")
+
+[node name="Level_3" type="Node2D" node_paths=PackedStringArray("player", "ball")]
+process_mode = 3
+script = ExtResource("1_4q750")
+player = NodePath("Player")
+ball = NodePath("Ball")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(7, 96)
+shape = SubResource("RectangleShape2D_1oova")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(128, 185)
+rotation = -1.5707964
+shape = SubResource("RectangleShape2D_1oova")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(128, 7)
+rotation = -1.5707964
+shape = SubResource("RectangleShape2D_1oova")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(249, 106)
+shape = SubResource("RectangleShape2D_1oova")
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
+position = Vector2(6.999999, 80)
+scale = Vector2(0.21875001, 3.5)
+texture = SubResource("GradientTexture2D_8a5oj")
+
+[node name="Sprite2D2" type="Sprite2D" parent="StaticBody2D"]
+position = Vector2(141.05545, 6.9999995)
+rotation = -1.5707964
+scale = Vector2(0.21875001, 3.970483)
+texture = SubResource("GradientTexture2D_8a5oj")
+
+[node name="Sprite2D3" type="Sprite2D" parent="StaticBody2D"]
+position = Vector2(136.00002, 185.00002)
+rotation = -1.5707964
+scale = Vector2(0.21875001, 3.970483)
+texture = SubResource("GradientTexture2D_8a5oj")
+
+[node name="Sprite2D4" type="Sprite2D" parent="StaticBody2D"]
+position = Vector2(249, 102)
+rotation = -3.1415927
+scale = Vector2(0.21875001, 3.970483)
+texture = SubResource("GradientTexture2D_8a5oj")
+
+[node name="Player" type="Marker2D" parent="."]
+position = Vector2(125, 52)
+
+[node name="Ball" type="Marker2D" parent="."]
+position = Vector2(128, 153)
+
+[node name="Target" parent="." instance=ExtResource("3_a2apq")]
+position = Vector2(58, 90)
+shape = 2
+
+[node name="Target2" parent="." instance=ExtResource("3_a2apq")]
+position = Vector2(124, 87)
+shape = 1
+
+[node name="Target3" parent="." instance=ExtResource("3_a2apq")]
+position = Vector2(184, 92)
+shape = 2

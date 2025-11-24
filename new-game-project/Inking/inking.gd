@@ -3,6 +3,9 @@ class_name Inking
 # --- Persistent Canvas Data ---
 @onready var texture_rect: TextureRect = $SubViewportInk/TextureRect
 @onready var tally: Panel = $Node2D/Tally
+@onready var ying_tang_tally: Node2D = $Node2D/Tally/YingTangTally
+
+const MONEY = preload("res://assets/money.png")
 
 var sub_viewport: SubViewport
 var canvas_image: Image # The one and only image object that holds all the paint data.
@@ -12,6 +15,9 @@ var canvas_texture: ImageTexture # The texture used to display the canvas_image.
 
 var spray_spots
 
+func _process(delta: float) -> void:
+	if Input.is_key_pressed(KEY_P):
+		splat_bug()
 
 #region Setup
 func _ready():
@@ -60,12 +66,16 @@ func splat_player(pos: Vector2, hit_dir: Vector2):
 	for i in 8:
 		spawned_spot(-hit_dir.rotated(randf_range(-.3,.3)) * randf_range(1,30), pos, create_circle_image(randf_range(2,4)), .3, Color.BLACK)
 
-
 func splat_ball(pos: Vector2, hit_dir: Vector2):
 	for i in 20:
 		spawned_spot(hit_dir.rotated(randf_range(-.5,.5)) * randf_range(1,35), pos, create_circle_image(randf_range(1,8)), randf_range(.2,.6), Color.WHITE)
 	#endregion
 
+
+func splat_bug():
+	for i in 20:
+		var circle = create_circle_image(randf_range(1,8))
+		stamp_image(Vector2(randf_range(0,230), randf_range(0,180)), Color.WHITE, circle)
 
 #region --- Main Reusable Stamping Function ---
 # This high-performance function accepts any Image data for stamping.
@@ -99,16 +109,18 @@ func stamp_image(viewport_pos: Vector2, paint_color: Color, stamp_image_data: Im
 #endregion
 
 func iterate_pixels():
+	await Music.current_bar
+	$Buildup.play()
 	var final_image = canvas_image 
 	var black_pixels = 0
 	var white_pixels = 0
-
+	ying_tang_tally.trans_in()
 	# Step 2: Iterate through every pixel
-	for y in range(final_image.get_height()):
+	for y in range(clamp(final_image.get_height(), final_image.get_height() - 180, final_image.get_height() - 13)):
 		await get_tree().physics_frame
 		canvas_texture.update(canvas_image)
-
-		for x in range(final_image.get_width()):
+		tally.set_bw(black_pixels, white_pixels)
+		for x in range(clamp(final_image.get_width(), final_image.get_width() - 245, final_image.get_width() -14 )):
 			
 			var color = final_image.get_pixel(x, y) # Get the color of the current pixel
 			canvas_image.set_pixel(x, y, color.inverted());
@@ -117,15 +129,25 @@ func iterate_pixels():
 			
 			if brightness < 0.1: black_pixels += 1
 			elif brightness > 0.9: white_pixels += 1
-			tally.set_bw(black_pixels, white_pixels)
 	
-	await get_tree().create_timer(0.5).timeout
-	SignalBus.emit_signal("switch_scene", "Shop")
+	
+	
+	Music.mute_perc_and_chop()
+	if black_pixels > white_pixels:
+		$Fail.play()
+		ying_tang_tally
+		
+	else: 
+		$Win.play()
+		SignalBus.emit_signal("switch_scene", "shop")
+	
+	ying_tang_tally.trans_out(black_pixels > white_pixels)
 
+func close():
+	$SubViewportInk/AnimationPlayer.play('close')
 
-func _on_end_game_timer_game_end() -> void:
-	iterate_pixels()
-
+func open():
+	$SubViewportInk/AnimationPlayer.play('open')
 
 func reset(image : Image = null):
 	var viewport_size = sub_viewport.size
@@ -144,3 +166,16 @@ func reset(image : Image = null):
 	
 	# Ensure the BakedCanvas fills the viewport
 	texture_rect.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+
+func shop(): # copy of the pixel thing
+	var final_image = canvas_image 
+	for y in range(final_image.get_height()):
+		await get_tree().physics_frame
+		canvas_texture.update(canvas_image)
+		for x in range(final_image.get_width()):
+			canvas_image.set_pixel(x,y,MONEY.get_pixel(x,y)) 
+			#canvas_image.set_pixel(x,y,Color(sin(x), 0.502, 0.0, 1.0)) 
+
+
+func _on_end_game_timer_timeout() -> void:
+	iterate_pixels()

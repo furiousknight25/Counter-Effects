@@ -1,76 +1,89 @@
 extends AnimationTree
 class_name PlayerAnim
+
 @onready var player: Player = $".."
-@export var base_speed_threshold := 10.0
 @onready var sprite_2d: AnimatedSprite2D = $"../Sprite2D"
 @onready var sound_controller: PlayerSoundController = $"../SoundController"
+@export var base_speed_threshold := 10.0
 
-# This is the "memory" we need.
-# We'll use it to detect the *exact frame* we land.
+# Memory for landing sound
 var was_on_floor := true
 
+func _ready() -> void:
+	active = true # Force the tree to be active
 
 func _process(_delta: float) -> void:
-	#sprite_2d.play()
-	# --- 1. GET PLAYER'S CURRENT STATE ---
+	# 1. GET PLAYBACK & INFO
 	var playback = get("parameters/playback")
-	if playback:
-		if playback.get_current_node() != "Hit" or playback.get_current_node() != "Hit_Air":
-			if abs(player.velocity.x) > 10:
-				sprite_2d.flip_h = !bool(clampi(sign(player.velocity.x) + 1, 0, 1))
-		#print("Current State: ", playback.get_current_node())
+	if not playback: return
 	
-	var is_on_floor: bool = player.is_on_floor()
-	var is_moving: bool = abs(player.velocity.x) > base_speed_threshold
-	# --- 2. RESET ALL "ONE-SHOT" TRIGGERS ---
-	# We set these to false *every frame* by default.
-	# This way, they only fire once when we set them to true.
-	set("parameters/conditions/jump", false)
-	set("parameters/conditions/land", false)
-	set("parameters/conditions/land_moving", false)
-	set("parameters/conditions/hitting", false)
-	set('parameters/conditions/top', false)
-	# --- 3. SET "CONTINUOUS STATE" PARAMETERS ---
-	# These parameters are set every frame to whatever the player is *currently* doing.
-	# Your state machine (in "Auto" mode) will react to these changes.
+	var current_node = playback.get_current_node()
+	var is_on_floor = player.is_on_floor()
+	var is_moving = abs(player.velocity.x) > base_speed_threshold
 	
-	# Set air/ground state
-	set("parameters/conditions/in_air", not is_on_floor)
-	
-	# Set floor movement states
-	if is_on_floor and is_moving: sound_controller.set_walking_on()
-	else:  sound_controller.set_walking_off()
-	set("parameters/conditions/idle", is_on_floor and not is_moving)
-	set("parameters/conditions/walk", is_on_floor and is_moving)
-	
-	# --- 4. CHECK FOR "ONE-SHOT" TRIGGERS ---
-	# CHECK FOR LANDING: Only on the *single frame* we go from
-	# "in air" (was_on_floor == false) to "on floor" (is_on_floor == true).
-	#if !is_on_floor and player.velocity.y > 0:
-		#set('parameters/conditions/top', true)
-	
+	# Check if we are currently in an attack animation
+	var is_attacking = current_node == "Hit" or current_node == "Hit_Air"
+
+	# --- 2. HANDLE DIRECTION (Visuals only) ---
+	# CHANGE: Only let velocity dictate facing direction if we are NOT attacking.
+	# If we ARE attacking, the anim_hit function already set the correct direction,
+	# and we want to lock it there until the animation finishes.
+	if not is_attacking:
+		if is_on_floor and abs(player.velocity.x) > 10:
+			sprite_2d.flip_h = player.velocity.x < 0
+
+	# --- 3. HANDLE SOUNDS ---
+	# (Sounds can play regardless of attack state)
 	if is_on_floor and not was_on_floor:
 		$"../SoundController/Landonground".play()
-		if is_moving:
-			set("parameters/conditions/land_moving", true)
-		else:
-			set("parameters/conditions/land", true)
+		playback.start("land")
+		was_on_floor = is_on_floor
+		
+		return
 	
-	# --- 5. STORE STATE FOR NEXT FRAME ---
-	# This "remembers" our floor status so we can detect landing next frame.
 	was_on_floor = is_on_floor
+	if is_on_floor and is_moving: 
+		sound_controller.set_walking_on()
+	else:  
+		sound_controller.set_walking_off()
+
+	# --- 4. THE "ACTION LOCK" ---
+	# If attacking, stop here. Don't let movement logic interrupt the attack animation.
+	if is_attacking:
+		return
+	
+	# --- 5. STATE ENFORCER (Movement Logic) ---
+	if is_on_floor and current_node != "land":
+		if is_moving:
+			playback.travel("walk")
+		else:
+			playback.travel("idle")
+	elif current_node != "jump" and current_node != "land":
+		playback.travel("top")
+		
+	
+
+func idle():
+	var playback = get("parameters/playback")
+	playback.travel('idle')
+# --- ACTION FUNCTIONS ---
 
 func jump_anim():
-	was_on_floor = true
-	set("parameters/conditions/jump", true)
-	$"../SoundController/Jump".play()
-	
-func anim_hit(direction: Vector2):
-	sprite_2d.flip_h = bool(clampi(sign(direction.x) + 1, 0, 1))
 	var playback = get("parameters/playback")
+	was_on_floor = false
+	$"../SoundController/Jump".play()
+	playback.start("jump") 
+
+func anim_hit(direction: Vector2):
+	var playback = get("parameters/playback")
+	
+	# This sets the direction *once* at the start of the attack.
+	# The new logic in _process ensures this doesn't get overwritten.
+	sprite_2d.flip_h = direction.x > 0
+	
 	if player.is_on_floor():
-		playback.travel("Hit")
+		playback.start("Hit")
 		set('parameters/Hit/blend_position', -direction.normalized().y)
 	else:
-		playback.travel("Hit_Air")
+		playback.start("Hit_Air")
 		set('parameters/Hit_Air/blend_position', -direction.normalized().y)

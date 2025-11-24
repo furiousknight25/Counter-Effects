@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="InkPatternUpgrade" load_steps=2 format=3 uid="uid://cnoobfao4q1sg"]
+[gd_resource type="Resource" script_class="InkPatternUpgrade" load_steps=2 format=3 uid="uid://d1025mgmhs0f7"]
 
 [ext_resource type="Script" uid="uid://b8q3l1fmwtkfq" path="res://Upgrades/Scripts/InkPatternUpgrade.gd" id="1_cla8i"]
 

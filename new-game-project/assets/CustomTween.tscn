@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://bkbl1oocj4hlw"]
+
+[ext_resource type="Script" uid="uid://5p4tsuec1or8" path="res://assets/custom_tween.gd" id="1_avdhm"]
+
+
+[node name="CustomTween" type="Node"]
+script = ExtResource("1_avdhm")

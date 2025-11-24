@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://date2vets4t5p"]
 
 [ext_resource type="PackedScene" uid="uid://ca387n6r6geyi" path="res://Levels/Door/door.tscn" id="1_k1w7q"]
-[ext_resource type="Script" uid="uid://b1trs4lur1k7f" path="res://Levels/Shop/shop.gd" id="1_y4rsg"]
+[ext_resource type="Script" path="res://Levels/Shop/shop.gd" id="1_y4rsg"]
 [ext_resource type="PackedScene" uid="uid://dbxdqkjweu23s" path="res://Upgrades/Scenes/UpgradeItem.tscn" id="3_60ttm"]
 [ext_resource type="FontFile" uid="uid://biu82p810b20s" path="res://assets/BadPixelFont2.ttf" id="3_ss0x6"]
 [ext_resource type="Resource" uid="uid://dvtjceoivin62" path="res://Upgrades/Resources/IncreaseGravity.tres" id="4_y4rsg"]
@@ -81,15 +81,15 @@ horizontal_alignment = 1
 
 [node name="UpgradeItem" parent="Upgrades" instance=ExtResource("3_60ttm")]
 position = Vector2(72, 149)
-upgrade_resource_1 = ExtResource("4_y4rsg")
+upgrade_resource_1 = ExtResource("5_ss0x6")
 upgrade_resource_2 = ExtResource("5_ss0x6")
 
 [node name="UpgradeItem2" parent="Upgrades" instance=ExtResource("3_60ttm")]
 position = Vector2(128, 149)
-upgrade_resource_1 = ExtResource("4_y4rsg")
+upgrade_resource_1 = ExtResource("5_ss0x6")
 upgrade_resource_2 = ExtResource("5_ss0x6")
 
 [node name="UpgradeItem3" parent="Upgrades" instance=ExtResource("3_60ttm")]
 position = Vector2(184, 149)
-upgrade_resource_1 = ExtResource("4_y4rsg")
+upgrade_resource_1 = ExtResource("5_ss0x6")
 upgrade_resource_2 = ExtResource("5_ss0x6")

@@ -15,6 +15,7 @@ var can_hit : bool = false
 @onready var weapon: Area2D = $Weapon
 @onready var animation_tree: PlayerAnim = $AnimationTree
 @onready var inking : Inking = get_tree().get_nodes_in_group("Inking")[0]
+@onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 
 var walk_animation_speed = 0
 var dash_strength = 10
@@ -32,11 +33,30 @@ var airspeed_multiplier : float = 1.0
 func _ready() -> void:
 	SignalBus.connect("upgrade_player", upgrade_player)
 
-
-func _process(delta):
-	weapon_c(delta)
+func set_freeze(yes: bool, pos = Vector2.ZERO):
+	$AnimationTree
+	if yes: 
+		freeze = true
+		collision_shape_2d.set_deferred("disabled", true)
+	if !yes: 
+		freeze = false
+		collision_shape_2d.set_deferred("disabled", false)
 	
-	movement(delta)
+func pos_tween(pos):
+	var tween = get_tree().create_tween()
+	tween.tween_property(self, "position", pos, 1.6)
+	$Jump.play("jump")
+	await tween.finished
+	
+	set_freeze(false)
+	velocity = Vector2(-25,2)
+
+var freeze = false
+func _process(delta):
+	if !freeze:
+		weapon_c(delta)
+		
+		movement(delta)
 	#visuals(delta)
 
 func weapon_c(delta):
@@ -151,7 +171,7 @@ func visuals(delta):
 		
 			sprite.rotation = lerp_angle(sprite.rotation, mult_xe, delta * 8)
 			squishable = true
-			print(mult_xe)
+			#print(mult_xe)
 			falling_stretch += delta * 2
 		
 		sprite.scale = sprite.scale.lerp(Vector2(1/falling_stretch, falling_stretch) * BASESCALE, delta * 5) 
@@ -167,8 +187,6 @@ func hit(direction : Vector2):
 		var tween = get_tree().create_tween()
 		tween.tween_property(self, "modulate", Color.WHITE, .5)
 		
-		#sprite.scale.x += .2 * BASESCALE
-		#sprite.scale.y -= .1 * BASESCALE
 		velocity += direction
 		
 		var push_direction = -1

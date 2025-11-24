@@ -17,4 +17,4 @@ func enable_door():
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body is Player:
 		collision_shape_2d.set_deferred("disabled", true)
-		(get_parent().get_parent() as GameStateManager).switch_scene("next_level")
+		SignalBus.emit_signal("switch_scene", "next_level")

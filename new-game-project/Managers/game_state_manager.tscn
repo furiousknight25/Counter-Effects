@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://8ns7uk77unk0"]
+[gd_scene load_steps=14 format=3 uid="uid://8ns7uk77unk0"]
 
 [ext_resource type="Script" uid="uid://bc44oqh2kl3sh" path="res://Managers/GameStateManager.gd" id="1_pcxke"]
 [ext_resource type="PackedScene" uid="uid://dfhfol7byum77" path="res://Levels/Level Scenes/Level_1.tscn" id="2_bf74e"]
@@ -7,24 +7,30 @@
 [ext_resource type="PackedScene" uid="uid://c7a6cijicq3rd" path="res://scenes/Ball.tscn" id="3_nyymm"]
 [ext_resource type="PackedScene" uid="uid://fyyoe5vf3xm1" path="res://scenes/character_body_2d.tscn" id="4_c64r5"]
 [ext_resource type="PackedScene" uid="uid://date2vets4t5p" path="res://Levels/Level Scenes/shop.tscn" id="4_utuad"]
+[ext_resource type="PackedScene" uid="uid://ywofvfcmcm35" path="res://Levels/Level Scenes/Level_2.tscn" id="5_utl7c"]
+[ext_resource type="PackedScene" uid="uid://d33tdssktocr7" path="res://Levels/Level Scenes/finalLevel.tscn" id="5_utuad"]
 [ext_resource type="PackedScene" uid="uid://becufmw83qp8r" path="res://MoneyComponent/MoneyComponent.tscn" id="5_uutof"]
 [ext_resource type="PackedScene" uid="uid://b6hvicojge7i8" path="res://Inking/Inking.tscn" id="6_rupjc"]
 [ext_resource type="Script" uid="uid://8vop7w1dd83g" path="res://TillEndGameTimer/end_game_timer.gd" id="7_utl7c"]
+[ext_resource type="PackedScene" uid="uid://bo5d4v6wps84i" path="res://Levels/Level Scenes/Level_3.tscn" id="8_4dj3i"]
 
-[node name="GameStateManager" type="Node"]
+[node name="GameStateManager" type="Node" node_paths=PackedStringArray("active_level")]
 script = ExtResource("1_pcxke")
 scenes = Dictionary[String, PackedScene]({
 "0": ExtResource("2_utl7c"),
 "1": ExtResource("2_bf74e"),
+"final": ExtResource("5_utuad"),
 "shop": ExtResource("4_utuad")
 })
+rouge_like_levels = Array[PackedScene]([ExtResource("2_bf74e"), ExtResource("5_utl7c")])
+active_level = NodePath("Level_2")
 metadata/_custom_type_script = "uid://bc44oqh2kl3sh"
 
 [node name="TransitionManager" type="Node" parent="."]
 process_mode = 3
 script = ExtResource("2_c64r5")
 
-[node name="Level_1" parent="." instance=ExtResource("2_bf74e")]
+[node name="Level_2" parent="." instance=ExtResource("8_4dj3i")]
 
 [node name="Ball" parent="." instance=ExtResource("3_nyymm")]
 position = Vector2(203, 162)
@@ -43,28 +49,46 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="StrikeCount" parent="UI" instance=ExtResource("5_uutof")]
+visible = false
 z_index = 1
 position = Vector2(30, -2)
 scale = Vector2(0.6709192, 0.6709192)
 
 [node name="Inking" parent="UI" groups=["Inking"] instance=ExtResource("6_rupjc")]
 layout_mode = 1
-spray_speed = 10.0
 metadata/_edit_lock_ = true
 
+[node name="ColorRect" parent="UI/Inking/SubViewportInk/AnimationPlayer" index="0"]
+color = Color(0.43137255, 0.6666667, 0.41568628, 1)
+
+[node name="ColorRect2" parent="UI/Inking/SubViewportInk/AnimationPlayer" index="1"]
+color = Color(0.4306467, 0.66712093, 0.41490605, 1)
+
+[node name="Tally" parent="UI/Inking/Node2D" index="0"]
+self_modulate = Color(1, 1, 1, 0)
+
+[node name="YangPart" parent="UI/Inking/Node2D/Tally/YingTangTally/Yang" index="0"]
+emitting = false
+amount = 20
+
+[node name="YinPart" parent="UI/Inking/Node2D/Tally/YingTangTally/Yin" index="0"]
+emitting = false
+amount = 20
+
 [node name="EndGameTimer" type="Timer" parent="UI"]
-wait_time = 20.0
+wait_time = 30.0
 one_shot = true
 script = ExtResource("7_utl7c")
 
 [node name="ProgressBar" type="ProgressBar" parent="UI/EndGameTimer"]
 z_index = 2
-offset_left = 69.0
-offset_top = 181.00002
-offset_right = 494.69235
-offset_bottom = 208.00002
+offset_left = 15.0
+offset_top = 178.0
+offset_right = 881.725
+offset_bottom = 227.8559
 scale = Vector2(0.2607517, 0.2607517)
 value = 100.0
+show_percentage = false
 
 [node name="321Go" type="Control" parent="UI"]
 anchors_preset = 0
@@ -112,13 +136,16 @@ scale = Vector2(8.994856, 8.994856)
 text = "GO"
 
 [node name="Polygon2D" type="Polygon2D" parent="UI/321Go"]
+visible = false
 polygon = PackedVector2Array(7, 17, 0, 28, 7, 40, 14, 28)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="UI/321Go"]
 max_polyphony = 6
 
-[connection signal="game_end" from="UI/EndGameTimer" to="UI/Inking" method="_on_end_game_timer_game_end"]
+[connection signal="animation_finished" from="UI/Inking/SubViewportInk/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="timeout" from="UI/EndGameTimer" to="Ball" method="_on_end_game_timer_timeout"]
+[connection signal="timeout" from="UI/EndGameTimer" to="UI/Inking" method="_on_end_game_timer_timeout"]
 [connection signal="timeout" from="UI/EndGameTimer" to="UI/EndGameTimer" method="_on_timeout"]
+[connection signal="timeout" from="UI/EndGameTimer" to="Ball" method="drop_the_ball" binds= [0.0, -3.5]]
 
 [editable path="UI/Inking"]

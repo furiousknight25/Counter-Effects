@@ -1,6 +1,6 @@
 [gd_scene load_steps=15 format=3 uid="uid://dey6d573npxbl"]
 
-[ext_resource type="Script" uid="uid://b088dki1h7ogg" path="res://Music/music.gd" id="1_4uau5"]
+[ext_resource type="Script" uid="uid://b0xt1uu67kil8" path="res://Music/Music.gd" id="1_yljg6"]
 [ext_resource type="Script" uid="uid://b1v22bdyxocy0" path="res://Music/AdaptiveMusic.gd" id="2_ytcby"]
 [ext_resource type="AudioStream" uid="uid://bq4j0qjv7l34w" path="res://assets/Music/INurMIND.amen.wav" id="3_b75lf"]
 [ext_resource type="AudioStream" uid="uid://da00dux0vgui" path="res://assets/Music/INurMIND.chop.wav" id="4_f4ytw"]
@@ -16,7 +16,7 @@
 [ext_resource type="AudioStream" uid="uid://cho4sp0guq7f0" path="res://assets/Music/shop/INurSHOP.voca.wav" id="14_yx4rj"]
 
 [node name="Music" type="Node" node_paths=PackedStringArray("song_list")]
-script = ExtResource("1_4uau5")
+script = ExtResource("1_yljg6")
 song_list = {
 "glob": NodePath("Glob"),
 "openyourmind": NodePath("OpenYourMind"),

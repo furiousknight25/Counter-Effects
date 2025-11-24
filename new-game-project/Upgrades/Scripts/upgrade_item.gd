@@ -11,9 +11,9 @@ class_name UpgradeItem extends Node2D
 var upgrade_name : String
 var can_obtain : bool = false
 var upgrades_dict : Dictionary[String, Array] = {
-	"moon_boots" : ["uid://dvtjceoivin62", "uid://di5tm50ea2psa"],
-	"line_pattern" : ["uid://cnoobfao4q1sg"],
-	"faster_ball" : ["uid://dnfanyy3kd43i"]
+	"moon_boots" : ["res://Upgrades/Resources/AirSpeed.tres", "res://Upgrades/Resources/IncreaseGravity.tres"],
+	"line_pattern" : ["res://Upgrades/Resources/LinePattern.tres"],
+	"faster_ball" : ["res://Upgrades/Resources/StrongerBall.tres"]
 }
 
 func _ready() -> void:
@@ -61,9 +61,9 @@ func _on_area_2d_body_exited(_body: Node2D) -> void:
 
 func set_upgrade(key : String):
 	upgrade_name = key
-	upgrade_resource_1 = load(ResourceUID.get_id_path(ResourceUID.text_to_id((upgrades_dict[key][0]))))
+	upgrade_resource_1 = load(upgrades_dict[key][0])
 	if upgrades_dict[key].size() > 1:
-		upgrade_resource_2 = load(ResourceUID.get_id_path(ResourceUID.text_to_id((upgrades_dict[key][1]))))
+		upgrade_resource_2 = load(upgrades_dict[key][1])
 	else:
 		upgrade_resource_2 = null
 	setup()

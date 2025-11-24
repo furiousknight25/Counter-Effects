@@ -13,10 +13,12 @@ colors = PackedColorArray(0.6523882, 0.653716, 0.61781263, 1)
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_8a5oj"]
 gradient = SubResource("Gradient_ka50d")
 
-[node name="Level_1" type="Node2D"]
+[node name="Level_1" type="Node2D" node_paths=PackedStringArray("player", "ball")]
 process_mode = 3
 script = ExtResource("1_c2f1v")
 starting_image = ExtResource("2_wvb8b")
+player = NodePath("Marker2D")
+ball = NodePath("Marker2D2")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
@@ -60,3 +62,9 @@ position = Vector2(249, 102)
 rotation = -3.1415927
 scale = Vector2(0.21875001, 3.970483)
 texture = SubResource("GradientTexture2D_8a5oj")
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(46, 120)
+
+[node name="Marker2D2" type="Marker2D" parent="."]
+position = Vector2(184, 100)

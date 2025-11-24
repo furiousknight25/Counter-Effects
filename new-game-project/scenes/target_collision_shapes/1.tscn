@@ -1,14 +1,43 @@
-[gd_scene load_steps=2 format=3 uid="uid://bj1k8c48u5iaq"]
+[gd_scene load_steps=6 format=3 uid="uid://bj1k8c48u5iaq"]
+
+[ext_resource type="Texture2D" path="res://.godot/imported/Sprite-0001.aseprite-740e71aa2645bbdfaba7debcd986fbce.Sprite-0001.texture.res" id="1_qf7mj"]
 
 [sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_dmwdl"]
-points = PackedVector2Array(5, 0, 0, 15, -5, 0, 0, -5)
+points = PackedVector2Array(5, 0, 0, -5, -5, 0, 0, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o8sd5"]
+atlas = ExtResource("1_qf7mj")
+region = Rect2(10, 0, 10, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2oey3"]
+atlas = ExtResource("1_qf7mj")
+region = Rect2(0, 0, 10, 20)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_f1430"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o8sd5")
+}],
+"loop": true,
+"name": &"off",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2oey3")
+}],
+"loop": true,
+"name": &"on",
+"speed": 10.0
+}]
+metadata/imported_via_aw = true
 
 [node name="kite" type="CollisionShape2D"]
-position = Vector2(0, -8)
-scale = Vector2(2, 2)
 shape = SubResource("ConvexPolygonShape2D_dmwdl")
 debug_color = Color(0.9584257, 3.080368e-06, 0.5298511, 0.41960785)
 
-[node name="Polygon2D" type="Polygon2D" parent="."]
-color = Color(1, 0.37840074, 0.6143717, 1)
-polygon = PackedVector2Array(0, -5, 5, 0, 0, 15, -5, 0)
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, 4)
+sprite_frames = SubResource("SpriteFrames_f1430")
+animation = &"off"
