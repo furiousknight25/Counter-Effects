@@ -38,7 +38,7 @@ func create_circle_image(radius: int) -> Image:
 			if dist_sq <= radius * radius:
 				image.set_pixel(x, y, Color(1, 1, 1, 1)) 
 			else:
-				image.set_pixel(x, y, Color(0, 0, 0, 0)) 
+				image.set_pixel(x, y, Color(0, 0, 0, 0))
 	return image
 
 func spawned_spot(velocity: Vector2, position: Vector2, shape: Image, damping_speed: float, color: Color):

@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="StrengthBallUpgrade" load_steps=2 format=3 uid="uid://gp5jl8ri7rco"]
+
+[ext_resource type="Script" uid="uid://ckhu6x274nql8" path="res://Upgrades/Scripts/StrengthBallUpgrade.gd" id="1_darje"]
+
+[resource]
+script = ExtResource("1_darje")
+strength = -15.0
+description = "THEBALL SPEEDS UP AT A SLOWER RATE"
+metadata/_custom_type_script = "uid://ckhu6x274nql8"
