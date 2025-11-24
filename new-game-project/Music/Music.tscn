@@ -29,7 +29,6 @@ tracks = [NodePath("chop"), NodePath("perc"), NodePath("subb"), NodePath("amen")
 
 [node name="chop" type="AudioStreamPlayer" parent="OpenYourMind"]
 stream = ExtResource("4_f4ytw")
-volume_db = -80.0
 
 [node name="perc" type="AudioStreamPlayer" parent="OpenYourMind"]
 stream = ExtResource("5_k5d4v")

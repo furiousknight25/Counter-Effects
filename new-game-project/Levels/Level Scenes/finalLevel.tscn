@@ -1,6 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://d33tdssktocr7"]
+[gd_scene load_steps=9 format=3 uid="uid://d33tdssktocr7"]
 
 [ext_resource type="Script" uid="uid://due6gpd7x4mba" path="res://Levels/level.gd" id="1_lcyel"]
+[ext_resource type="Image" uid="uid://25lj6du152l0" path="res://assets/death.png" id="2_p1w77"]
+[ext_resource type="Script" uid="uid://dw4vk2qvm2t5h" path="res://creidts.gd" id="3_671gf"]
+[ext_resource type="Script" uid="uid://dwmgscfyyqioc" path="res://Levels/Level Scenes/kid.gd" id="4_neaag"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1oova"]
 size = Vector2(14, 256)
@@ -12,9 +15,13 @@ colors = PackedColorArray(0.6523882, 0.653716, 0.61781263, 1)
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_8a5oj"]
 gradient = SubResource("Gradient_ka50d")
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mj1m6"]
+height = 38.0
+
 [node name="Final" type="Node2D" node_paths=PackedStringArray("player", "ball")]
 process_mode = 3
 script = ExtResource("1_lcyel")
+starting_image = ExtResource("2_p1w77")
 player = NodePath("Marker2D")
 ball = NodePath("Marker2D2")
 
@@ -61,15 +68,159 @@ rotation = -3.1415927
 scale = Vector2(0.21875001, 3.970483)
 texture = SubResource("GradientTexture2D_8a5oj")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="."]
-offset_left = 69.0
-offset_top = 73.0
-offset_right = 192.0
-offset_bottom = 139.0
-text = "FINAL LEVLE"
-
 [node name="Marker2D" type="Marker2D" parent="."]
 position = Vector2(126, 157)
 
 [node name="Marker2D2" type="Marker2D" parent="."]
 position = Vector2(128, 65)
+
+[node name="kids" type="Node2D" parent="."]
+script = ExtResource("3_671gf")
+
+[node name="Jude" type="RigidBody2D" parent="kids"]
+position = Vector2(39, 52)
+rotation = -0.2618014
+freeze = true
+script = ExtResource("4_neaag")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="kids/Jude"]
+position = Vector2(6, -4)
+rotation = -1.5707964
+shape = SubResource("CapsuleShape2D_mj1m6")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="kids/Jude"]
+offset_left = -7.778147
+offset_top = -13.472208
+offset_right = 108.00196
+offset_bottom = 62.647743
+scale = Vector2(0.26034012, 0.26034012)
+text = "Jude
+Programming
+Technical Art"
+
+[node name="Jude2" type="RigidBody2D" parent="kids"]
+position = Vector2(91.00001, 50.000008)
+rotation = 0.73412836
+freeze = true
+script = ExtResource("4_neaag")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="kids/Jude2"]
+position = Vector2(6, -4)
+rotation = -1.5707964
+shape = SubResource("CapsuleShape2D_mj1m6")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="kids/Jude2"]
+offset_left = -7.2244034
+offset_top = -10.991276
+offset_right = 88.71142
+offset_bottom = 69.76286
+scale = Vector2(0.32239044, 0.32239044)
+text = "Krisper
+Animation"
+
+[node name="Jude3" type="RigidBody2D" parent="kids"]
+position = Vector2(142, 57)
+rotation = -0.36727023
+freeze = true
+script = ExtResource("4_neaag")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="kids/Jude3"]
+position = Vector2(6, -4)
+rotation = -1.5707964
+shape = SubResource("CapsuleShape2D_mj1m6")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="kids/Jude3"]
+offset_left = -7.2244034
+offset_top = -10.991276
+offset_right = 109.17803
+offset_bottom = 69.76286
+scale = Vector2(0.25561333, 0.25561333)
+text = "Phoenix
+Programming"
+
+[node name="Jude4" type="RigidBody2D" parent="kids"]
+position = Vector2(172, 69)
+rotation = 0.42529774
+freeze = true
+script = ExtResource("4_neaag")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="kids/Jude4"]
+position = Vector2(6, -4)
+rotation = -1.5707964
+shape = SubResource("CapsuleShape2D_mj1m6")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="kids/Jude4"]
+offset_left = -7.2244034
+offset_top = -10.991276
+offset_right = 109.17803
+offset_bottom = 69.76286
+scale = Vector2(0.25561333, 0.25561333)
+text = "Ollie
+Sfx/Music"
+
+[node name="Jude5" type="RigidBody2D" parent="kids"]
+position = Vector2(199, 43)
+rotation = -0.19017583
+freeze = true
+script = ExtResource("4_neaag")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="kids/Jude5"]
+position = Vector2(6, -4)
+rotation = -1.5707964
+shape = SubResource("CapsuleShape2D_mj1m6")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="kids/Jude5"]
+offset_left = -7.2244034
+offset_top = -10.991276
+offset_right = 109.17803
+offset_bottom = 69.76286
+scale = Vector2(0.25561333, 0.25561333)
+text = "Donnie
+Programming"
+
+[node name="Jude6" type="RigidBody2D" parent="kids"]
+position = Vector2(64, 73)
+rotation = -0.19017583
+freeze = true
+script = ExtResource("4_neaag")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="kids/Jude6"]
+position = Vector2(6, -4)
+rotation = -1.5707964
+shape = SubResource("CapsuleShape2D_mj1m6")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="kids/Jude6"]
+offset_left = -7.2244034
+offset_top = -10.991276
+offset_right = 109.17803
+offset_bottom = 69.76286
+scale = Vector2(0.25561333, 0.25561333)
+text = "Kevin
+Programming"
+
+[node name="Jude7" type="RigidBody2D" parent="kids"]
+position = Vector2(129.99998, 90)
+rotation = 0.16507468
+freeze = true
+script = ExtResource("4_neaag")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="kids/Jude7"]
+position = Vector2(6, -4)
+rotation = -1.5707964
+shape = SubResource("CapsuleShape2D_mj1m6")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="kids/Jude7"]
+offset_left = -7.2244034
+offset_top = -10.991276
+offset_right = 109.17803
+offset_bottom = 69.76286
+scale = Vector2(0.25561333, 0.25561333)
+text = "Riley
+Programming"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="kids"]
+offset_left = 87.0
+offset_top = 15.0
+offset_right = 210.0
+offset_bottom = 81.0
+text = "Credits:"

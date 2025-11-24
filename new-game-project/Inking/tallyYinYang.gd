@@ -14,7 +14,7 @@ func _on_timer_timeout() -> void:
 func trans_in():
 	rotation = 0
 	get_tree().create_tween().tween_property(self, "position", Vector2(127,80), 0.5).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
-
+	
 func trans_out(winner: bool):
 	if winner:
 		laugh()
@@ -22,7 +22,8 @@ func trans_out(winner: bool):
 		spin(-.5,0)
 		position.y += 12
 		get_tree().create_tween().tween_property(self, "position", Vector2(127,-80), 2.0).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
-		print('yang wins')
+		$"../Yin2".value = 0
+		$"../Yang2".value = 0
 
 func spin(dir, amt):
 	await get_tree().process_frame
@@ -35,10 +36,16 @@ func mark(who : bool):
 	if who: #yang
 		yang_part.emitting = true
 		rotation -= .001
+		yang.scale += Vector2(.0001,.0001)
+		$"../Yang2".value += 1
+		#$"../Yang2".position.y -= .001
 	else: #yin
 		yin_part.emitting = true
 		rotation += .001
-
+		yin.scale += Vector2(.0001,.0001)
+		$"../Yin2".value += 1
+		#$"../Yin2".position.y -= .001
+	
 func laugh():
 	Music.stop()
 	dead = true
@@ -48,7 +55,6 @@ func laugh():
 
 var open_mouth = false
 func laughing():
-	
 	open_mouth = !open_mouth
 	if open_mouth:
 		await get_tree().create_timer(.2).timeout
@@ -57,6 +63,13 @@ func laughing():
 	laughing()
 
 func _process(delta: float) -> void:
+	$"../Yin2".position.y = lerp($"../Yin2".position.y, position.y, delta * 12)
+	$"../Yang2".position.y = lerp($"../Yang2".position.y, position.y, delta * 12)
+	
+	
+	yin.scale = yin.scale.lerp(Vector2.ONE * 0.086, delta * 102)
+	yang.scale = yang.scale.lerp(Vector2.ONE * 0.086, delta * 102)
+	
 	if dead:
 		yang.position = yang.position.lerp(Vector2.ZERO, delta * 12)
 		yin.position= yin.position.lerp(Vector2.ZERO, delta * 12)
@@ -70,4 +83,4 @@ func _process(delta: float) -> void:
 		rotation += delta
 
 func _on_laugh_death_timeout() -> void:
-	print('game dead')
+	get_tree().quit()

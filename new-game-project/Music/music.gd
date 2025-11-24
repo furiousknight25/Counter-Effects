@@ -15,8 +15,10 @@ var level_shop = 1
 
 func _ready() -> void:
 	current_song = song_list.get('openyourmind')
-	current_song.start()
+	#current_song.start()
 
+func the_beg():
+	current_song.start()
 func stop():current_song.stop()
 	
 func switch_song(song : String):
@@ -46,7 +48,6 @@ func move_up(place: String):
 		for i in range(level_mind):
 			song_list.get('openyourmind').increase_volume(i, 0, .1)
 	if place == "shop":
-		print('asd')
 		level_shop += 1
 		for i in range(level_shop):
 			song_list.get('shop').increase_volume(i, 0, .1)

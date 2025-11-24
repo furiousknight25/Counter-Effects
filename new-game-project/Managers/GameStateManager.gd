@@ -22,6 +22,10 @@ func _ready() -> void:
 	SignalBus.connect("switch_scene", switch_scene)
 
 func switch_scene(location : String):
+	if level_idx == 3: 
+		SignalBus.emit_signal("final")
+		return
+		
 	disable_scene()
 	await done_anim
 	var loaded_scene : Level
@@ -76,6 +80,8 @@ func disable_scene():
 func start_scene():
 	animation_player.play('open')
 	ball.set_state_moving()
+	ball.velocity = Vector2.ZERO
+	ball.speed = 0
 
 func add_upgrade_to_array(upgrade : Upgrade):
 	upgrade_array.append(upgrade)

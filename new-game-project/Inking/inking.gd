@@ -1,9 +1,16 @@
 extends SubViewportContainer
 class_name Inking
 # --- Persistent Canvas Data ---
+
+@onready var yin_2: ProgressBar = $Node2D/Tally/YingTangTally/Yin2
+@onready var yin_p: Path2D = $Node2D/Tally/YingTangTally/Yin2/Yin
+@onready var yang_2: ProgressBar = $Node2D/Tally/YingTangTally/Yang2
+@onready var yang_p: Path2D = $Node2D/Tally/YingTangTally/Yang2/Yang
+
 @onready var texture_rect: TextureRect = $SubViewportInk/TextureRect
 @onready var tally: Panel = $Node2D/Tally
 @onready var ying_tang_tally: Node2D = $Node2D/Tally/YingTangTally
+const TUTORIAL_LEVEL = preload("res://assets/tutorial_level.png")
 
 const MONEY = preload("res://assets/money.png")
 
@@ -18,13 +25,16 @@ var spray_spots
 func _process(delta: float) -> void:
 	if Input.is_key_pressed(KEY_P):
 		splat_bug()
+	
+	#yin_p.curve.set_point_position(0, $Node2D/Tally/YingTangTally/Yin/YinPart.position)
+	
 
 #region Setup
 func _ready():
 	# Safely access the SubViewport using get_node()
 	sub_viewport = get_node("SubViewportInk")
 	
-	if sub_viewport:if texture_rect:reset()
+	if sub_viewport:if texture_rect:reset(TUTORIAL_LEVEL)
 	
 	SignalBus.connect("reset_ink", reset)
 #endregion
@@ -63,8 +73,8 @@ func splat_player(pos: Vector2, hit_dir: Vector2):
 	for i in 12:
 		spawned_spot(Vector2.UP.rotated(randf_range(-.5,.5)) * randf_range(1,40), pos, create_circle_image(randf_range(2,5)), .8, Color.BLACK)
 	
-	for i in 10:
-		spawned_spot(-hit_dir.rotated(randf_range(-.3,.3)) * randf_range(1,30), pos, create_circle_image(randf_range(2,4)), .2, Color.BLACK)
+	for i in 6:
+		spawned_spot(-hit_dir.rotated(randf_range(-.3,.3)) * randf_range(1,30), pos, create_circle_image(randf_range(2,4)), .4, Color.BLACK)
 
 func splat_ball(pos: Vector2, hit_dir: Vector2):
 	for i in 20:
