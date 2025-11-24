@@ -25,11 +25,16 @@ func reset() -> void:
 	progress_bar.value = 100
 	stop()
 
-
+var start_real = false
 func start_round() -> void:
 	
 	if round_start == true:
 		return
-	Music.move_up('mind')
+	if start_real:
+		Music.move_up('mind')
+	else:
+		Music.the_beg()
+	
+	start_real = true
 	start()
 	round_start = true

@@ -84,10 +84,7 @@ position = Vector2(184, 92)
 shape = 2
 
 [node name="Enemy" parent="." instance=ExtResource("3_fwcuo")]
-position = Vector2(51, 53)
-
-[node name="Enemy2" parent="." instance=ExtResource("3_fwcuo")]
-position = Vector2(189, 77)
+position = Vector2(128, 51)
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="."]
 position = Vector2(82, 212.00002)

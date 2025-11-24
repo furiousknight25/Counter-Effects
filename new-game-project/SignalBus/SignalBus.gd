@@ -11,6 +11,9 @@ signal reset
 signal close
 
 @warning_ignore("unused_signal")
+signal final
+
+@warning_ignore("unused_signal")
 signal reset_ink(image : Image)
 #endregion
 
