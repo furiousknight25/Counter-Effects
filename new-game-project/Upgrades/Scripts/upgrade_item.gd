@@ -12,8 +12,9 @@ var upgrade_name : String
 var can_obtain : bool = false
 var upgrades_dict : Dictionary[String, Array] = {
 	"moon_boots" : ["res://Upgrades/Resources/AirSpeed.tres", "res://Upgrades/Resources/IncreaseGravity.tres"],
-	"line_pattern" : ["res://Upgrades/Resources/LinePattern.tres"],
-	"faster_ball" : ["res://Upgrades/Resources/StrongerBall.tres"]
+	"ball_trail" : ["res://Upgrades/Resources/BallTrail.tres"],
+	"stronger_ball" : ["res://Upgrades/Resources/BiggerBall.tres" , "res://Upgrades/Resources/SlowerBall.tres"],
+	"linear_speed_up" : ["res://Upgrades/Resources/SpeedOverTime.tres"]
 }
 
 func _ready() -> void:

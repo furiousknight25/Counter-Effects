@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="BiggerBall" load_steps=2 format=3 uid="uid://opu3isdvupfm"]
+
+[ext_resource type="Script" uid="uid://dr23aqkm40fl4" path="res://Upgrades/Scripts/BiggerBall.gd" id="1_jchqi"]
+
+[resource]
+script = ExtResource("1_jchqi")
+new_scale = 2.0
+description = "INCREASES THE SIZE OF THE BALL"
+metadata/_custom_type_script = "uid://dr23aqkm40fl4"

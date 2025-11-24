@@ -44,7 +44,7 @@ func create_circle_image(radius: int) -> Image:
 			if dist_sq <= radius * radius:
 				image.set_pixel(x, y, Color(1, 1, 1, 1)) 
 			else:
-				image.set_pixel(x, y, Color(0, 0, 0, 0)) 
+				image.set_pixel(x, y, Color(0, 0, 0, 0))
 	return image
 
 func spawned_spot(velocity: Vector2, position: Vector2, shape: Image, damping_speed: float, color: Color):
@@ -59,7 +59,8 @@ func spawned_spot(velocity: Vector2, position: Vector2, shape: Image, damping_sp
 	spawned_spot(velocity, position, shape, damping_speed, color)
 	
 func splat_player(pos: Vector2, hit_dir: Vector2):
-	for i in 14:
+	SignalBus.emit_signal("switch_trail_color")
+	for i in 12:
 		spawned_spot(Vector2.UP.rotated(randf_range(-.5,.5)) * randf_range(1,40), pos, create_circle_image(randf_range(2,5)), .8, Color.BLACK)
 	
 	for i in 10:

@@ -22,6 +22,9 @@ signal upgrade_player(upgrade : PlayerUpgrade)
 @warning_ignore("unused_signal")
 signal upgrade_ball(upgrade : BallUpgrade)
 
+@warning_ignore("unused_signal")
+signal switch_trail_color
+
 #endregion
 
 
