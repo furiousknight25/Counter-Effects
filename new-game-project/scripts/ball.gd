@@ -11,7 +11,7 @@ class_name Ball
 @export var spring_enabled = false
 var base_speed : float = 1.0
 var speed : float = 1.0
-var strength : float = 50.0
+var strength : float = 30.0
 
 enum STATES {FREEZE, MOVING}
 var cur_state = STATES.MOVING
@@ -100,6 +100,14 @@ func hit_object(object):
 	if object.is_in_group("Hitable"):
 		object.hit(velocity)
 
+func drop_the_ball(amt, vel):
+	await get_tree().physics_frame
+	if amt < 100:
+		amt += 1
+		print(amt)
+		vel += .2
+		position.y += vel
+		drop_the_ball(amt, vel)
 
 func _on_end_game_timer_timeout() -> void:
 	set_state_freezing()

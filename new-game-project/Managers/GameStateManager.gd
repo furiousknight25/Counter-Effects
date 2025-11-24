@@ -6,7 +6,7 @@ var level_idx : int = 0
 @export var rouge_like_levels : Array[PackedScene]
 @onready var transition_manager: TransitionManager = $TransitionManager
 @onready var upgrade_array : Array[Upgrade]
-@onready var active_level: Level = $"Level_1"
+@onready var active_level: Level 
 @onready var ball: Ball = $Ball
 @onready var player: Player = %Player
 @onready var ui: Control = $UI
@@ -30,21 +30,18 @@ func switch_scene(location : String):
 			level_idx += 1
 			if level_idx <= 3: 
 				loaded_scene = rouge_like_levels[randi_range(0, rouge_like_levels.size() - 1)].instantiate()
-				player.pos_tween(Vector2(32, 157))
-				ball.position = Vector2(128, 112)
 				Music.transition_to_open_your_mind()
 			else:
 				loaded_scene = scenes.get('final').instantiate()
-				player.pos_tween(Vector2(32, 157))
 		"shop":
 			loaded_scene = scenes.get('shop').instantiate()
-			player.pos_tween(Vector2(32, 157))
-			ball.position = Vector2(-10, -10)
 		"Level_1":
 			loaded_scene = scenes.get('1').instantiate()
-			player.pos_tween(Vector2(32, 157))
-			ball.position = Vector2(128, 112)
 	
+	if loaded_scene.player != null:
+		player.pos_tween(loaded_scene.player.position)
+	else:
+		player.pos_tween(Vector2(32, 157))
 	#get_tree().paused = true
 	
 	loaded_scene.position.x = 280
@@ -61,6 +58,12 @@ func switch_scene(location : String):
 	active_level.queue_free()
 	active_level = loaded_scene
 	start_scene()
+	
+	if loaded_scene.ball != null:
+		ball.position = loaded_scene.ball.position
+	else:
+		ball.position = Vector2(-10, -10)
+	
 	if location == "Shop": inking.shop()
 
 func disable_scene():

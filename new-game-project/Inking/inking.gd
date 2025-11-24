@@ -132,7 +132,11 @@ func iterate_pixels():
 	Music.mute_perc_and_chop()
 	if black_pixels > white_pixels:
 		$Fail.play()
-	else: $Win.play()
+		ying_tang_tally
+		
+	else: 
+		$Win.play()
+		SignalBus.emit_signal("switch_scene", "shop")
 	
 	ying_tang_tally.trans_out(black_pixels > white_pixels)
 

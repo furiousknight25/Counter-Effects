@@ -1,0 +1,41 @@
+[gd_scene load_steps=5 format=3 uid="uid://cpmdspnjh3tt5"]
+
+[ext_resource type="Script" uid="uid://dvlcxsh1hmcyu" path="res://Enemy/enemy.gd" id="1_2v3kw"]
+[ext_resource type="PackedScene" uid="uid://bfxj6lclf2l67" path="res://assets/drone.fbx" id="2_g67sm"]
+[ext_resource type="Script" uid="uid://cy1bk8gc2bnvn" path="res://Enemy/drone.gd" id="3_g67sm"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_makm5"]
+radius = 14.142136
+
+[node name="Enemy" type="CharacterBody2D"]
+script = ExtResource("1_2v3kw")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+offset_left = -129.0
+offset_top = -86.0
+offset_right = 127.0
+offset_bottom = 106.0
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(256, 192)
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_makm5")
+
+[node name="drone" parent="." instance=ExtResource("2_g67sm")]
+transform = Transform3D(0.65707284, -0.24579543, -0.71262884, -0.07955523, 0.91745806, -0.38979694, 0.7496174, 0.31281835, 0.5832825, 0, 0, -3.1697912)
+script = ExtResource("3_g67sm")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.097969174, 0.86311376, -0.49541593, -0.16743937, 0.5050098, 0.8467167, 0.9810027, 0, 0.19399461, 0, 0, 0)
+
+[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.071146466, -0.9303215, -0.35977757, 0.1804774, 0.36674505, -0.91264784, 0.9810025, -1.9292097e-08, 0.1939946, 0, 0, 0)
+
+[node name="DirectionalLight3D3" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.97234285, 0.23317519, 0.013365953, -0.23341787, 0.9721488, 0.021039784, -0.008087724, -0.02357763, 0.9996892, 0, 0, 0)

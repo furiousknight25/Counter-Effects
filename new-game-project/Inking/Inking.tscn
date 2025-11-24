@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://b6hvicojge7i8"]
+[gd_scene load_steps=14 format=3 uid="uid://b6hvicojge7i8"]
 
 [ext_resource type="Script" uid="uid://caog3lyckx461" path="res://Inking/inking.gd" id="1_b4kwv"]
 [ext_resource type="Script" uid="uid://dl3j1iglinpnt" path="res://Inking/Tally.gd" id="2_vduku"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bpkq1204k5cce" path="res://assets/image.psd6.png" id="4_5x2tj"]
 [ext_resource type="Texture2D" uid="uid://c2kly473at0fu" path="res://assets/image.psd5.png" id="5_5pbac"]
 [ext_resource type="AudioStream" uid="uid://8wybg8aj2au6" path="res://assets/sfx/buildup.wav" id="6_0nshc"]
+[ext_resource type="AudioStream" uid="uid://ck0ddhabm7gnu" path="res://assets/sfx/ha-vox.wav" id="6_ssv2n"]
 [ext_resource type="AudioStream" uid="uid://cssad1sxrcb6s" path="res://assets/sfx/buildupfail.wav" id="7_ssv2n"]
 [ext_resource type="AudioStream" uid="uid://cufbrrenbqbmr" path="res://assets/sfx/buildupsuccess.wav" id="8_ws8p6"]
 
@@ -213,6 +214,12 @@ color = Color(0, 0, 0, 1)
 wait_time = 0.1
 autostart = true
 
+[node name="LaughDeath" type="Timer" parent="Node2D/Tally/YingTangTally"]
+wait_time = 5.0
+
+[node name="LaughAudio" type="AudioStreamPlayer" parent="Node2D/Tally/YingTangTally"]
+stream = ExtResource("6_ssv2n")
+
 [node name="Buildup" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_0nshc")
 volume_db = 10.0
@@ -224,3 +231,5 @@ stream = ExtResource("7_ssv2n")
 stream = ExtResource("8_ws8p6")
 
 [connection signal="timeout" from="Node2D/Tally/YingTangTally/Timer" to="Node2D/Tally/YingTangTally" method="_on_timer_timeout"]
+[connection signal="timeout" from="Node2D/Tally/YingTangTally/LaughDeath" to="Node2D/Tally/YingTangTally" method="_on_laugh_death_timeout"]
+[connection signal="finished" from="Node2D/Tally/YingTangTally/LaughAudio" to="Node2D/Tally/YingTangTally/LaughAudio" method="play"]

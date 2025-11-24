@@ -7,6 +7,7 @@ func _on_timeout():
 	Music.transition_to_shop()
 
 func _process(_delta: float) -> void:
+	
 	if round_start == true:
 		progress_bar.value = lerp(0.0,100.0, time_left/wait_time)
 	

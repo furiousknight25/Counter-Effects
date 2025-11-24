@@ -15,6 +15,8 @@ func _ready() -> void:
 	current_song = song_list.get('openyourmind')
 	current_song.start()
 
+func stop():current_song.stop()
+	
 func switch_song(song : String):
 	var time_to_start = current_song.master_track.get_playback_position()
 	current_song.stop()
@@ -35,7 +37,7 @@ func transition_to_shop():
 	
 	await current_four_bar
 	switch_song('shop')
-	SignalBus.emit_signal("switch_scene", "shop")
+	
 
 func mute_perc_and_chop():
 	$OpenYourMind/perc.volume_db = -80
