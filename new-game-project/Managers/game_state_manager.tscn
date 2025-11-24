@@ -14,7 +14,7 @@
 [ext_resource type="Script" uid="uid://8vop7w1dd83g" path="res://TillEndGameTimer/end_game_timer.gd" id="7_utl7c"]
 [ext_resource type="PackedScene" uid="uid://bo5d4v6wps84i" path="res://Levels/Level Scenes/Level_3.tscn" id="8_4dj3i"]
 
-[node name="GameStateManager" type="Node"]
+[node name="GameStateManager" type="Node" node_paths=PackedStringArray("active_level")]
 script = ExtResource("1_pcxke")
 scenes = Dictionary[String, PackedScene]({
 "0": ExtResource("2_utl7c"),
@@ -23,6 +23,7 @@ scenes = Dictionary[String, PackedScene]({
 "shop": ExtResource("4_utuad")
 })
 rouge_like_levels = Array[PackedScene]([ExtResource("2_bf74e"), ExtResource("5_utl7c")])
+active_level = NodePath("Level_2")
 metadata/_custom_type_script = "uid://bc44oqh2kl3sh"
 
 [node name="TransitionManager" type="Node" parent="."]

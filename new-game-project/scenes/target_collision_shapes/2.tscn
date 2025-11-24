@@ -1,14 +1,35 @@
-[gd_scene load_steps=2 format=3 uid="uid://dgtf87kkmhwq0"]
+[gd_scene load_steps=5 format=3 uid="uid://cpt1psh8dffnk"]
+
+[ext_resource type="Texture2D" uid="uid://cmpukt3nguk7d" path="res://assets/bomb_2.png" id="1_rvttm"]
+[ext_resource type="Texture2D" uid="uid://5tdh4tnqqdlx" path="res://assets/bomb1.png" id="2_6od2f"]
 
 [sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_qxqx8"]
-points = PackedVector2Array(5, 0, 1, 4, 0, 0, 2, -5)
+points = PackedVector2Array(6.9999995, -7, 6.9999995, 7, -7.0000005, 7, -7.0000005, -7)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_g04ax"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_rvttm")
+}],
+"loop": true,
+"name": &"off",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_6od2f")
+}],
+"loop": true,
+"name": &"on",
+"speed": 10.0
+}]
+metadata/imported_via_aw = true
 
 [node name="corner" type="CollisionShape2D"]
-position = Vector2(-7.9999995, 0)
-scale = Vector2(4, 4)
 shape = SubResource("ConvexPolygonShape2D_qxqx8")
 debug_color = Color(0.9584257, 3.080368e-06, 0.5298511, 0.41960785)
 
-[node name="Polygon2D" type="Polygon2D" parent="."]
-color = Color(1, 0.37840074, 0.6143717, 1)
-polygon = PackedVector2Array(1.9999999, -4.75, 5, 0, 0.9999999, 3.75, -1.1920929e-07, 0)
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_g04ax")
+animation = &"off"

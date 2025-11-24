@@ -65,11 +65,11 @@ func splat_player(pos: Vector2, hit_dir: Vector2):
 	for i in 8:
 		spawned_spot(-hit_dir.rotated(randf_range(-.3,.3)) * randf_range(1,30), pos, create_circle_image(randf_range(2,4)), .3, Color.BLACK)
 
-
 func splat_ball(pos: Vector2, hit_dir: Vector2):
 	for i in 20:
 		spawned_spot(hit_dir.rotated(randf_range(-.5,.5)) * randf_range(1,35), pos, create_circle_image(randf_range(1,8)), randf_range(.2,.6), Color.WHITE)
 	#endregion
+
 
 func splat_bug():
 	for i in 20:
@@ -108,6 +108,7 @@ func stamp_image(viewport_pos: Vector2, paint_color: Color, stamp_image_data: Im
 #endregion
 
 func iterate_pixels():
+	await Music.current_bar
 	$Buildup.play()
 	var final_image = canvas_image 
 	var black_pixels = 0
@@ -128,7 +129,8 @@ func iterate_pixels():
 			if brightness < 0.1: black_pixels += 1
 			elif brightness > 0.9: white_pixels += 1
 	
-	await Music.current_beat
+	
+	
 	Music.mute_perc_and_chop()
 	if black_pixels > white_pixels:
 		$Fail.play()

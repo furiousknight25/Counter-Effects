@@ -1,6 +1,28 @@
-[gd_scene load_steps=2 format=3 uid="uid://bo5kfu2xrt7og"]
+[gd_scene load_steps=7 format=3 uid="uid://bo5kfu2xrt7og"]
 
 [ext_resource type="Script" uid="uid://dxoi4ac1u2wx1" path="res://scripts/target.gd" id="1_n13nt"]
+[ext_resource type="AudioStream" uid="uid://cm3jbpy7shf2h" path="res://assets/sfx/target.blink.wav" id="2_5bgov"]
+[ext_resource type="AudioStream" uid="uid://dj2qo20x8uuli" path="res://assets/sfx/target.althit.wav" id="2_r15hg"]
+[ext_resource type="AudioStream" uid="uid://dsixjr1th8gxs" path="res://assets/sfx/target.hit.wav" id="3_5bgov"]
+[ext_resource type="AudioStream" uid="uid://cjaawxj3ju3gc" path="res://assets/sfx/target.mad.wav" id="4_ekue0"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_yc8bm"]
+streams_count = 2
+stream_0/stream = ExtResource("2_r15hg")
+stream_1/stream = ExtResource("3_5bgov")
 
 [node name="Target" type="StaticBody2D" groups=["Hitable"]]
 script = ExtResource("1_n13nt")
+
+[node name="Beep" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_5bgov")
+volume_db = -10.0
+max_polyphony = 5
+
+[node name="hit" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_yc8bm")
+max_polyphony = 3
+
+[node name="mad" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_ekue0")
+max_polyphony = 3

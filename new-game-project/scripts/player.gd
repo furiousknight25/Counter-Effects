@@ -187,8 +187,6 @@ func hit(direction : Vector2):
 		var tween = get_tree().create_tween()
 		tween.tween_property(self, "modulate", Color.WHITE, .5)
 		
-		#sprite.scale.x += .2 * BASESCALE
-		#sprite.scale.y -= .1 * BASESCALE
 		velocity += direction
 		
 		var push_direction = -1

@@ -6,7 +6,7 @@ var level_idx : int = 0
 @export var rouge_like_levels : Array[PackedScene]
 @onready var transition_manager: TransitionManager = $TransitionManager
 @onready var upgrade_array : Array[Upgrade]
-@onready var active_level: Level 
+@export var active_level: Level 
 @onready var ball: Ball = $Ball
 @onready var player: Player = %Player
 @onready var ui: Control = $UI

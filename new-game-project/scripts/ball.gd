@@ -99,6 +99,12 @@ func hit_ball(direction : Vector2, freeze_length : float = 0): #direction is you
 func hit_object(object):
 	if object.is_in_group("Hitable"):
 		object.hit(velocity)
+		
+		self.set_collision_mask_value(4, false)
+		set_collision_layer_value(2, false)
+		await get_tree().create_timer(.2).timeout
+		self.set_collision_mask_value(4, true)
+		set_collision_layer_value(2, true)
 
 func drop_the_ball(amt, vel):
 	await get_tree().physics_frame

@@ -1,11 +1,244 @@
-[gd_scene load_steps=5 format=3 uid="uid://cpmdspnjh3tt5"]
+[gd_scene load_steps=26 format=4 uid="uid://cpmdspnjh3tt5"]
 
 [ext_resource type="Script" uid="uid://dvlcxsh1hmcyu" path="res://Enemy/enemy.gd" id="1_2v3kw"]
-[ext_resource type="PackedScene" uid="uid://bfxj6lclf2l67" path="res://assets/drone.fbx" id="2_g67sm"]
+[ext_resource type="Texture2D" uid="uid://cihabufe20di0" path="res://assets/drone_0.png" id="3_e2146"]
 [ext_resource type="Script" uid="uid://cy1bk8gc2bnvn" path="res://Enemy/drone.gd" id="3_g67sm"]
+[ext_resource type="AudioStream" uid="uid://boijo7bevx1bu" path="res://assets/sfx/drone.hit.wav" id="4_uus6j"]
+[ext_resource type="AudioStream" uid="uid://dfg8xg56y17bf" path="res://assets/sfx/drone.hitalt(1).wav" id="5_muyy7"]
+[ext_resource type="AudioStream" uid="uid://d2f325l5t6v4p" path="res://assets/sfx/drone.mad.wav" id="6_3edli"]
+[ext_resource type="AudioStream" uid="uid://c02rmci53p60m" path="res://assets/sfx/drone.death.wav" id="7_kv8px"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_makm5"]
 radius = 14.142136
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nknvs"]
+resource_name = "dronetexture.png"
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("3_e2146")
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_xak74"]
+_surfaces = [{
+"aabb": AABB(-0.125, 0.0625, -0.375, 0.25, 0.375, 0.75),
+"format": 34359742465,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAgABAAMAAwABAAAAAgAEAAAAAAAFAAMABQAAAAQAAwAGAAIABgADAAUABAACAAYABQAHAAYABgAHAAQABAAHAAUA"),
+"name": "dronetexture.png",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("AAAAPgAAgD0AAMA+AAAAPgAA4D4AAMA+AAAAPgAA4D4AAMC+AAAAvgAA4D4AAMA+AAAAPgAAgD0AAMC+AAAAvgAAgD0AAMA+AAAAvgAA4D4AAMC+AAAAvgAAgD0AAMC+")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_u454d"]
+resource_name = "cuboid"
+_surfaces = [{
+"aabb": AABB(-0.125, 0.0625, -0.375, 0.25, 0.375, 0.75),
+"attribute_data": PackedByteArray("AAAAAAAAwD0AAAAAAAAAAAAAQD4AAAAAAABAPgAAwD0AAAAAAADgPQAAQD4AAOA9AABAPgAAUD4AAAAAAABQPgAAiD4AAAAAAACIPgAAQD4AAFA+AABAPgAAUD4AAAAAAABQPgAAUD4AAIg+AABQPgAAiD4AAMg+AABQPgAAyD4AAOA9AABgPgAAMD4AAGA+AAAwPgAAoD4AAOA9AACgPgAAgD0AAPg+AACAPQAAyD4AAAA+AADIPgAAAD4AAPg+"),
+"format": 34359742487,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAgADAAAABAAFAAYABgAHAAQACAAJAAoACgALAAgADAANAA4ADgAPAAwAEAARABIAEgATABAAFAAVABYAFgAXABQA"),
+"material": SubResource("StandardMaterial3D_nknvs"),
+"name": "dronetexture.png",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("AAAAPgAAgD0AAMA+AAAAPgAA4D4AAMA+AAAAPgAA4D4AAMC+AAAAPgAAgD0AAMC+AAAAvgAA4D4AAMC+AAAAvgAA4D4AAMA+AAAAvgAAgD0AAMA+AAAAvgAAgD0AAMC+AAAAPgAA4D4AAMC+AAAAPgAA4D4AAMA+AAAAvgAA4D4AAMA+AAAAvgAA4D4AAMC+AAAAvgAAgD0AAMA+AAAAPgAAgD0AAMA+AAAAPgAAgD0AAMC+AAAAvgAAgD0AAMC+AAAAvgAA4D4AAMA+AAAAPgAA4D4AAMA+AAAAPgAAgD0AAMA+AAAAvgAAgD0AAMA+AAAAPgAAgD0AAMC+AAAAPgAA4D4AAMC+AAAAvgAA4D4AAMC+AAAAvgAAgD0AAMC+////f/////////9//////////3//////////f/////8AAP9//3//vwAA/3//f/+/AAD/f/9//78AAP9//3//v/9///////+//3///////7//f///////v/9///////+//38AAP///7//fwAA////v/9/AAD///+//38AAP///7//f/9/////v/9//3////+//3//f////7//f/9/////v/////8AAP+//////wAA/7//////AAD/v/////8AAP+/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_xak74")
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_577to"]
+_surfaces = [{
+"aabb": AABB(-0.1, 0.20625, -0.3125, 0.2, 0.21249999, 0.625),
+"format": 34359742465,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAgABAAMAAwABAAAAAgAEAAAAAAAFAAMABQAAAAQAAwAGAAIABgADAAUABAACAAYABQAHAAYABgAHAAQABAAHAAUA"),
+"name": "dronetexture.png",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("zczMPTMzUz4AAKA+zczMPWZm1j4AAKA+zczMPWZm1j4AAKC+zczMvWZm1j4AAKA+zczMPTMzUz4AAKC+zczMvTMzUz4AAKA+zczMvWZm1j4AAKC+zczMvTMzUz4AAKC+")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_ok22x"]
+resource_name = "cuboid_3"
+_surfaces = [{
+"aabb": AABB(-0.1, 0.20625, -0.3125, 0.2, 0.21249999, 0.625),
+"attribute_data": PackedByteArray("AAAAAAAAwD4AAAAAAACoPgAAID4AAKg+AAAgPgAAwD4AAJA+AACoPgAA4D4AAKg+AADgPgAAwD4AAJA+AADAPgAAQD0AAMg+AABAPQAADD8AAAAAAAAMPwAAAAAAAMg+AADIPgAAAAAAAOA+AAAAAAAA4D4AACA+AADIPgAAID4AABA+AADoPgAAQD4AAOg+AABAPgAAAD8AABA+AAAAPwAA6D4AAMA+AADoPgAAqD4AAAA/AACoPgAAAD8AAMA+"),
+"format": 34359742487,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAgADAAAABAAFAAYABgAHAAQACAAJAAoACgALAAgADAANAA4ADgAPAAwAEAARABIAEgATABAAFAAVABYAFgAXABQA"),
+"material": SubResource("StandardMaterial3D_nknvs"),
+"name": "dronetexture.png",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("zczMPTMzUz4AAKA+zczMPWZm1j4AAKA+zczMPWZm1j4AAKC+zczMPTMzUz4AAKC+zczMvWZm1j4AAKC+zczMvWZm1j4AAKA+zczMvTMzUz4AAKA+zczMvTMzUz4AAKC+zczMPWZm1j4AAKC+zczMPWZm1j4AAKA+zczMvWZm1j4AAKA+zczMvWZm1j4AAKC+zczMvTMzUz4AAKA+zczMPTMzUz4AAKA+zczMPTMzUz4AAKC+zczMvTMzUz4AAKC+zczMvWZm1j4AAKA+zczMPWZm1j4AAKA+zczMPTMzUz4AAKA+zczMvTMzUz4AAKA+zczMPTMzUz4AAKC+zczMPWZm1j4AAKC+zczMvWZm1j4AAKC+zczMvTMzUz4AAKC+////f/////////9//////////3//////////f/////8AAP9//3//vwAA/3//f/+/AAD/f/9//78AAP9//3//v/9///////+//3///////7//f///////v/9///////+//38AAP///7//fwAA////v/9/AAD///+//38AAP///7//f/9/////v/9//3////+//3//f////7//f/9/////v/////8AAP+//////wAA/7//////AAD/v/////8AAP+/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_577to")
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_beayb"]
+_surfaces = [{
+"aabb": AABB(-0.125, 0, -0.125, 0.25, 1e-05, 0.25),
+"format": 34359742465,
+"index_count": 6,
+"index_data": PackedByteArray("AAABAAIAAgADAAAA"),
+"name": "dronetexture.png",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray("AAAAvgAAAAAAAAC+AAAAPgAAAAAAAAC+AAAAPgAAAAAAAAA+AAAAvgAAAAAAAAA+")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_kre0b"]
+resource_name = "plane_1"
+_surfaces = [{
+"aabb": AABB(-0.125, 0, -0.125, 0.25, 1e-05, 0.25),
+"attribute_data": PackedByteArray("AADIPgAAMD4AAOg+AAAwPgAA6D4AAHA+AADIPgAAcD4="),
+"format": 34359742487,
+"index_count": 6,
+"index_data": PackedByteArray("AAABAAIAAgADAAAA"),
+"material": SubResource("StandardMaterial3D_nknvs"),
+"name": "dronetexture.png",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray("AAAAvgAAAAAAAAC+AAAAPgAAAAAAAAC+AAAAPgAAAAAAAAA+AAAAvgAAAAAAAAA+/3///////7//f///////v/9///////+//3///////78=")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_beayb")
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_0he7h"]
+_surfaces = [{
+"aabb": AABB(-0.1875, 0.1875, -0.1875, 0.375, 0.125, 0.375),
+"format": 34359742465,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAgABAAMAAwABAAAAAgAEAAAAAAAFAAMABQAAAAQAAwAGAAIABgADAAUABAACAAYABQAHAAYABgAHAAQABAAHAAUA"),
+"name": "dronetexture.png",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("AABAPgAAQD4AAEA+AABAPgAAoD4AAEA+AABAPgAAoD4AAEC+AABAvgAAoD4AAEA+AABAPgAAQD4AAEC+AABAvgAAQD4AAEA+AABAvgAAoD4AAEC+AABAvgAAQD4AAEC+")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_kxsc6"]
+resource_name = "cuboid_2"
+_surfaces = [{
+"aabb": AABB(-0.1875, 0.1875, -0.1875, 0.375, 0.125, 0.375),
+"attribute_data": PackedByteArray("AAC4PgAA8D4AALg+AADgPgAA6D4AAOA+AADoPgAA8D4AAOg+AAAAAAAADD8AAAAAAAAMPwAAAD0AAOg+AAAAPQAAwD4AAOA9AADAPgAAUD4AAJA+AABQPgAAkD4AAOA9AACQPgAAYD4AAMA+AABgPgAAwD4AAKA+AACQPgAAoD4AAOg+AABAPQAADD8AAEA9AAAMPwAAoD0AAOg+AACgPQAA6D4AAAA+AADoPgAAwD0AAAw/AADAPQAADD8AAAA+"),
+"format": 34359742487,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAgADAAAABAAFAAYABgAHAAQACAAJAAoACgALAAgADAANAA4ADgAPAAwAEAARABIAEgATABAAFAAVABYAFgAXABQA"),
+"material": SubResource("StandardMaterial3D_nknvs"),
+"name": "dronetexture.png",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("AABAPgAAQD4AAEA+AABAPgAAoD4AAEA+AABAPgAAoD4AAEC+AABAPgAAQD4AAEC+AABAvgAAoD4AAEC+AABAvgAAoD4AAEA+AABAvgAAQD4AAEA+AABAvgAAQD4AAEC+AABAPgAAoD4AAEC+AABAPgAAoD4AAEA+AABAvgAAoD4AAEA+AABAvgAAoD4AAEC+AABAvgAAQD4AAEA+AABAPgAAQD4AAEA+AABAPgAAQD4AAEC+AABAvgAAQD4AAEC+AABAvgAAoD4AAEA+AABAPgAAoD4AAEA+AABAPgAAQD4AAEA+AABAvgAAQD4AAEA+AABAPgAAQD4AAEC+AABAPgAAoD4AAEC+AABAvgAAoD4AAEC+AABAvgAAQD4AAEC+////f/////////9//////////3//////////f/////8AAP9//3//vwAA/3//f/+/AAD/f/9//78AAP9//3//v/9///////+//3///////7//f///////v/9///////+//38AAP///7//fwAA////v/9/AAD///+//38AAP///7//f/9/////v/9//3////+//3//f////7//f/9/////v/////8AAP+//////wAA/7//////AAD/v/////8AAP+/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_0he7h")
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_snvmh"]
+_surfaces = [{
+"aabb": AABB(-0.125, 0, -0.125, 0.25, 1e-05, 0.25),
+"format": 34359742465,
+"index_count": 6,
+"index_data": PackedByteArray("AAABAAIAAgADAAAA"),
+"name": "dronetexture.png",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray("AAAAvgAAAAAAAAC+AAAAPgAAAAAAAAC+AAAAPgAAAAAAAAA+AAAAvgAAAAAAAAA+")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_qq6vq"]
+resource_name = "plane"
+_surfaces = [{
+"aabb": AABB(-0.125, 0, -0.125, 0.25, 1e-05, 0.25),
+"attribute_data": PackedByteArray("AADIPgAAgD4AAOg+AACAPgAA6D4AAKA+AADIPgAAoD4="),
+"format": 34359742487,
+"index_count": 6,
+"index_data": PackedByteArray("AAABAAIAAgADAAAA"),
+"material": SubResource("StandardMaterial3D_nknvs"),
+"name": "dronetexture.png",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray("AAAAvgAAAAAAAAC+AAAAPgAAAAAAAAC+AAAAPgAAAAAAAAA+AAAAvgAAAAAAAAA+/3///////7//f///////v/9///////+//3///////78=")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_snvmh")
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_wcqn1"]
+_surfaces = [{
+"aabb": AABB(-0.1875, 0.1875, -0.1875, 0.375, 0.125, 0.375),
+"format": 34359742465,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAgABAAMAAwABAAAAAgAEAAAAAAAFAAMABQAAAAQAAwAGAAIABgADAAUABAACAAYABQAHAAYABgAHAAQABAAHAAUA"),
+"name": "dronetexture.png",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("AABAPgAAQD4AAEA+AABAPgAAoD4AAEA+AABAPgAAoD4AAEC+AABAvgAAoD4AAEA+AABAPgAAQD4AAEC+AABAvgAAQD4AAEA+AABAvgAAoD4AAEC+AABAvgAAQD4AAEC+")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_3vwop"]
+resource_name = "cuboid_1"
+_surfaces = [{
+"aabb": AABB(-0.1875, 0.1875, -0.1875, 0.375, 0.125, 0.375),
+"attribute_data": PackedByteArray("AACQPgAA2D4AAJA+AADIPgAAwD4AAMg+AADAPgAA2D4AAMg+AADIPgAA+D4AAMg+AAD4PgAA2D4AAMg+AADYPgAAwD0AAGA+AADAPQAAoD4AAAAAAACgPgAAAAAAAGA+AACQPgAAAAAAAMA+AAAAAAAAwD4AAMA9AACQPgAAwD0AABA+AADQPgAAcD4AANA+AABwPgAA4D4AABA+AADgPgAAgD4AAPA+AACAPgAA4D4AALA+AADgPgAAsD4AAPA+"),
+"format": 34359742487,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAgADAAAABAAFAAYABgAHAAQACAAJAAoACgALAAgADAANAA4ADgAPAAwAEAARABIAEgATABAAFAAVABYAFgAXABQA"),
+"material": SubResource("StandardMaterial3D_nknvs"),
+"name": "dronetexture.png",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("AABAPgAAQD4AAEA+AABAPgAAoD4AAEA+AABAPgAAoD4AAEC+AABAPgAAQD4AAEC+AABAvgAAoD4AAEC+AABAvgAAoD4AAEA+AABAvgAAQD4AAEA+AABAvgAAQD4AAEC+AABAPgAAoD4AAEC+AABAPgAAoD4AAEA+AABAvgAAoD4AAEA+AABAvgAAoD4AAEC+AABAvgAAQD4AAEA+AABAPgAAQD4AAEA+AABAPgAAQD4AAEC+AABAvgAAQD4AAEC+AABAvgAAoD4AAEA+AABAPgAAoD4AAEA+AABAPgAAQD4AAEA+AABAvgAAQD4AAEA+AABAPgAAQD4AAEC+AABAPgAAoD4AAEC+AABAvgAAoD4AAEC+AABAvgAAQD4AAEC+////f/////////9//////////3//////////f/////8AAP9//3//vwAA/3//f/+/AAD/f/9//78AAP9//3//v/9///////+//3///////7//f///////v/9///////+//38AAP///7//fwAA////v/9/AAD///+//38AAP///7//f/9/////v/9//3////+//3//f////7//f/9/////v/////8AAP+//////wAA/7//////AAD/v/////8AAP+/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_wcqn1")
+
+[sub_resource type="Animation" id="Animation_ujfxf"]
+resource_name = "propel"
+tracks/0/type = "rotation_3d"
+tracks/0/imported = true
+tracks/0/enabled = true
+tracks/0/path = NodePath("leftwing/leftpropeller")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 0.20833333, 1, 0, 0.9659258, 0, 0.25881904, 0.41666666, 1, 0, 0.5, 0, -0.8660254, 0.45833334, 1, 0, 0.25881904, 0, -0.9659258, 0.49999997, 1, 0, 1.2246064e-16, 0, -1, 0.7083333, 1, 0, -0.9659258, 0, -0.25881904, 0.9166667, 1, 0, -0.5, 0, 0.8660254, 0.95833325, 1, 0, -0.25881904, 0, 0.9659258, 0.99999994, 1, 0, -2.4492127e-16, 0, 1)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = true
+tracks/1/enabled = true
+tracks/1/path = NodePath("rightwing/rightpropeller")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 0.23333333, 1, 0, 0.9945219, 0, 0.104528405, 0.46666667, 1, 0, 0.20791157, 0, -0.9781476, 0.5, 1, 0, -1.338638e-07, 0, -1, 0.73333335, 1, 0, -0.9945219, 0, -0.10452827, 0.96666664, 1, 0, -0.20791143, 0, 0.9781476, 0.99999994, 1, 0, -2.4492127e-16, 0, 1)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cha6v"]
+_data = {
+&"propel": SubResource("Animation_ujfxf")
+}
+
+[sub_resource type="BoxMesh" id="BoxMesh_g67sm"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_svtgk"]
+streams_count = 2
+stream_0/stream = ExtResource("4_uus6j")
+stream_1/stream = ExtResource("5_muyy7")
 
 [node name="Enemy" type="CharacterBody2D"]
 script = ExtResource("1_2v3kw")
@@ -27,9 +260,66 @@ render_target_update_mode = 4
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_makm5")
 
-[node name="drone" parent="." instance=ExtResource("2_g67sm")]
+[node name="drone" type="Node3D" parent="."]
 transform = Transform3D(0.65707284, -0.24579543, -0.71262884, -0.07955523, 0.91745806, -0.38979694, 0.7496174, 0.31281835, 0.5832825, 0, 0, -3.1697912)
 script = ExtResource("3_g67sm")
+
+[node name="body" type="Node3D" parent="drone"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0625, 0)
+
+[node name="cuboid" type="MeshInstance3D" parent="drone/body"]
+mesh = SubResource("ArrayMesh_u454d")
+skeleton = NodePath("")
+
+[node name="cuboid_3" type="MeshInstance3D" parent="drone/body"]
+mesh = SubResource("ArrayMesh_ok22x")
+skeleton = NodePath("")
+
+[node name="leftwing" type="Node3D" parent="drone"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3125, 0, 0)
+
+[node name="leftpropeller" type="Node3D" parent="drone/leftwing"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
+
+[node name="plane_1" type="MeshInstance3D" parent="drone/leftwing/leftpropeller"]
+mesh = SubResource("ArrayMesh_kre0b")
+skeleton = NodePath("")
+
+[node name="cuboid_2" type="MeshInstance3D" parent="drone/leftwing"]
+mesh = SubResource("ArrayMesh_kxsc6")
+skeleton = NodePath("")
+
+[node name="rightwing" type="Node3D" parent="drone"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3125, 0, 0)
+
+[node name="rightpropeller" type="Node3D" parent="drone/rightwing"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.625, 0.25, 0)
+
+[node name="plane" type="MeshInstance3D" parent="drone/rightwing/rightpropeller"]
+mesh = SubResource("ArrayMesh_qq6vq")
+skeleton = NodePath("")
+
+[node name="cuboid_1" type="MeshInstance3D" parent="drone/rightwing"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.625, 0, 0)
+mesh = SubResource("ArrayMesh_3vwop")
+skeleton = NodePath("")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="drone"]
+libraries = {
+&"": SubResource("AnimationLibrary_cha6v")
+}
+
+[node name="CPUParticles3D" type="CPUParticles3D" parent="drone"]
+emitting = false
+amount = 1
+mesh = SubResource("BoxMesh_g67sm")
+emission_shape = 1
+emission_sphere_radius = 0.5
+gravity = Vector3(0, 9.8, 0)
+initial_velocity_max = 1.0
+angular_velocity_max = 1.0
+scale_amount_min = 0.1
+scale_amount_max = 0.2
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.097969174, 0.86311376, -0.49541593, -0.16743937, 0.5050098, 0.8467167, 0.9810027, 0, 0.19399461, 0, 0, 0)
@@ -39,3 +329,21 @@ transform = Transform3D(0.071146466, -0.9303215, -0.35977757, 0.1804774, 0.36674
 
 [node name="DirectionalLight3D3" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.97234285, 0.23317519, 0.013365953, -0.23341787, 0.9721488, 0.021039784, -0.008087724, -0.02357763, 0.9996892, 0, 0, 0)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.2
+autostart = true
+
+[node name="hit" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_svtgk")
+volume_db = 15.0
+
+[node name="Mad" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_3edli")
+volume_db = 5.0
+
+[node name="death" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_kv8px")
+volume_db = 5.0
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
