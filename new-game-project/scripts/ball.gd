@@ -20,6 +20,8 @@ var ink_pattern : int = InkPattern.DEFAULT
 
 var linear_speed_increase : bool = false
 var round_has_started : bool = false
+var has_trail : bool = true
+var trail_color : Color = Color.WHITE
 
 func _ready() -> void:
 	spring_x.goal = global_position.x
@@ -27,6 +29,7 @@ func _ready() -> void:
 	
 	SignalBus.connect("reset", reset)
 	SignalBus.connect("upgrade_ball", upgrade_ball)
+	SignalBus.connect("switch_trail_color", switch_trail_color)
 
 
 func _process(delta: float) -> void:
@@ -38,6 +41,9 @@ func _process(delta: float) -> void:
 	
 	if linear_speed_increase == true and round_has_started == true:
 		increase_speed_over_time(delta)
+		
+	if has_trail == true and round_has_started == true:
+		inking.stamp_image(global_position, trail_color, inking.create_circle_image(randf_range(2,4)))
 
 func set_state_freezing(freeze_time: float = 0) -> void:
 	cur_state = STATES.FREEZE
@@ -114,3 +120,11 @@ func increase_speed_over_time(delta : float):
 	speed = speed + (delta * 48)
 	velocity = velocity.normalized() * speed
 	
+
+func switch_trail_color():
+	if has_trail == true:
+		match trail_color:
+			Color.WHITE:
+				trail_color = Color.BLACK
+			Color.BLACK:
+				trail_color = Color.WHITE

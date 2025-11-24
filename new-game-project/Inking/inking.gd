@@ -53,6 +53,7 @@ func spawned_spot(velocity: Vector2, position: Vector2, shape: Image, damping_sp
 	spawned_spot(velocity, position, shape, damping_speed, color)
 	
 func splat_player(pos: Vector2, hit_dir: Vector2):
+	SignalBus.emit_signal("switch_trail_color")
 	for i in 12:
 		spawned_spot(Vector2.UP.rotated(randf_range(-.5,.5)) * randf_range(1,40), pos, create_circle_image(randf_range(2,5)), .8, Color.BLACK)
 	

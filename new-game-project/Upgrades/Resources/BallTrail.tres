@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="BallTrail" load_steps=2 format=3 uid="uid://613kh0a81yt2"]
+
+[ext_resource type="Script" uid="uid://r5a5jfqx3jof" path="res://Upgrades/Scripts/BallTrail.gd" id="1_t6k81"]
+
+[resource]
+script = ExtResource("1_t6k81")
+metadata/_custom_type_script = "uid://r5a5jfqx3jof"
