@@ -6,6 +6,7 @@ class_name Ball
 @onready var spring_y: Spring = $SpringY
 @onready var visual_follow_line: VisualFollowLine = $VisualFollowLine
 @onready var inking : Inking = get_tree().get_nodes_in_group("Inking")[0]
+@onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 
 @export var spring_enabled = false
 var base_speed : float = 1.0
@@ -41,6 +42,7 @@ func _process(delta: float) -> void:
 
 func set_state_freezing(freeze_time: float = 0) -> void:
 	cur_state = STATES.FREEZE
+	collision_shape_2d.set_deferred("disabled", true)
 	if freeze_time > 0:
 		var original_time_scale = 1.0
 		Engine.time_scale = .1
@@ -49,6 +51,7 @@ func set_state_freezing(freeze_time: float = 0) -> void:
 		set_state_moving()
 
 func set_state_moving():
+	collision_shape_2d.set_deferred("disabled", false)
 	cur_state = STATES.MOVING
 
 func freeze_process(_delta):

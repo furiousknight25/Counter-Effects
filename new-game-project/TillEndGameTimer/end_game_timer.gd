@@ -3,14 +3,16 @@ extends Timer
 
 var round_start : bool = false
 
-signal game_end
-func _on_timeout(): emit_signal("game_end")
+func _on_timeout():
+	Music.transition_to_shop()
 
 func _process(_delta: float) -> void:
 	if round_start == true:
 		progress_bar.value = lerp(0.0,100.0, time_left/wait_time)
 	
-	if Input.is_action_just_pressed("ui_right"): start(.2)
+	if Input.is_action_just_pressed("ui_right"): 
+		start(.2)
+		wait_time = 20.0
 
 func _ready() -> void:
 	SignalBus.connect("reset", reset)

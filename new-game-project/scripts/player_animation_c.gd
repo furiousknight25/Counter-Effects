@@ -36,8 +36,12 @@ func _process(_delta: float) -> void:
 	# (Sounds can play regardless of attack state)
 	if is_on_floor and not was_on_floor:
 		$"../SoundController/Landonground".play()
-	was_on_floor = is_on_floor
+		playback.start("land")
+		was_on_floor = is_on_floor
+		
+		return
 	
+	was_on_floor = is_on_floor
 	if is_on_floor and is_moving: 
 		sound_controller.set_walking_on()
 	else:  
@@ -47,16 +51,21 @@ func _process(_delta: float) -> void:
 	# If attacking, stop here. Don't let movement logic interrupt the attack animation.
 	if is_attacking:
 		return
-
+	
 	# --- 5. STATE ENFORCER (Movement Logic) ---
-	if is_on_floor:
+	if is_on_floor and current_node != "land":
 		if is_moving:
 			playback.travel("walk")
 		else:
 			playback.travel("idle")
-	else:
+	elif current_node != "jump" and current_node != "land":
 		playback.travel("top")
+		
+	
 
+func idle():
+	var playback = get("parameters/playback")
+	playback.travel('idle')
 # --- ACTION FUNCTIONS ---
 
 func jump_anim():

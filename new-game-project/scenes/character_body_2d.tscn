@@ -1,6 +1,7 @@
-[gd_scene load_steps=149 format=3 uid="uid://fyyoe5vf3xm1"]
+[gd_scene load_steps=147 format=3 uid="uid://fyyoe5vf3xm1"]
 
 [ext_resource type="Script" uid="uid://dymxf0txidqa8" path="res://scripts/player.gd" id="1_g2brh"]
+[ext_resource type="Texture2D" path="res://.godot/imported/animations.aseprite-f9bcbc41da6af8f0719fa067ff4343f1.animations.texture.res" id="2_yi2kj"]
 [ext_resource type="Script" uid="uid://dhmrpw5gokk5h" path="res://scripts/player_animation_c.gd" id="3_dn4c7"]
 [ext_resource type="Script" uid="uid://ytgykf1yg2ik" path="res://scenes/sound_controller.gd" id="12_7pl6r"]
 [ext_resource type="AudioStream" uid="uid://duqxkj7ji5bxx" path="res://assets/sfx/footstep.mp3" id="13_x5gf8"]
@@ -9,8 +10,8 @@
 [ext_resource type="AudioStream" uid="uid://bc32x238qoxhd" path="res://assets/sfx/landonground.mp3" id="16_wqsd8"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nckey"]
-radius = 9.0
-height = 28.0
+radius = 5.0
+height = 20.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_10tqf"]
 atlas = ExtResource("2_yi2kj")
@@ -408,7 +409,7 @@ region = Rect2(210, 30, 30, 30)
 atlas = ExtResource("2_yi2kj")
 region = Rect2(240, 30, 30, 30)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_cibgq"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_yi2kj"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -701,9 +702,9 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_y0mff")
 }],
-"loop": true,
+"loop": false,
 "name": &"top",
-"speed": 5.0
+"speed": 15.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -785,66 +786,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [&"idle"]
-}
-
-[sub_resource type="Animation" id="Animation_7pl6r"]
-resource_name = "hit_air_right"
-length = 0.4
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:animation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [&"air_hit_right"]
-}
-tracks/1/type = "method"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [&"", 1.0, false],
-"method": &"play"
-}]
-}
-
-[sub_resource type="Animation" id="Animation_x5gf8"]
-resource_name = "hit_air_up"
-length = 0.4
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:animation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [&"air_hit_up"]
-}
-tracks/1/type = "method"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [&"", 1.0, false],
-"method": &"play"
-}]
 }
 
 [sub_resource type="Animation" id="Animation_7pl6r"]
@@ -1243,6 +1184,13 @@ advance_mode = 2
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_7pl6r"]
 advance_mode = 2
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_yi2kj"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_cibgq"]
+switch_mode = 2
+advance_mode = 2
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_xvfxd"]
 states/End/position = Vector2(1091, 100)
 states/Hit/node = SubResource("AnimationNodeBlendSpace1D_inrnk")
@@ -1255,15 +1203,76 @@ states/idle/position = Vector2(423, 91)
 states/jump/node = SubResource("AnimationNodeAnimation_ugk0l")
 states/jump/position = Vector2(466, -55)
 states/land/node = SubResource("AnimationNodeAnimation_eewtm")
-states/land/position = Vector2(762, 6)
+states/land/position = Vector2(185, -16)
 states/land_moving/node = SubResource("AnimationNodeAnimation_o6j3l")
 states/land_moving/position = Vector2(882, 6)
 states/top/node = SubResource("AnimationNodeAnimation_mfdas")
 states/top/position = Vector2(555, 100)
 states/walk/node = SubResource("AnimationNodeAnimation_uduk5")
 states/walk/position = Vector2(882, 113)
-transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_tyfdd"), "Start", "Hit", SubResource("AnimationNodeStateMachineTransition_dn4c7"), "Hit", "idle", SubResource("AnimationNodeStateMachineTransition_ws0vm"), "Hit_Air", "top", SubResource("AnimationNodeStateMachineTransition_8nwgm"), "Start", "Hit_Air", SubResource("AnimationNodeStateMachineTransition_7pl6r")]
-graph_offset = Vector2(56, -169.66667)
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_tyfdd"), "Start", "Hit", SubResource("AnimationNodeStateMachineTransition_dn4c7"), "Hit", "idle", SubResource("AnimationNodeStateMachineTransition_ws0vm"), "Hit_Air", "top", SubResource("AnimationNodeStateMachineTransition_8nwgm"), "Start", "Hit_Air", SubResource("AnimationNodeStateMachineTransition_7pl6r"), "Start", "land", SubResource("AnimationNodeStateMachineTransition_yi2kj"), "land", "idle", SubResource("AnimationNodeStateMachineTransition_cibgq")]
+graph_offset = Vector2(-126, -44.66667)
+
+[sub_resource type="Animation" id="Animation_42hdn"]
+resource_name = "jump"
+length = 1.7
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.75, 1.6),
+"transitions": PackedFloat32Array(0.3, 4, 1),
+"update": 0,
+"values": [0.0, 0.2592907, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.75, 1.6666666),
+"transitions": PackedFloat32Array(0.3, 4, 1),
+"update": 0,
+"values": [Vector2(0.96801984, 0.96801984), Vector2(1.5269324, 1.5269324), Vector2(0.96801984, 0.96801984)]
+}
+
+[sub_resource type="Animation" id="Animation_el37e"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.96801984, 0.96801984)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_inrnk"]
+_data = {
+&"RESET": SubResource("Animation_el37e"),
+&"jump": SubResource("Animation_42hdn")
+}
 
 [node name="Player" type="CharacterBody2D" groups=["Hitable", "Player"]]
 collision_layer = 4
@@ -1272,15 +1281,16 @@ jump_strength = 150
 speed = 150
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -2)
+position = Vector2(0, 2)
 shape = SubResource("CapsuleShape2D_nckey")
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 3
-position = Vector2(2, 29)
-sprite_frames = SubResource("SpriteFrames_cibgq")
+position = Vector2(0, 12)
+scale = Vector2(0.96801984, 0.96801984)
+sprite_frames = SubResource("SpriteFrames_yi2kj")
 animation = &"idle"
-offset = Vector2(0, -28)
+offset = Vector2(2, -11)
 
 [node name="Weapon" type="Area2D" parent="."]
 collision_layer = 0
@@ -1325,5 +1335,10 @@ stream = ExtResource("14_42hdn")
 stream = ExtResource("16_wqsd8")
 
 [node name="Sprite2D2" type="Sprite2D" parent="."]
+
+[node name="Jump" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_inrnk")
+}
 
 [connection signal="timeout" from="SoundController/FootTimer" to="SoundController/FootTimer/FootStep" method="play"]

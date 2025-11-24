@@ -16,7 +16,6 @@ func _ready() -> void:
 	current_song.start()
 
 func switch_song(song : String):
-	await current_eight_bar
 	var time_to_start = current_song.master_track.get_playback_position()
 	current_song.stop()
 	match song:
@@ -28,6 +27,24 @@ func switch_song(song : String):
 			current_song = song_list.get('openyourmind')
 	current_song.start(time_to_start)
 	
+func transition_to_shop():
+	var current_time = current_song.master_track.get_playback_position()
+	var measure_duration = 4.0 * current_song.beat_duration * 4 * 2
+	
+	var time_untill_sync = measure_duration - fmod(current_time, measure_duration)
+	
+	await current_four_bar
+	switch_song('shop')
+	SignalBus.emit_signal("switch_scene", "shop")
+
+func mute_perc_and_chop():
+	$OpenYourMind/perc.volume_db = -80
+	$OpenYourMind/chop.volume_db = -80
+
+func transition_to_open_your_mind():
+	await current_four_bar
+	switch_song('openyourmind')
+
 
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("ui_left"):switch_song("shop")

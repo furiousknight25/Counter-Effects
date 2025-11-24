@@ -1,7 +1,102 @@
-[gd_scene load_steps=3 format=3 uid="uid://b6hvicojge7i8"]
+[gd_scene load_steps=13 format=3 uid="uid://b6hvicojge7i8"]
 
 [ext_resource type="Script" uid="uid://caog3lyckx461" path="res://Inking/inking.gd" id="1_b4kwv"]
 [ext_resource type="Script" uid="uid://dl3j1iglinpnt" path="res://Inking/Tally.gd" id="2_vduku"]
+[ext_resource type="Script" uid="uid://clgc6yd2vrd0" path="res://Inking/tallyYinYang.gd" id="3_ndjvv"]
+[ext_resource type="Texture2D" uid="uid://bpkq1204k5cce" path="res://assets/image.psd6.png" id="4_5x2tj"]
+[ext_resource type="Texture2D" uid="uid://c2kly473at0fu" path="res://assets/image.psd5.png" id="5_5pbac"]
+[ext_resource type="AudioStream" uid="uid://8wybg8aj2au6" path="res://assets/sfx/buildup.wav" id="6_0nshc"]
+[ext_resource type="AudioStream" uid="uid://cssad1sxrcb6s" path="res://assets/sfx/buildupfail.wav" id="7_ssv2n"]
+[ext_resource type="AudioStream" uid="uid://cufbrrenbqbmr" path="res://assets/sfx/buildupsuccess.wav" id="8_ws8p6"]
+
+[sub_resource type="Animation" id="Animation_3y8v0"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SubViewportInk/AnimationPlayer/ColorRect2:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(339, 96)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SubViewportInk/AnimationPlayer/ColorRect:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-310, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_vduku"]
+resource_name = "close"
+length = 1.0275
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SubViewportInk/AnimationPlayer/ColorRect2:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(3.2490098, 1),
+"update": 0,
+"values": [Vector2(299, 96), Vector2(1, 96)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SubViewportInk/AnimationPlayer/ColorRect:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(3.2490098, 1),
+"update": 0,
+"values": [Vector2(-300, 0), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_p5ia4"]
+resource_name = "open"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SubViewportInk/AnimationPlayer/ColorRect2:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.3, 3.2490098),
+"update": 0,
+"values": [Vector2(1, 96), Vector2(299, 96)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SubViewportInk/AnimationPlayer/ColorRect:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.3, 3.2490098),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-300, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ndjvv"]
+_data = {
+&"RESET": SubResource("Animation_3y8v0"),
+&"close": SubResource("Animation_vduku"),
+&"open": SubResource("Animation_p5ia4")
+}
 
 [node name="Inking" type="SubViewportContainer"]
 z_index = -10
@@ -12,7 +107,6 @@ grow_horizontal = 2
 grow_vertical = 2
 stretch = true
 script = ExtResource("1_b4kwv")
-spray_speed = null
 
 [node name="SubViewportInk" type="SubViewport" parent="."]
 transparent_bg = true
@@ -32,6 +126,26 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="SubViewportInk"]
+root_node = NodePath("../..")
+libraries = {
+&"": SubResource("AnimationLibrary_ndjvv")
+}
+autoplay = "RESET"
+
+[node name="ColorRect" type="ColorRect" parent="SubViewportInk/AnimationPlayer"]
+offset_left = -310.0
+offset_right = -54.0
+offset_bottom = 96.0
+color = Color(0.8686699, 0.59811014, 0.7639869, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="SubViewportInk/AnimationPlayer"]
+offset_left = 339.0
+offset_top = 96.0
+offset_right = 597.00024
+offset_bottom = 192.0
+color = Color(0, 0, 0, 1)
+
 [node name="Node2D" type="Node2D" parent="."]
 
 [node name="Tally" type="Panel" parent="Node2D"]
@@ -42,13 +156,71 @@ offset_bottom = -8.0
 script = ExtResource("2_vduku")
 
 [node name="Black" type="Label" parent="Node2D/Tally"]
+visible = false
 layout_mode = 0
 offset_left = 6.0
 offset_right = 46.0
 offset_bottom = 23.0
 
 [node name="White" type="Label" parent="Node2D/Tally"]
+visible = false
 layout_mode = 0
 offset_left = 80.0
 offset_right = 120.0
 offset_bottom = 23.0
+
+[node name="YingTangTally" type="Node2D" parent="Node2D/Tally"]
+top_level = true
+position = Vector2(127, -80)
+script = ExtResource("3_ndjvv")
+
+[node name="Yang" type="Sprite2D" parent="Node2D/Tally/YingTangTally"]
+scale = Vector2(0.08639758, 0.08639758)
+texture = ExtResource("4_5x2tj")
+
+[node name="YangPart" type="CPUParticles2D" parent="Node2D/Tally/YingTangTally/Yang"]
+position = Vector2(0, -231.48796)
+amount = 1
+emission_shape = 1
+emission_sphere_radius = 6.0
+direction = Vector2(0, 0)
+spread = 180.0
+initial_velocity_min = 894.74
+initial_velocity_max = 894.74
+angle_min = -244.2
+scale_amount_min = 2.0
+scale_amount_max = 6.0
+
+[node name="Yin" type="Sprite2D" parent="Node2D/Tally/YingTangTally"]
+scale = Vector2(0.08639758, 0.08639758)
+texture = ExtResource("5_5pbac")
+
+[node name="YinPart" type="CPUParticles2D" parent="Node2D/Tally/YingTangTally/Yin"]
+position = Vector2(0, 231.48798)
+amount = 1
+emission_shape = 1
+emission_sphere_radius = 6.0
+direction = Vector2(0, 0)
+spread = 180.0
+initial_velocity_min = 894.74
+initial_velocity_max = 894.74
+angle_min = -244.2
+scale_amount_min = 2.0
+scale_amount_max = 6.0
+color = Color(0, 0, 0, 1)
+
+[node name="Timer" type="Timer" parent="Node2D/Tally/YingTangTally"]
+wait_time = 0.1
+autostart = true
+
+[node name="Buildup" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_0nshc")
+volume_db = 10.0
+
+[node name="Fail" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_ssv2n")
+
+[node name="Win" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_ws8p6")
+
+[connection signal="timeout" from="Node2D/Tally/YingTangTally/Timer" to="Node2D/Tally/YingTangTally" method="_on_timer_timeout"]
