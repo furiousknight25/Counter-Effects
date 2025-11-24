@@ -20,7 +20,7 @@ var ink_pattern : int = InkPattern.DEFAULT
 
 var linear_speed_increase : bool = false
 var round_has_started : bool = false
-var has_trail : bool = true
+var has_trail : bool = false
 var trail_color : Color = Color.WHITE
 
 func _ready() -> void:
