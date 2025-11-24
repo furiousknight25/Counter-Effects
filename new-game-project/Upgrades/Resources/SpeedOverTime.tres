@@ -1,6 +1,7 @@
 [gd_resource type="Resource" script_class="LinearSpeedBallUpgrade" load_steps=2 format=3 uid="uid://xjt3g47vld28"]
 
-[ext_resource type="Script" path="res://Upgrades/Scripts/LinearSpeedBallUpgrade.gd" id="1_tw1n6"]
+[ext_resource type="Script" uid="uid://comm2c31ece5n" path="res://Upgrades/Scripts/LinearSpeedBallUpgrade.gd" id="1_tw1n6"]
 
 [resource]
 script = ExtResource("1_tw1n6")
+description = "THE BALL SPEEDS UP OVER TIME BUT IT NO LONGER GETS FASTER WHEN HIT"
